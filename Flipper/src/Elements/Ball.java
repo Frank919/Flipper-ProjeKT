@@ -3,6 +3,7 @@ package Elements;
 
 public class Ball extends ElementKinetic{
     protected int radius;
+    protected float force[] = new float[2];
     /**
      * 
      * @param positionX
