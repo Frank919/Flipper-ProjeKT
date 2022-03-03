@@ -14,6 +14,9 @@ public class GameTable{
             }
         }
         while(true){
+            if(containBall()){
+                
+            }
             break;
         }
     }
