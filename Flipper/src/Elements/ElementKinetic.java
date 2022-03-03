@@ -7,10 +7,16 @@ public class ElementKinetic extends ElementBasic{
      */
     protected int mass;
 
+    protected float velocity[] =  new float[2];
+
     /**
-     * La vitesse est définie selon l'axe X et l"axe Y, en pixel/s.
+     * La composition X de vitesse en pixel/s.
      */
-    protected long vitesseX, vitesseY;
+    protected float velocityX = velocity[0];
+    /**
+     * La composition Y de vitesse en pixel/s.
+     */
+    protected float velocityY = velocity[1];
 
     /**
      * L'accélération est définie selon l'axe X et l"axe Y, en pixel/s^2.

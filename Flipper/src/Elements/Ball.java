@@ -1,6 +1,5 @@
 package Elements;
 
-import IHM.GameTable;
 
 public class Ball extends ElementKinetic{
     protected int radius;
@@ -24,13 +23,13 @@ public class Ball extends ElementKinetic{
     }
     public float moveX(){
         //TO DO with vitesseX
-        float displacementXPerFrame = vitesseX * GameTable.frameTime;
+        float displacementXPerFrame = velocityX * GameTable.frameTime;
         positionX += displacementXPerFrame;
         return displacementXPerFrame;
     }
     public float moveY(){
         //TO DO with vitesseY
-        float displacementYPerFrame = vitesseY * GameTable.frameTime;
+        float displacementYPerFrame = velocityY * GameTable.frameTime;
         positionY += displacementYPerFrame;
         return displacementYPerFrame;
     }
@@ -42,6 +41,10 @@ public class Ball extends ElementKinetic{
     public final void fall(){
 
     }
+
+
+
+
     /**
      * Cette méthode permet de calculer la variation de la vitesse en raison de la friction,
      * qui impacte la vitesse tangentielle.
