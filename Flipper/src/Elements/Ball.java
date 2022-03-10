@@ -15,7 +15,7 @@ public class Ball extends ElementKinetic{
      * @param messe
      *          Masse de cette balle
      * @param smoothness
-     * 
+     *          
      * @param elasticity
      */
     public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
@@ -43,7 +43,7 @@ public class Ball extends ElementKinetic{
 
     }
 
-
+    
 
 
     /**
