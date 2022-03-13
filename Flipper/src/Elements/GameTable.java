@@ -1,12 +1,16 @@
 package Elements;
 
 public class GameTable{
+    /**
+     * 每一帧运算一次小球位置
+     */
     public static int frameRate = 60;
     public static float frameTime = (float)1.0/frameRate;
+    public static float dt = (float) 0.000001;
     public int width;
     public int height;
     public ElementBasic[][] element;
-    protected float dt = (float) 0.000001;
+    
 
     public GameTable(int width, int height){
         this.width = width;
@@ -18,13 +22,13 @@ public class GameTable{
             }
         }
         while(true){
-            if(containBall()){
+            if(containsBall()){
                 
             }
             break;
         }
     }
-    public boolean containBall(){
+    public boolean containsBall(){
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 if(element[i][j] instanceof Ball){

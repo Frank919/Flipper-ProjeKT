@@ -40,47 +40,49 @@ public class Ball extends ElementKinetic{
      * qui impacte la vitesse selon Y.
      */
     public final void fall(){
-
+        int g = 10;
+        velocityY-=g*GameTable.frameTime;
     }
-
-    
 
 
     /**
-     * Cette méthode permet de calculer la variation de la vitesse en raison de la friction,
-     * qui impacte la vitesse tangentielle.
-     * 
-     * Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
-     * donc entre 0 et 1.
-     * Et si    {@code coeffFriction = 1}, la vitesse tangentielle se sera anullée.
-     *    Si    {@code coeffFriction = 0}, la vitesse tangentielle ne varie pas.
-     * 
-     * @param E
-     *          Un {@code elementBasic} qui sera frotté par la balle
-     * 
-     * @return 
-     */
-    public final void rubAgainst(ElementBasic E){
-        float coeffFriction = smoothness * E.smoothness;
-
-    }
-
-    /**
-     * Cette méthode permet de calculer la variation de la vitesse en raison de la collision,
-     * qui impacte la vitesse normale.
+     * Cette méthode permet de calculer la variation de la vitesse en raison de la collision et de la frction,
+     * qui impacte la vitesse normale et tangentielle.
      * 
      * Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets frotté,
      * donc entre 0 et 1.
      * Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
      *    Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
      * 
+     * Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
+     * donc entre 0 et 1.
+     * Et si    {@code coeffFriction = 1}, la vitesse tangentielle se sera anullée.
+     *    Si    {@code coeffFriction = 0}, la vitesse tangentielle ne varie pas.
+     * 
      * @param E 
-     *          Un {@code elementBasic} qui sera heurté par la balle
+     *          Un {@code elementBasic} qui sera heurté et frotté par la balle
      * 
      * @return
      */
     public final void collideWith(ElementBasic E){
         float coeffRebound = elasticity * E.elasticity;
+        float coeffFriction = smoothness * E.smoothness;
+        float vNX = (velocityX * E.nX + velocityX * E.nY) * E.nX;
+        float vNY = (velocityX * E.nX + velocityX * E.nY) * E.nY;
+        float vTX = velocityX - vNX;
+        float vTY = velocityY - vNY;
+        //Collision
+        vNX = -coeffRebound * vNX;
+        vNY = -coeffRebound * vNY;
+        //Friciton
+        vTX = (1 - coeffFriction) * vTX;
+        vTY = (1 - coeffFriction) * vTY;
+        //Conclusion
+        velocityX = vTX + vNX;
+        velocityY = vTY + vNY;
+
+
+
 
     }
 }

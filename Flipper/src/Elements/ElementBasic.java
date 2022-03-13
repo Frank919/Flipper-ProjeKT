@@ -22,6 +22,16 @@ public class ElementBasic {
      */
     protected float elasticity;
 
+    /**
+     * Les vecteurs normales selon X et Y
+     */
+    protected float nX,nY;
+
+
+
+    
+
+
     public ElementBasic(){
         System.out.println("Element created");
     }
