@@ -71,8 +71,8 @@ public class Ball extends ElementKinetic{
         float vTX = velocityX - vNX;
         float vTY = velocityY - vNY;
         //Collision
-        vNX = -coeffRebound * vNX;
-        vNY = -coeffRebound * vNY;
+        vNX = - coeffRebound * vNX;
+        vNY = - coeffRebound * vNY;
         //Friciton
         vTX = (1 - coeffFriction) * vTX;
         vTY = (1 - coeffFriction) * vTY;
