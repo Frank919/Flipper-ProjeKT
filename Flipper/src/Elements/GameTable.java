@@ -23,20 +23,11 @@ public class GameTable{
             }
         }
         while(true){
-            if(isOut()){
+            if(true){
                 
             }
             break;
         }
     }
-    public boolean isOut(){
-        for(int i=0;i<width;i++){
-            for(int j=0;j<height;j++){
-                if(element[i][j] instanceof Ball){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
 }

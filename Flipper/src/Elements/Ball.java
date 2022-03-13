@@ -80,4 +80,11 @@ public class Ball extends ElementKinetic{
         velocityX = vTX + vNX;
         velocityY = vTY + vNY;
     }
+
+    public boolean isOut(){
+        if(positionY>640){
+            return true;
+        }
+        return false;
+    }
 }
