@@ -9,6 +9,7 @@ public class GameTable{
     public static float dt = (float) 0.000001;
     public int width;
     public int height;
+    //将游戏桌想象成一堆格子，将球的横纵坐标对应到表格的行列，位置更新时，同时更新其表格中的位置
     public ElementBasic[][] element;
     
 
@@ -22,13 +23,13 @@ public class GameTable{
             }
         }
         while(true){
-            if(containsBall()){
+            if(isOut()){
                 
             }
             break;
         }
     }
-    public boolean containsBall(){
+    public boolean isOut(){
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 if(element[i][j] instanceof Ball){

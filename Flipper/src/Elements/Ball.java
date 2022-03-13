@@ -22,13 +22,13 @@ public class Ball extends ElementKinetic{
         super(positionX, positionY, messe, smoothness, elasticity);
         this.radius=radius; 
     }
-    public float moveX(){
+    public float movesX(){
         //TO DO with vitesseX
         float displacementXPerFrame = velocityX * GameTable.frameTime;
         positionX += displacementXPerFrame;
         return displacementXPerFrame;
     }
-    public float moveY(){
+    public float movesY(){
         //TO DO with vitesseY
         float displacementYPerFrame = velocityY * GameTable.frameTime;
         positionY += displacementYPerFrame;
@@ -39,11 +39,10 @@ public class Ball extends ElementKinetic{
      * Cette méthode permet de calculer la variation de la vitesse en raison de la gravitation,
      * qui impacte la vitesse selon Y.
      */
-    public final void fall(){
+    public final void falls(){
         int g = 10;
         velocityY-=g*GameTable.frameTime;
     }
-
 
     /**
      * Cette méthode permet de calculer la variation de la vitesse en raison de la collision et de la frction,
@@ -64,7 +63,7 @@ public class Ball extends ElementKinetic{
      * 
      * @return
      */
-    public final void collideWith(ElementBasic E){
+    public final void collidesWith(ElementBasic E){
         float coeffRebound = elasticity * E.elasticity;
         float coeffFriction = smoothness * E.smoothness;
         float vNX = (velocityX * E.nX + velocityX * E.nY) * E.nX;
@@ -80,9 +79,5 @@ public class Ball extends ElementKinetic{
         //Conclusion
         velocityX = vTX + vNX;
         velocityY = vTY + vNY;
-
-
-
-
     }
 }
