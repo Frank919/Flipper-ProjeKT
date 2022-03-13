@@ -17,10 +17,6 @@ public class ElementKinetic extends ElementBasic{
      * La composition Y de vitesse en pixel/s.
      */
     protected float velocityY;
-    
-    protected float velocityNorm = (float) Math.sqrt(velocityX*velocityX+velocityY*velocityY);
-
-    protected float direction = (float)Math.toDegrees(Math.atan(velocityY/velocityX));
 
     /**
      * L'accélération est définie selon l'axe X et l"axe Y, en pixel/s^2.

@@ -63,7 +63,7 @@ public class Ball extends ElementKinetic{
      * 
      * @return
      */
-    public final void collidesWith(ElementBasic E){
+    public void collidesWith(ElementBasic E){
         float coeffRebound = elasticity * E.elasticity;
         float coeffFriction = smoothness * E.smoothness;
         float vNX = (velocityX * E.nX + velocityX * E.nY) * E.nX;
