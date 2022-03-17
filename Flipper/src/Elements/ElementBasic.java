@@ -27,11 +27,6 @@ public class ElementBasic {
      */
     protected float nX,nY;
 
-
-
-    
-
-
     public ElementBasic(){
         System.out.println("Element created");
     }

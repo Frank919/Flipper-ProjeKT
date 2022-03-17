@@ -64,26 +64,48 @@ public class Ball extends ElementKinetic{
      * @return
      */
     public void collidesWith(ElementBasic E){
-        float coeffRebound = elasticity * E.elasticity;
-        float coeffFriction = smoothness * E.smoothness;
-        float vNX = (velocityX * E.nX + velocityX * E.nY) * E.nX;
-        float vNY = (velocityX * E.nX + velocityX * E.nY) * E.nY;
-        float vTX = velocityX - vNX;
-        float vTY = velocityY - vNY;
-        //Collision
-        vNX = - coeffRebound * vNX;
-        vNY = - coeffRebound * vNY;
-        //Friciton
-        vTX = (1 - coeffFriction) * vTX;
-        vTY = (1 - coeffFriction) * vTY;
-        //Conclusion
-        velocityX = vTX + vNX;
-        velocityY = vTY + vNY;
+        if(E instanceof Circle){
+            velocityX = - velocityX;
+            velocityY = - velocityY;
+        }else{
+            float coeffRebound = elasticity * E.elasticity;
+            float coeffFriction = smoothness * E.smoothness;
+            float vNX = (velocityX * E.nX + velocityX * E.nY) * E.nX;
+            float vNY = (velocityX * E.nX + velocityX * E.nY) * E.nY;
+            float vTX = velocityX - vNX;
+            float vTY = velocityY - vNY;
+            //Collision
+            vNX = - coeffRebound * vNX;
+            vNY = - coeffRebound * vNY;
+            //Friciton
+            vTX = (1 - coeffFriction) * vTX;
+            vTY = (1 - coeffFriction) * vTY;
+            //Conclusion
+            velocityX = vTX + vNX;
+            velocityY = vTY + vNY;
+        }
     }
 
     public boolean isOut(){
         if(positionY>640){
             return true;
+        }
+        return false;
+    }
+
+    public boolean isOnContect(){
+        for(int i=positionX - 100;i<positionX + 100;i++){
+            for(int j=positionY - 100;j<positionY + 100;j++){
+                if(GameTable.table[i][j] instanceof Circle){
+                    float distanceCircle = (float)Math.sqrt(
+                       (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
+                       (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
+                        );
+                    if(distanceCircle == radius - GameTable.table[i][j].radius){
+                        collidesWith(GameTable.table[i][j]);
+                    }
+                }
+            }
         }
         return false;
     }

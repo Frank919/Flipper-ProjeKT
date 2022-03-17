@@ -10,24 +10,28 @@ public class GameTable{
     public int width;
     public int height;
     //将游戏桌想象成一堆格子，将球的横纵坐标对应到表格的行列，位置更新时，同时更新其表格中的位置
-    public ElementBasic[][] element;
+    public static ElementBasic[][] table;
+    public Ball xiangpiqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
+    public Ball gangqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     
 
     public GameTable(int width, int height){
         this.width = width;
         this.height = height;
-        element = new ElementBasic[width][height];
+        table = new ElementBasic[width][height];
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
-                element[i][j]=new ElementBasic();
+                table[i][j]=new ElementBasic();
             }
         }
         while(true){
+
             if(true){
                 
             }
             break;
         }
     }
+
 
 }
