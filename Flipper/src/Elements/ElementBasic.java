@@ -2,6 +2,7 @@ package Elements;
 
 public class ElementBasic {
 
+
     protected int position[] = new int[2];
     /**
      * Les deux définient la position de l'élément dans un repère cartésien

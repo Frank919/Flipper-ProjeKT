@@ -58,20 +58,20 @@ public class Ball extends ElementKinetic{
      * Et si    {@code coeffFriction = 1}, la vitesse tangentielle se sera anullée.
      *    Si    {@code coeffFriction = 0}, la vitesse tangentielle ne varie pas.
      * 
-     * @param E 
+     * @param e 
      *          Un {@code elementBasic} qui sera heurté et frotté par la balle
      * 
      * @return
      */
-    public void collidesWith(ElementBasic E){
-        if(E instanceof Circle){
+    public void collidesWith(ElementBasic e){
+        if(e instanceof Circle){
             velocityX = - velocityX;
             velocityY = - velocityY;
         }else{
-            float coeffRebound = elasticity * E.elasticity;
-            float coeffFriction = smoothness * E.smoothness;
-            float vNX = (velocityX * E.nX + velocityX * E.nY) * E.nX;
-            float vNY = (velocityX * E.nX + velocityX * E.nY) * E.nY;
+            float coeffRebound = elasticity * e.elasticity;
+            float coeffFriction = smoothness * e.smoothness;
+            float vNX = (velocityX * e.nX + velocityX * e.nY) * e.nX;
+            float vNY = (velocityX * e.nX + velocityX * e.nY) * e.nY;
             float vTX = velocityX - vNX;
             float vTY = velocityY - vNY;
             //Collision
@@ -83,6 +83,7 @@ public class Ball extends ElementKinetic{
             //Conclusion
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
+            
         }
     }
 
@@ -93,36 +94,37 @@ public class Ball extends ElementKinetic{
         return false;
     }
 
-    public boolean isOnContect(){
-        for(int i=positionX - 100;i<positionX + 100;i++){
-            for(int j=positionY - 100;j<positionY + 100;j++){
-                if(GameTable.table[i][j] instanceof Circle){
-                    float distanceCircle = (float)Math.sqrt(
-                       (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
-                       (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
-                        );
-                    if(distanceCircle == radius + GameTable.table[i][j].radius){
-                        collidesWith(GameTable.table[i][j]);
-                    }
-                }else if(GameTable.table[i][j] instanceof InnerCircle){
-                        float distanceInnerCircle = (float)Math.sqrt(
-                           (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
-                           (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
-                            );
-                        if(distanceInnerCircle == radius - GameTable.table[i][j].radius){
-                            collidesWith(GameTable.table[i][j]);
-                        }
-                }else if(GameTable.table[i][j] instanceof StraightObstacle){
-                        float distance = (float)Math.sqrt(
-                           (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
-                           (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
-                            );
-                        if(distance == radius ){
-                            collidesWith(GameTable.table[i][j]);
-                        }
-                }
+    public boolean isOnContectWith(ElementBasic e){
+        e = new Circle(3, 4, 5);
+        if(e instanceof Circle){
+            float distanceCircle = (float)Math.sqrt(
+               (e.positionX - positionX) * (e.positionX - positionX)+
+               (e.positionY - positionY) * (e.positionY - positionY)
+                );
+            if(distanceCircle == radius + e.radius){
+                return true;
+                collidesWith(e);
             }
+        }else if(e instanceof InnerCircle){
+                float distanceInnerCircle = (float)Math.sqrt(
+                   (e.positionX - positionX) * (e.positionX - positionX)+
+                   (e.positionY - positionY) * (e.positionY - positionY)
+                    );
+                if(distanceInnerCircle == radius - e.radius){
+                    return true;
+                    collidesWith(e);
+                }
+        }else if(e instanceof StraightObstacle){
+                float distance = (float)Math.sqrt(
+                   (e.positionX - positionX) * (e.positionX - positionX)+
+                   (e.positionY - positionY) * (e.positionY - positionY)
+                    );
+                if(distance == radius ){
+                    return true;
+                    collidesWith(e);
+                }
         }
+        
         
         return false;
     }

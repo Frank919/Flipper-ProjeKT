@@ -25,9 +25,12 @@ public class GameTable{
             }
         }
         while(true){
-
-            if(true){
-                
+            for(int i=xiangpiqiu.positionX - 100;i<xiangpiqiu.positionX + 100;i++){
+                for(int j=xiangpiqiu.positionY - 100;j<xiangpiqiu.positionY + 100;j++){
+                    if (xiangpiqiu.isOnContectWith(table[i][j])){
+                        xiangpiqiu.collidesWith(table[i][j]);
+                    }
+                }
             }
             break;
         }
