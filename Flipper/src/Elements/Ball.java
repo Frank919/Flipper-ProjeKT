@@ -50,8 +50,8 @@ public class Ball extends ElementKinetic{
      * 
      * Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets frotté,
      * donc entre 0 et 1.
-     * Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
-     *    Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
+     * <ul>Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
+     * Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
      * 
      * Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
      * donc entre 0 et 1.
@@ -83,7 +83,9 @@ public class Ball extends ElementKinetic{
             //Conclusion
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
-            
+            //Update positions
+            positionX += velocityX * GameTable.frameTime;
+            positionY += velocityY * GameTable.frameTime;
         }
     }
 
@@ -95,33 +97,23 @@ public class Ball extends ElementKinetic{
     }
 
     public boolean isOnContectWith(ElementBasic e){
+        float distance = (float)Math.sqrt(
+                    Math.pow((e.positionX - positionX),2)
+                    + Math.pow((e.positionY - positionY),2)
+                    );
         if(e instanceof Circle){
-            float distanceCircle = (float)Math.sqrt(
-               (e.positionX - positionX) * (e.positionX - positionX)+
-               (e.positionY - positionY) * (e.positionY - positionY)
-                );
-            if(distanceCircle <= radius + ((Circle)e).radius){
+            if(distance <= radius + ((Circle)e).radius){
                 return true;
             }
         }else if(e instanceof InnerCircle){
-                float distanceInnerCircle = (float)Math.sqrt(
-                   (e.positionX - positionX) * (e.positionX - positionX)+
-                   (e.positionY - positionY) * (e.positionY - positionY)
-                    );
-                if(distanceInnerCircle <= radius - ((InnerCircle)e).radius){
+                if(distance <= radius - ((InnerCircle)e).radius){
                     return true;            
                 }
         }else if(e instanceof StraightObstacle){
-                float distance = (float)Math.sqrt(
-                   (e.positionX - positionX) * (e.positionX - positionX)+
-                   (e.positionY - positionY) * (e.positionY - positionY)
-                    );
                 if(distance <= radius ){
                     return true;
                 }
         }
-        
-        
         return false;
     }
 }
