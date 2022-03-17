@@ -101,9 +101,25 @@ public class Ball extends ElementKinetic{
                        (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
                        (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
                         );
-                    if(distanceCircle == radius - GameTable.table[i][j].radius){
+                    if(distanceCircle == radius + GameTable.table[i][j].radius){
                         collidesWith(GameTable.table[i][j]);
                     }
+                }else if(GameTable.table[i][j] instanceof InnerCircle){
+                        float distanceInnerCircle = (float)Math.sqrt(
+                           (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
+                           (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
+                            );
+                        if(distanceInnerCircle == radius - GameTable.table[i][j].radius){
+                            collidesWith(GameTable.table[i][j]);
+                        }
+                }else if(GameTable.table[i][j] instanceof StraightObstacle){
+                        float distance = (float)Math.sqrt(
+                           (GameTable.table[i][j].positionX - positionX) * (GameTable.table[i][j].positionX - positionX)+
+                           (GameTable.table[i][j].positionY - positionY) * (GameTable.table[i][j].positionY - positionY)
+                            );
+                        if(distance == radius ){
+                            collidesWith(GameTable.table[i][j]);
+                        }
                 }
             }
         }
