@@ -95,33 +95,29 @@ public class Ball extends ElementKinetic{
     }
 
     public boolean isOnContectWith(ElementBasic e){
-        e = new Circle(3, 4, 5);
         if(e instanceof Circle){
             float distanceCircle = (float)Math.sqrt(
                (e.positionX - positionX) * (e.positionX - positionX)+
                (e.positionY - positionY) * (e.positionY - positionY)
                 );
-            if(distanceCircle == radius + e.radius){
+            if(distanceCircle <= radius + ((Circle)e).radius){
                 return true;
-                collidesWith(e);
             }
         }else if(e instanceof InnerCircle){
                 float distanceInnerCircle = (float)Math.sqrt(
                    (e.positionX - positionX) * (e.positionX - positionX)+
                    (e.positionY - positionY) * (e.positionY - positionY)
                     );
-                if(distanceInnerCircle == radius - e.radius){
-                    return true;
-                    collidesWith(e);
+                if(distanceInnerCircle <= radius - ((InnerCircle)e).radius){
+                    return true;            
                 }
         }else if(e instanceof StraightObstacle){
                 float distance = (float)Math.sqrt(
                    (e.positionX - positionX) * (e.positionX - positionX)+
                    (e.positionY - positionY) * (e.positionY - positionY)
                     );
-                if(distance == radius ){
+                if(distance <= radius ){
                     return true;
-                    collidesWith(e);
                 }
         }
         
