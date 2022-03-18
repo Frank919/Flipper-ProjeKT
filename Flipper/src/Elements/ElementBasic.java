@@ -12,14 +12,14 @@ public class ElementBasic {
     /**
      * La glissance est definie entre 0 et 1.
      * 
-     * @see Elements.Ball#rubAgainst()
+     * @see Elements.Ball#collidesWith()
      */
     protected float smoothness;
 
     /**
      * L'elasticité est definie entre 0 et 1.
      * 
-     * @see Elements.Ball#collideWith()
+     * @see Elements.Ball#collidesWith()
      */
     protected float elasticity;
 
@@ -29,15 +29,14 @@ public class ElementBasic {
     protected float nX,nY;
 
     public ElementBasic(){
-        System.out.println("Element created");
+        
     }
     public ElementBasic(int positionX,int positionY){
-        this.positionY=positionX;
-        this.positionY=positionY;
+        this.positionX=positionX + GameTable.margin;
+        this.positionY=positionY + GameTable.margin;
     }
     public ElementBasic(int positionX,int positionY,float smoothness,float elasticity){
-        this.positionY=positionX;
-        this.positionY=positionY;
+        this(positionX, positionY);
         this.smoothness=smoothness;
         this.elasticity=elasticity;
     }

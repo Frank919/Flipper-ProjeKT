@@ -7,16 +7,17 @@ public class Ball extends ElementKinetic{
     /**
      * 
      * @param positionX
-     *          Coordonnée X du centre de cette balle
+     *          Coordonnée X initiale du centre de cette balle
      * @param positionY
-     *          Coordonnée Y du centre de cette balle
+     *          Coordonnée Y initiale du centre de cette balle
      * @param radius
      *          Radium de cette balle
      * @param messe
      *          Masse de cette balle
      * @param smoothness
-     *          
+     *          @see #collidesWith()
      * @param elasticity
+     *          @see #collidesWith()
      */
     public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
         super(positionX, positionY, messe, smoothness, elasticity);
@@ -50,7 +51,7 @@ public class Ball extends ElementKinetic{
      * 
      * Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets frotté,
      * donc entre 0 et 1.
-     * <ul>Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
+     * Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
      * Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
      * 
      * Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
@@ -98,14 +99,14 @@ public class Ball extends ElementKinetic{
 
     public boolean isOnContectWith(ElementBasic e){
         float distance = (float)Math.sqrt(
-                    Math.pow((e.positionX - positionX),2)
-                    + Math.pow((e.positionY - positionY),2)
+                        Math.pow((e.positionX - positionX),2) +   
+                        Math.pow((e.positionY - positionY),2)
                     );
         if(e instanceof Circle){
             if(distance <= radius + ((Circle)e).radius){
                 return true;
             }
-        }else if(e instanceof InnerCircle){
+        }else if(e instanceof InnerCircle){//这里很有问题
                 if(distance <= radius - ((InnerCircle)e).radius){
                     return true;            
                 }
@@ -115,5 +116,9 @@ public class Ball extends ElementKinetic{
                 }
         }
         return false;
+    }
+
+    public String toString(){
+        return "x = " + positionX+", y = " + positionY + ".";
     }
 }
