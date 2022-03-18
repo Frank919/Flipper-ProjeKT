@@ -65,29 +65,34 @@ public class Ball extends ElementKinetic{
      * @return
      */
     public void collidesWith(ElementBasic e){
-        if(e instanceof Circle){
-            velocityX = - velocityX;
-            velocityY = - velocityY;
-        }else{
-            float coeffRebound = elasticity * e.elasticity;
-            float coeffFriction = smoothness * e.smoothness;
-            float vNX = (velocityX * e.nX + velocityX * e.nY) * e.nX;
-            float vNY = (velocityX * e.nX + velocityX * e.nY) * e.nY;
-            float vTX = velocityX - vNX;
-            float vTY = velocityY - vNY;
-            //Collision
-            vNX = - coeffRebound * vNX;
-            vNY = - coeffRebound * vNY;
-            //Friciton
-            vTX = (1 - coeffFriction) * vTX;
-            vTY = (1 - coeffFriction) * vTY;
-            //Conclusion
-            velocityX = vTX + vNX;
-            velocityY = vTY + vNY;
-            //Update positions
-            positionX += velocityX * GameTable.frameTime;
-            positionY += velocityY * GameTable.frameTime;
-        }
+        /**
+         * 只考虑完全弹性碰撞
+         */
+        if(e instanceof ElementKinetic){
+            velocityX -= ((ElementKinetic)e).velocityX;
+            velocityY -= ((ElementKinetic)e).velocityY;
+        }   
+        float coeffRebound = elasticity * e.elasticity;
+        float coeffFriction = smoothness * e.smoothness;
+        //Calculer la vitesse normale à un obstacle 计算法向速度
+        float vNX = (velocityX * e.nX + velocityX * e.nY) * e.nX;
+        float vNY = (velocityX * e.nX + velocityX * e.nY) * e.nY;
+        //Calculer la vitesse tangentielle à un obstacle 计算切向速度
+        float vTX = velocityX - vNX;
+        float vTY = velocityY - vNY;
+        //Collision 碰撞将法向速度反转，并考虑弹力系数
+        vNX = - coeffRebound * vNX;
+        vNY = - coeffRebound * vNY;
+        //Friciton 摩擦将减小切向速度
+        vTX = (1 - coeffFriction) * vTX;
+        vTY = (1 - coeffFriction) * vTY;
+        //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
+        velocityX = vTX + vNX;
+        velocityY = vTY + vNY;
+        //Update positions
+        positionX += velocityX * GameTable.frameTime;
+        positionY += velocityY * GameTable.frameTime;
+        
     }
 
     public boolean isOut(){
