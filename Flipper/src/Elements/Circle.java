@@ -1,7 +1,5 @@
 package Elements;
 
-import java.util.LinkedList;
-
 public class Circle extends Obstacle{
     
     protected float radius;
