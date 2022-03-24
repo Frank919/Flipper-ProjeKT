@@ -32,8 +32,8 @@ public class ElementBasic {
         
     }
     public ElementBasic(int positionX,int positionY){
-        this.positionX=positionX + GameTable.margin;
-        this.positionY=positionY + GameTable.margin;
+        this.positionX=positionX;
+        this.positionY=positionY;
     }
     public ElementBasic(int positionX,int positionY,float smoothness,float elasticity){
         this(positionX, positionY);

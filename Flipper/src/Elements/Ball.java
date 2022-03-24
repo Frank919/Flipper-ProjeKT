@@ -7,9 +7,9 @@ public class Ball extends ElementKinetic{
     /**
      * 
      * @param positionX
-     *          Coordonnée X initiale du centre de cette balle
+     *          Coordonnée X initiale du centre de cette balle dans le table vrai
      * @param positionY
-     *          Coordonnée Y initiale du centre de cette balle
+     *          Coordonnée Y initiale du centre de cette balle dans le table vrai
      * @param radius
      *          Radium de cette balle
      * @param messe
@@ -20,7 +20,11 @@ public class Ball extends ElementKinetic{
      *          @see #collidesWith()
      */
     public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
-        super(positionX, positionY, messe, smoothness, elasticity);
+        /**
+         * Ici on met la balle dans le pseudoTable car tous les calculs et simulations s'y passent.
+         * Donc on fait décaler la position.
+         */
+        super(positionX + GameTable.margin, positionY + GameTable.margin, messe, smoothness, elasticity);
         this.radius=radius; 
     }
     public float movesX(){
@@ -96,7 +100,7 @@ public class Ball extends ElementKinetic{
     }
 
     public boolean isOut(){
-        if(positionY>640){
+        if(positionY>GameTable.height){
             return true;
         }
         return false;
@@ -123,7 +127,11 @@ public class Ball extends ElementKinetic{
         return false;
     }
 
+    /**
+     * 
+     * @return la position de la balle dans le table vrai
+     */
     public String toString(){
-        return "x = " + positionX+", y = " + positionY + ".";
+        return "( " + (positionX - GameTable.margin) + " , " + (positionY - GameTable.margin) + " )";
     }
 }
