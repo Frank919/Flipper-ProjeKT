@@ -84,7 +84,6 @@ public class GameTable{
                 for(int j = xiangpiqiu.positionY - margin; j < xiangpiqiu.positionY + margin; j++){
                     if (xiangpiqiu.isOnContectWith(pseudoTable[i][j])){
                         xiangpiqiu.collidesWith(pseudoTable[i][j]);
-                        
                     }
                 }
                 System.out.println(xiangpiqiu.toString());

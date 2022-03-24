@@ -10,7 +10,7 @@ public class Polygone extends Obstacle{
     /**
      * 
      * @param obs
-     *      Une série de sommets bien rangée dans l'ordre consécutif
+     *      Une série de sommets bien rangée dans le sens horaire
      * @param s
      *      Smoothness entre 0 et 1
      * @param e
@@ -62,12 +62,22 @@ public class Polygone extends Obstacle{
                 }
             }else{
                 //La pente
-                float k = (obs[i].positionY - obs[i+1].positionY) /
-                         (obs[i].positionX - obs[i+1].positionX);
+                int deltaY = obs[i+1].positionY - obs[i].positionY;
+                int deltaX = obs[i+1].positionX - obs[i].positionX;
+                float k = deltaY / deltaX;
                 //L'ordonée à l'origine
                 float b = obs[i].positionY - k * obs[i].positionX;
 
-
+                //Le vecteur normal
+                ny = (float)Math.sqrt(1/(1+k*k));
+                nx = - k * ny;
+                float produitVectoriel =(nx*deltaY)-(ny*deltaX);
+                
+                //Si le produit vectoriel est négatif, on change le signe de nx et ny
+                if(produitVectoriel>0){
+                    ny = -ny;
+                    nx = -nx;
+                }
                 if(obs[i].positionX<obs[i+1].positionX){
                     max = obs[i+1].positionX;
                     min = obs[i].positionX;
@@ -79,11 +89,7 @@ public class Polygone extends Obstacle{
                     int y = (int)(k*x+b);
                     GameTable.table[x][y]=new Obstacle(nx, ny, s, e);
                 }
-                
             }
-            
-
-
         }
     }
 }
