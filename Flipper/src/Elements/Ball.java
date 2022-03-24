@@ -73,29 +73,33 @@ public class Ball extends ElementKinetic{
          * 只考虑完全弹性碰撞
          */
         if(e instanceof ElementKinetic){
-            velocityX -= ((ElementKinetic)e).velocityX;
-            velocityY -= ((ElementKinetic)e).velocityY;
-        }   
-        float coeffRebound = elasticity * e.elasticity;
-        float coeffFriction = smoothness * e.smoothness;
-        //Calculer la vitesse normale à un obstacle 计算法向速度
-        float vNX = (velocityX * e.nX + velocityX * e.nY) * e.nX;
-        float vNY = (velocityX * e.nX + velocityX * e.nY) * e.nY;
-        //Calculer la vitesse tangentielle à un obstacle 计算切向速度
-        float vTX = velocityX - vNX;
-        float vTY = velocityY - vNY;
-        //Collision 碰撞将法向速度反转，并考虑弹力系数
-        vNX = - coeffRebound * vNX;
-        vNY = - coeffRebound * vNY;
-        //Friciton 摩擦将减小切向速度
-        vTX = (1 - coeffFriction) * vTX;
-        vTY = (1 - coeffFriction) * vTY;
-        //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
-        velocityX = vTX + vNX;
-        velocityY = vTY + vNY;
-        //Update positions
-        positionX += velocityX * GameTable.frameTime;
-        positionY += velocityY * GameTable.frameTime;
+            ElementKinetic eK = (ElementKinetic)e;
+            velocityX -= eK.velocityX;
+            velocityY -= eK.velocityY;
+        }else if(e instanceof ElementStatic){
+            ElementStatic eS = (ElementStatic)e;
+            float coeffRebound = elasticity * e.elasticity;
+            float coeffFriction = smoothness * e.smoothness;
+            //Calculer la vitesse normale à un obstacle 计算法向速度
+            float vNX = (float)( (velocityX * eS.nX + velocityX * eS.nY) * eS.nX);
+            float vNY = (float)( (velocityX * eS.nX + velocityX * eS.nY) * eS.nY);
+            //Calculer la vitesse tangentielle à un obstacle 计算切向速度
+            float vTX = velocityX - vNX;
+            float vTY = velocityY - vNY;
+            //Collision 碰撞将法向速度反转，并考虑弹力系数
+            vNX = - coeffRebound * vNX;
+            vNY = - coeffRebound * vNY;
+            //Friciton 摩擦将减小切向速度
+            vTX = (1 - coeffFriction) * vTX;
+            vTY = (1 - coeffFriction) * vTY;
+            //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
+            velocityX = vTX + vNX;
+            velocityY = vTY + vNY;
+            //Update positions
+            positionX += velocityX * GameTable.frameTime;
+            positionY += velocityY * GameTable.frameTime;
+        
+        }  
         
     }
     /**

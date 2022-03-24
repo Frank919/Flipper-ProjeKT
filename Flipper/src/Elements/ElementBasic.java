@@ -1,9 +1,6 @@
 package Elements;
 
 public class ElementBasic {
-
-
-    protected int position[] = new int[2];
     /**
      * Les deux définient la position de l'élément dans un repère cartésien
      */
@@ -26,7 +23,7 @@ public class ElementBasic {
     /**
      * Les vecteurs normales selon X et Y
      */
-    protected float nX,nY;
+    protected double nX,nY;
 
     public ElementBasic(){
         
@@ -37,6 +34,16 @@ public class ElementBasic {
     }
     public ElementBasic(int positionX,int positionY,float smoothness,float elasticity){
         this(positionX, positionY);
+        this.smoothness=smoothness;
+        this.elasticity=elasticity;
+    }
+    public ElementBasic(int positionX,int positionY,double nx,double ny){
+        this(positionX, positionY);
+        this.nX=nx;
+        this.nY=ny;
+    }
+    public ElementBasic(int positionX,int positionY,double nx,double ny,float smoothness,float elasticity){
+        this(positionX, positionY, nx, ny);
         this.smoothness=smoothness;
         this.elasticity=elasticity;
     }

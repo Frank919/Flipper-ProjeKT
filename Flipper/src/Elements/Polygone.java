@@ -4,16 +4,18 @@ public class Polygone extends Obstacle{
     protected Obstacle[] apex;
     /**
      * 
-     * @param obs
-     *      Une série de sommets bien rangée dans le sens horaire
+     * @param elm
+     *      Une série de sommets bien rangés dans le sens horaire
      * @param s
      *      Smoothness entre 0 et 1
      * @param e
      *      Elasticity entre 0 et 1
      */
-    public Polygone(Obstacle[] obs, float s, float e){
-        for(int i=0;i<obs.length;i++){
-            apex[i] = obs[i];
+    public Polygone(ElementBasic[] elm, float s, float e){
+        this.smoothness = s;
+        this.elasticity = e;
+        for(int i=0;i<elm.length;i++){
+            apex[i] = (Obstacle)elm[i];
             //le vecteur normal
             float nx = 0;
             float ny = 0;
@@ -21,14 +23,14 @@ public class Polygone extends Obstacle{
             int max = 0;
             int min = 0;
             //
-            Obstacle end = new Obstacle();
-            Obstacle start = new Obstacle();
-            if(i == obs.length - 1){
-                end = obs[0];
-                start = obs[i];
+            ElementBasic start = new ElementBasic();
+            ElementBasic end = new ElementBasic();
+            
+            start = elm[i];
+            if(i == elm.length - 1){
+                end = elm[0];
             }else{
-                end = obs[i+1];
-                start = obs[i];
+                end = elm[i+1];
             }
             //La pente
             int deltaY = end.positionY - start.positionY;
@@ -42,7 +44,7 @@ public class Polygone extends Obstacle{
             nx = - k * ny;
             float produitVectoriel =(nx*deltaY)-(ny*deltaX);
             /**
-             *  le produit vectoriel est négatif, on change le signe de nx et ny,
+             *  le produit vectoriel est positif, on change le signe de nx et ny,
              *  car on me veut que le vecteur vers l'extérieur
              */ 
             if(produitVectoriel>0){
