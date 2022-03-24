@@ -98,31 +98,31 @@ public class Ball extends ElementKinetic{
         positionY += velocityY * GameTable.frameTime;
         
     }
-
+    /**
+     * Cette méthode permet de déterminer si on a la fin du jeu
+     * @return 
+     *      si la balle est en dehors du table
+     */
     public boolean isOut(){
         if(positionY>GameTable.height){
             return true;
         }
         return false;
     }
-
+    
+    /**
+     * @param e
+     *      une chose
+     * @return 
+     *      si la balle est en contact avec une chose
+     */
     public boolean isOnContectWith(ElementBasic e){
         float distance = (float)Math.sqrt(
                         Math.pow((e.positionX - positionX),2) +   
                         Math.pow((e.positionY - positionY),2)
                     );
-        if(e instanceof Circle){
-            if(distance <= radius + ((Circle)e).radius){
-                return true;
-            }
-        }else if(e instanceof InnerCircle){//这里很有问题
-                if(distance <= radius - ((InnerCircle)e).radius){
-                    return true;            
-                }
-        }else if(e instanceof StraightObstacle){
-                if(distance <= radius ){
-                    return true;
-                }
+        if(distance <= 0){
+            return true;
         }
         return false;
     }
