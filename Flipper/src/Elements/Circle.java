@@ -10,6 +10,4 @@ public class Circle extends Obstacle{
         centerX = elm.positionX;
         centerX = elm.positionY;
     } 
-
-
 }
