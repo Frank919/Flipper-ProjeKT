@@ -24,7 +24,7 @@ public class ElementKinetic extends ElementBasic{
     protected long accelerationX, accelerationY;
 
     public ElementKinetic(){
-        System.out.println("Element created");
+
     }
     public ElementKinetic(int PositionX,int PositionY){
         super(PositionX, PositionY);
