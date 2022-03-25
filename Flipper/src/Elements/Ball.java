@@ -24,7 +24,7 @@ public class Ball extends ElementKinetic{
          * Ici on met la balle dans le pseudoTable car tous les calculs et simulations s'y passent.
          * Donc on fait décaler la position.
          */
-        super(positionX + GameTable.margin, positionY + GameTable.margin, messe, smoothness, elasticity);
+        super(positionX + GameTable.detectionRange, positionY + GameTable.detectionRange, messe, smoothness, elasticity);
         this.radius=radius; 
     }
     public float movesX(){
@@ -136,6 +136,6 @@ public class Ball extends ElementKinetic{
      * @return la position de la balle dans le table vrai
      */
     public String toString(){
-        return "( " + (positionX - GameTable.margin) + " , " + (positionY - GameTable.margin) + " )";
+        return "( " + (positionX - GameTable.detectionRange) + " , " + (positionY - GameTable.detectionRange) + " )";
     }
 }

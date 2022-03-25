@@ -7,8 +7,9 @@ public class GameTable{
     public static int frameRate = 60;
     public static float frameTime = (float)1.0/frameRate;
     public static float dt = (float) 0.000001;
-    //小球探测范围，以及台球桌边缘留白，小球和障碍物都不能出现在这一区域。
-    public static int margin = 100;
+    //C'est aussi le margin du pseudoTable
+    public static int detectionRange = 100;
+    public static int margin = detectionRange;
     public static int width;
     public static int height;
     public int pseudoWidth;
@@ -20,8 +21,8 @@ public class GameTable{
 
     /**
      * Le table qu'on ne peut voir. Tous les calculs et la balle sont mis ici.
-     * Il a des margins donc plus grand.
-     * Ceux-ci existent pour le bon fonctionnement de la detection de collision.
+     * Il a des margins donc plus grand que celui vrai.
+     * Ceux-là existent pour le bon fonctionnement de la detection de collision.
      * Chaque élément dans ce table a donc un décalage d'un margin en X et en Y
      * par rapport à celui dans le table vrai.
      */
@@ -56,7 +57,7 @@ public class GameTable{
                 System.out.print("-");
             }
         }
-        System.out.println("\nThe game table successfully generated");
+        System.out.println("\nThe game table generated with success");
 
         pseudoTable = new ElementBasic[pseudoWidth][pseudoHeight];
         for(int i=0;i<pseudoWidth;i++){
@@ -67,7 +68,16 @@ public class GameTable{
                 System.out.print("-");
             }
         }
-        System.out.println("\nThe pseudo game table successfully generated");
+        System.out.println("\nThe pseudo game table generated with success");
+
+
+
+        /**
+         * 在此处构造所有障碍物，填入table[][]当中
+         * ...
+         */
+
+
 
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
@@ -77,11 +87,11 @@ public class GameTable{
                 System.out.print("-");
             }
         }
-        System.out.println("\nAll Elements successfully copied to pseudoTable");
+        System.out.println("\nAll Elements copied to pseudoTable with success");
 
         while(true){
-            for(int i = xiangpiqiu.positionX - margin; i < xiangpiqiu.positionX + margin; i++){
-                for(int j = xiangpiqiu.positionY - margin; j < xiangpiqiu.positionY + margin; j++){
+            for(int i = xiangpiqiu.positionX - detectionRange; i < xiangpiqiu.positionX + detectionRange; i++){
+                for(int j = xiangpiqiu.positionY - detectionRange; j < xiangpiqiu.positionY + detectionRange; j++){
                     if (xiangpiqiu.isOnContectWith(pseudoTable[i][j])){
                         xiangpiqiu.collidesWith(pseudoTable[i][j]);
                     }
