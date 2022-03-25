@@ -121,12 +121,14 @@ public class Ball extends ElementKinetic{
      *      si la balle est en contact avec une chose
      */
     public boolean isOnContectWith(ElementBasic e){
-        float distance = (float)Math.sqrt(
+        if(e instanceof ElementStatic || e instanceof ElementKinetic){
+            float distance = (float)Math.sqrt(
                         Math.pow((e.positionX - positionX),2) +   
                         Math.pow((e.positionY - positionY),2)
                     );
-        if(distance <= 0){
-            return true;
+            if(distance <= 0){
+                return true;
+            }
         }
         return false;
     }
