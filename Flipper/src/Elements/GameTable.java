@@ -34,6 +34,7 @@ public class GameTable{
     public Ball xiangpiqiu= new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     public Ball gangqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     
+    
     /**
      * 
      * @param w
@@ -68,6 +69,8 @@ public class GameTable{
                 System.out.print("-");
             }
         }
+       
+
         System.out.println("\nThe pseudo game table generated with success");
 
 
@@ -90,13 +93,20 @@ public class GameTable{
         System.out.println("\nAll Elements copied to pseudoTable with success");
 
         while(true){
+            //Supprimer la balle de ce pseudoTable 
+            pseudoTable[xiangpiqiu.positionX][xiangpiqiu.positionY] = new ElementBasic();
             for(int i = xiangpiqiu.positionX - detectionRange; i < xiangpiqiu.positionX + detectionRange; i++){
                 for(int j = xiangpiqiu.positionY - detectionRange; j < xiangpiqiu.positionY + detectionRange; j++){
                     if (xiangpiqiu.isOnContectWith(pseudoTable[i][j])){
                         xiangpiqiu.collidesWith(pseudoTable[i][j]);
                     }
                 }
-                System.out.println(xiangpiqiu.toString());
+            }
+            //Rajouter la balle dans ce pseudoTable 
+            pseudoTable[xiangpiqiu.positionX][xiangpiqiu.positionY] = xiangpiqiu;
+            System.out.println(xiangpiqiu.toString());
+            if(xiangpiqiu.isOut()){
+                break;
             }
             break;
         }
