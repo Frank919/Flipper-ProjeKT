@@ -127,7 +127,7 @@ public class Ball extends ElementKinetic{
                         Math.pow((e.positionX - positionX),2) +   
                         Math.pow((e.positionY - positionY),2)
                     );
-            if(distance <= 0){
+            if(distance <= radius){
                 return true;
             }
         }
