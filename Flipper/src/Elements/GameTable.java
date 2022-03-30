@@ -7,9 +7,11 @@ public class GameTable{
     public static int frameRate = 60;
     public static float frameTime = (float)1.0/frameRate;
     public static float dt = (float) 0.000001;
+
     //C'est aussi le margin du pseudoTable
     public static int detectionRange = 100;
     public static int margin = detectionRange;
+
     public static int width;
     public static int height;
     public int pseudoWidth;
@@ -21,10 +23,10 @@ public class GameTable{
 
     /**
      * Le table qu'on ne peut voir. Tous les calculs et la balle sont mis ici.
-     * Il a des margins donc plus grand que celui vrai.
-     * Ceux-là existent pour le bon fonctionnement de la detection de collision.
+     * Il a des margins donc est plus grand que celui vrai.
+     * <p>Ceux-là existent pour le bon fonctionnement de la detection de collision.
      * Chaque élément dans ce table a donc un décalage d'un margin en X et en Y
-     * par rapport à celui dans le table vrai.
+     * par rapport aux éléments dans le table vrai.
      */
     public static ElementBasic[][] pseudoTable;
 
@@ -69,8 +71,6 @@ public class GameTable{
                 System.out.print("-");
             }
         }
-       
-
         System.out.println("\nThe pseudo game table generated with success");
 
 

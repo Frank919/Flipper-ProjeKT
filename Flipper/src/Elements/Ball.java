@@ -6,7 +6,7 @@ public class Ball extends ElementKinetic{
     protected float force[] = new float[2];
     
     /**
-     * 
+     * Construire une balle
      * @param positionX
      *          Coordonnée X initiale du centre de cette balle dans le table vrai
      * @param positionY
@@ -16,9 +16,12 @@ public class Ball extends ElementKinetic{
      * @param messe
      *          Masse de cette balle
      * @param smoothness
-     *          @see #collidesWith()
+     *          Glissement défini entre 0 et 1 
+     * 
      * @param elasticity
-     *          @see #collidesWith()
+     *          Élasticity défini entre 0 et 1 
+     * 
+     * @see #collidesWith()
      */
     public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
         /**
@@ -28,18 +31,15 @@ public class Ball extends ElementKinetic{
         super(positionX + GameTable.detectionRange, positionY + GameTable.detectionRange, messe, smoothness, elasticity);
         this.radius=radius; 
     }
-    public float movesX(){
-        //TO DO with vitesseX
-        float displacementXPerFrame = velocityX * GameTable.frameTime;
-        positionX += displacementXPerFrame;
-        return displacementXPerFrame;
+
+    /**
+     * Mettre à jour la position de la balle
+     */
+    public void moves(){
+        positionX += velocityX * GameTable.frameTime;
+        positionY += velocityY * GameTable.frameTime;
     }
-    public float movesY(){
-        //TO DO with vitesseY
-        float displacementYPerFrame = velocityY * GameTable.frameTime;
-        positionY += displacementYPerFrame;
-        return displacementYPerFrame;
-    }
+    
 
     /**
      * Cette méthode permet de calculer la variation de la vitesse en raison de la gravitation,
@@ -47,7 +47,7 @@ public class Ball extends ElementKinetic{
      */
     public final void falls(){
         int g = 10;
-        velocityY-=g*GameTable.frameTime;
+        velocityY+=g*GameTable.frameTime;
     }
 
     /**
@@ -66,8 +66,6 @@ public class Ball extends ElementKinetic{
      * 
      * @param e 
      *          Un {@code elementBasic} qui sera heurté et frotté par la balle
-     * 
-     * @return
      */
     public void collidesWith(ElementBasic e){
         /**
@@ -96,15 +94,13 @@ public class Ball extends ElementKinetic{
             //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
-            //Update positions
-            positionX += velocityX * GameTable.frameTime;
-            positionY += velocityY * GameTable.frameTime;
         }  
     }
     /**
-     * Cette méthode permet de déterminer si on a la fin du jeu
-     * @return 
-     *      si la balle est en dehors du table
+     * Déterminer si on a la fin du jeu
+     * @return  {@code true} si la balle est en dehors du table
+     *      <li>{@code false} sinon
+     *      
      */
     public boolean isOut(){
         if(positionY>GameTable.height){
