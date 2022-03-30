@@ -9,7 +9,7 @@ public class Curve extends Obstacle{
      * Une constructeur qui permet construit un cercle (une courbe circulaire complète)
      * @param centre
      *      Le centre du cercle
-     * @param radius
+     * @param y
      *      Le rayon du cercle
      * @param s
      *      La glissance
@@ -36,9 +36,6 @@ public class Curve extends Obstacle{
             GameTable.table[x][y1] = new Obstacle(nx1, ny1, s, e);
             GameTable.table[x][y2] = new Obstacle(nx2, ny2, s, e);
         }
-
-        
-
     }
     /**
      * Une constructeur qui permet construit une courbe circulaire partielle
@@ -76,7 +73,8 @@ public class Curve extends Obstacle{
             GameTable.table[x][y1] = new Obstacle(nx1, ny1, s, e);
             GameTable.table[x][y2] = new Obstacle(nx2, ny2, s, e);
 
-            //Puis on supprime les points non sur la courbe, on les remplace par ElementBasic. 
+            //Puis on supprime les points non sur la courbe, on les remplace par ElementBasic.  
+            
 
 
         }

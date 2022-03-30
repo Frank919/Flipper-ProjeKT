@@ -99,9 +99,7 @@ public class Ball extends ElementKinetic{
             //Update positions
             positionX += velocityX * GameTable.frameTime;
             positionY += velocityY * GameTable.frameTime;
-        
         }  
-        
     }
     /**
      * Cette méthode permet de déterminer si on a la fin du jeu
