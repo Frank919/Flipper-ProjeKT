@@ -93,7 +93,7 @@ public class GameTable{
         System.out.println("\nAll Elements copied to pseudoTable with success");
 
         while(true){
-            //Supprimer la balle de ce pseudoTable 
+            //Supprimer la balle de pseudoTable 
             pseudoTable[xiangpiqiu.positionX][xiangpiqiu.positionY] = new ElementBasic();
             for(int i = xiangpiqiu.positionX - detectionRange; i < xiangpiqiu.positionX + detectionRange; i++){
                 for(int j = xiangpiqiu.positionY - detectionRange; j < xiangpiqiu.positionY + detectionRange; j++){
@@ -102,7 +102,7 @@ public class GameTable{
                     }
                 }
             }
-            //Rajouter la balle dans ce pseudoTable 
+            //Rajouter la balle dans pseudoTable 
             pseudoTable[xiangpiqiu.positionX][xiangpiqiu.positionY] = xiangpiqiu;
             System.out.println(xiangpiqiu.toString());
             if(xiangpiqiu.isOut()){

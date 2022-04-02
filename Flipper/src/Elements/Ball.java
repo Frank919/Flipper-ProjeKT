@@ -116,7 +116,7 @@ public class Ball extends ElementKinetic{
      *      si la balle est en contact avec une chose
      */
     public boolean isOnContectWith(ElementBasic e){
-        if(e instanceof ElementStatic || e instanceof ElementKinetic){
+        if(e instanceof ElementStatic){
             float distance = (float)Math.sqrt(
                         Math.pow((e.positionX - positionX),2) +   
                         Math.pow((e.positionY - positionY),2)
@@ -124,6 +124,20 @@ public class Ball extends ElementKinetic{
             if(distance <= radius){
                 return true;
             }
+        }
+        if(e instanceof Flipper){
+            Flipper eF = (Flipper)e;
+            int deltaX1 = positionX - eF.centre.positionX;
+            int deltaX2 = positionX - eF.tip.positionX;
+            int deltaY1 = positionY - eF.centre.positionY;
+            int deltaY2 = positionY - eF.tip.positionY;
+            float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
+            float produitScalaire = deltaX1 * deltaX2 + deltaY1 * deltaY2;
+
+            if(produitVectoriel == 0 && produitScalaire<=0){
+                return true;
+            }
+            
         }
         return false;
     }
