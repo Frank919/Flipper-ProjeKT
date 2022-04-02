@@ -21,7 +21,7 @@ public class Ball extends ElementKinetic{
      * @param elasticity
      *          Élasticity défini entre 0 et 1 
      * 
-     * @see #collidesWith()
+     * @see #collidesWith(ElementBasic e)
      */
     public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
         /**

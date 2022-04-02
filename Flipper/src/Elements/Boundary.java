@@ -2,6 +2,7 @@ package Elements;
 
 public class Boundary extends ElementStatic{
     protected Obstacle[] apex;
+    
     /**
      * Construire les bords de GameTable, qui sont 3 ségements situés à gauche, en haut et à droit.
      * @param elm
@@ -11,7 +12,12 @@ public class Boundary extends ElementStatic{
      * @param e
      *      Elasticity entre 0 et 1
      */
-    public Boundary(ElementBasic[] elm, float s, float e){
+    public Boundary(float s, float e){
+        ElementBasic[] elm = new ElementBasic[4];
+        elm[0] = new ElementBasic(0,GameTable.height);
+        elm[1] = new ElementBasic(0,0);
+        elm[2] = new ElementBasic(GameTable.width,0);
+        elm[3] = new ElementBasic(GameTable.width,GameTable.height);
         this.smoothness = s;
         this.elasticity = e;
         for(int i=0;i<elm.length-1;i++){
@@ -20,8 +26,8 @@ public class Boundary extends ElementStatic{
             //Le début et la fin d'un ségement
             ElementBasic start = new ElementBasic();
             ElementBasic end = new ElementBasic();
-            start = elm[i];
-            end = elm[i+1];
+            start = apex[i];
+            end = apex[i+1];
 
             //La pente
             int deltaY = end.positionY - start.positionY;
@@ -82,7 +88,6 @@ public class Boundary extends ElementStatic{
                     GameTable.table[x][y]=new Obstacle(nx, ny, s, e);
                 }
             }
-            
         }
     }
 }
