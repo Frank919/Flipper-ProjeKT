@@ -71,22 +71,50 @@ public class Ball extends ElementKinetic{
         //Calculer le coefficient répondissement et celui de fricion
         float coeffRebound = elasticity * e.elasticity;
         float coeffFriction = smoothness * e.smoothness;
-        //Calculer la vitesse normale à un obstacle
-        float vNX = (float)( (velocityX * e.nX + velocityX * e.nY) * e.nX);
-        float vNY = (float)( (velocityX * e.nX + velocityX * e.nY) * e.nY);
-        //Calculer la vitesse tangentielle à un obstacle
-        float vTX = velocityX - vNX;
-        float vTY = velocityY - vNY;
+        
         if(e instanceof ElementKinetic){
             if(e instanceof Flipper){
                 Flipper eF = (Flipper)e;
-                //Collision 碰撞将法向速度反转，并考虑弹力系数
-                vNX = - coeffRebound * vNX;
-                vNY = - coeffRebound * vNY;
-                //Friciton 摩擦将减小切向速度
+                //Vecteur1 centre--->balle
+                int v1X = positionX - eF.centre.positionX;
+                int v1Y = positionY - eF.centre.positionY;
+                //Vecteur2 centre--->tip
+                int v3X = eF.tip.positionX - eF.centre.positionX;
+                int v3Y = eF.tip.positionY - eF.centre.positionY;
+                //Vecteur1 X vecteur3
+                float produitVectoriel = v1X * v3Y - v3X * v1Y;
+                //Vecteur1 . vecteur3
+                float produitScalaire = v1X * v3X + v1Y * v3Y;
+                //Déterminer quelle surface à impacter
+                if( produitVectoriel <= 0){
+                    eF.nX = eF.n1X;
+                    eF.nY = eF.n1Y;
+                }else{
+                    eF.nX = eF.n2X;
+                    eF.nY = eF.n2Y;
+                }
+                //Calculer la vitesse normale au flipper
+                float vNX = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nX);
+                float vNY = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nY);
+                //Calculer la vitesse tangentielle au flipper
+                float vTX = velocityX - vNX;
+                float vTY = velocityY - vNY;
+
+                //Déterminer la position contact sur le flipper
+                float rayon = (float)(produitScalaire / Math.pow((v3X*v3X + v3Y*v3Y),2));
+                float velocityLineX = (float)(eF.velocityAng * rayon * nX);
+                float velocityLineY = (float)(eF.velocityAng * rayon * nY);
+                //Calculer la vitesse normale du flipper
+                float vFNX = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nX);
+                float vFNY = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nY);
+
+                //Collision 
+                vNX = - coeffRebound * vNX + vFNX - vNX;
+                vNY = - coeffRebound * vNY + vFNY - vNY;
+                //Friciton 
                 vTX = (1 - coeffFriction) * vTX;
                 vTY = (1 - coeffFriction) * vTY;
-                //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
+                //Conclusion 
                 velocityX = vTX + vNX;
                 velocityY = vTY + vNY;
 
@@ -95,13 +123,19 @@ public class Ball extends ElementKinetic{
  
              }
         }else if(e instanceof ElementStatic){
-            //Collision 碰撞将法向速度反转，并考虑弹力系数
+            //Calculer la vitesse normale à un obstacle
+            float vNX = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nX);
+            float vNY = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nY);
+            //Calculer la vitesse tangentielle à un obstacle
+            float vTX = velocityX - vNX;
+            float vTY = velocityY - vNY;
+            //Collision 
             vNX = - coeffRebound * vNX;
             vNY = - coeffRebound * vNY;
-            //Friciton 摩擦将减小切向速度
+            //Friciton 
             vTX = (1 - coeffFriction) * vTX;
             vTY = (1 - coeffFriction) * vTY;
-            //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
+            //Conclusion 
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
         }  
@@ -130,7 +164,6 @@ public class Ball extends ElementKinetic{
             float distance = (float)Math.sqrt(
                         (e.positionX - positionX)*(e.positionX - positionX) 
                         + (e.positionY - positionY)*(e.positionY - positionY)
-                        
             );
             if(distance <= radius){
                 return true;
@@ -148,7 +181,7 @@ public class Ball extends ElementKinetic{
             int v3X = eF.tip.positionX - eF.centre.positionX;
             int v3Y = eF.tip.positionY - eF.centre.positionY;
 
-            // float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
+            // float produitVectoriel = v1X * v2Y - v2X * v1Y;
             float produitScalaire = v1X * v2X + v1Y * v2Y;
 
             // Calculer la distance entre la balle et la droite représentant le flipper
