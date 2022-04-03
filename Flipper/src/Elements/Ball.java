@@ -127,20 +127,24 @@ public class Ball extends ElementKinetic{
         }
         if(e instanceof Flipper){
             Flipper eF = (Flipper)e;
-            int deltaX1 = positionX - eF.centre.positionX;
-            int deltaX2 = positionX - eF.tip.positionX;
-            int deltaY1 = positionY - eF.centre.positionY;
-            int deltaY2 = positionY - eF.tip.positionY;
-            // float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
-            float produitScalaire = deltaX1 * deltaX2 + deltaY1 * deltaY2;
+            
+            int v1X = positionX - eF.centre.positionX;
+            int v1Y = positionY - eF.centre.positionY;
 
-            int deltaX3 = eF.tip.positionX - eF.centre.positionX;
-            int deltaY3 = eF.tip.positionY - eF.centre.positionY;
+            int v2X = positionX - eF.tip.positionX;
+            int v2Y = positionY - eF.tip.positionY;
+
+            int v3X = eF.tip.positionX - eF.centre.positionX;
+            int v3Y = eF.tip.positionY - eF.centre.positionY;
+
+            // float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
+            float produitScalaire = v1X * v2X + v1Y * v2Y;
+            
             // Calculer la distance entre la balle et la droite représentant le flipper
             float distance = (float)Math.sqrt(
-                        Math.pow(deltaX1,2) + Math.pow(deltaY1,2) 
-                        - Math.pow((deltaX1*deltaX3+deltaY1*deltaY3),2)
-                        / (Math.pow(deltaX3,2) + Math.pow(deltaY3,2) )
+                        Math.pow(v1X,2) + Math.pow(v1Y,2) 
+                        - Math.pow((v1X*v3X+v1Y*v3Y),2)
+                        / (Math.pow(v3X,2) + Math.pow(v3Y,2) )
             );
             // Si la distance est inférieur au rayon 
             // et si la balle se trouve entre le centre et le tip du flipper
