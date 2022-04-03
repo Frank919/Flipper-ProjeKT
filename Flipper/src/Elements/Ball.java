@@ -73,8 +73,8 @@ public class Ball extends ElementKinetic{
          */
         if(e instanceof ElementKinetic){
             ElementKinetic eK = (ElementKinetic)e;
-            velocityX -= eK.velocityX;
-            velocityY -= eK.velocityY;
+            velocityX -= velocityX - eK.velocityX;
+            velocityY -= velocityY - eK.velocityY;
         }else if(e instanceof ElementStatic){
             ElementStatic eS = (ElementStatic)e;
             float coeffRebound = elasticity * e.elasticity;
@@ -139,7 +139,7 @@ public class Ball extends ElementKinetic{
 
             // float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
             float produitScalaire = v1X * v2X + v1Y * v2Y;
-            
+
             // Calculer la distance entre la balle et la droite représentant le flipper
             float distance = (float)Math.sqrt(
                         Math.pow(v1X,2) + Math.pow(v1Y,2) 
