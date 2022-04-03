@@ -131,13 +131,23 @@ public class Ball extends ElementKinetic{
             int deltaX2 = positionX - eF.tip.positionX;
             int deltaY1 = positionY - eF.centre.positionY;
             int deltaY2 = positionY - eF.tip.positionY;
-            float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
+            // float produitVectoriel = deltaX1 * deltaY2 - deltaX2 * deltaY1;
             float produitScalaire = deltaX1 * deltaX2 + deltaY1 * deltaY2;
 
-            if(produitVectoriel == 0 && produitScalaire<=0){
+            int deltaX3 = eF.tip.positionX - eF.centre.positionX;
+            int deltaY3 = eF.tip.positionY - eF.centre.positionY;
+            // Calculer la distance entre la balle et la droite représentant le flipper
+            float distance = (float)Math.sqrt(
+                        Math.pow(deltaX1,2) + Math.pow(deltaY1,2) 
+                        - Math.pow((deltaX1*deltaX3+deltaY1*deltaY3),2)
+                        / (Math.pow(deltaX3,2) + Math.pow(deltaY3,2) )
+            );
+            // Si la distance est inférieur au rayon 
+            // et si la balle se trouve entre le centre et le tip du flipper
+            // on considère qu'il y a une collision
+            if(distance <= radius && produitScalaire<=0){
                 return true;
             }
-            
         }
         return false;
     }
