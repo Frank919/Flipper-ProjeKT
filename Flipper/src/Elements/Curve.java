@@ -37,36 +37,18 @@ public class Curve extends Obstacle{
 
         deltaX = startPoint.positionX-centreX;
         deltaY = startPoint.positionY-centreY;
-        if(((deltaX)>=0)&&((deltaY)>=0)){
-            startQuadrant=1;
-        }
-
-        if(((deltaX)<=0)&&((deltaY)>=0)){
-            startQuadrant=2;
-        }
-
         if(((deltaX)<=0)&&((deltaY)<=0)){
             startQuadrant=3;
         }
-
         if(((deltaX)>=0)&&((deltaY)<=0)){
             startQuadrant=4;
         }
 
         deltaX = endPoint.positionX-centreX;
         deltaY = endPoint.positionY-centreY;
-        if(((deltaX)>=0)&&((deltaY)>=0)){
-            endQuadrant=1;
-        }
-
-        if(((deltaX)<=0)&&((deltaY)>=0)){
-            endQuadrant=2;
-        }
-
         if(((deltaX)<=0)&&((deltaY)<=0)){
             endQuadrant=3;
         }
-
         if(((deltaX)>=0)&&((deltaY)<=0)){
             endQuadrant=4;
         }
@@ -92,8 +74,8 @@ public class Curve extends Obstacle{
                 int x2 = (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2 = (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                float nx1 = centreX-x1/Math.abs(centreX-x1);
-                float ny1 = centreY-y1/Math.abs(centreX-x1);
+                float nx1 = (centreX-x1)/Math.abs(centreX-x1);
+                float ny1 = (centreY-y1)/Math.abs(centreX-x1);
                 float nx2 = -(centreX-x2)/Math.abs(centreX-x2);
                 float ny2 = -(centreY-y2)/Math.abs(centreY-y2);
 
@@ -107,8 +89,8 @@ public class Curve extends Obstacle{
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                float nx1 = centreX-x1/Math.abs(centreX-x1);
-                float ny1 = centreY-y1/Math.abs(centreX-x1);
+                float nx1 = (centreX-x1)/Math.abs(centreX-x1);
+                float ny1 = (centreY-y1)/Math.abs(centreX-x1);
                 float nx2 = -(centreX-x2)/Math.abs(centreX-x2);
                 float ny2 = -(centreY-y2)/Math.abs(centreY-y2);
 
@@ -122,8 +104,8 @@ public class Curve extends Obstacle{
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
                 
-                float nx1 = centreX-x1/Math.abs(centreX-x1);
-                float ny1 = centreY-y1/Math.abs(centreX-x1);
+                float nx1 = (centreX-x1)/Math.abs(centreX-x1);
+                float ny1 = (centreY-y1)/Math.abs(centreX-x1);
                 float nx2 = -(centreX-x2)/Math.abs(centreX-x2);
                 float ny2 = -(centreY-y2)/Math.abs(centreY-y2);
 

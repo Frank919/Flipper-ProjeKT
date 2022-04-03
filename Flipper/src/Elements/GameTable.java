@@ -79,7 +79,8 @@ public class GameTable{
          * 在此处构造所有障碍物，障碍物构造器会将其填入table[][]当中
          * ...
          */
-
+        new Boundary(1, (float)0.5);
+        
 
 
         for(int i=0;i<width;i++){

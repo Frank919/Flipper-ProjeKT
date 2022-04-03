@@ -3,9 +3,25 @@ package Elements;
 public class Flipper extends ElementKinetic{
     protected ElementBasic centre;
     protected ElementBasic tip;
-    protected float angle;
     protected boolean isOnRight;
-    
+    /**
+     * Positif dans le sens horaire
+     */
+    protected double angle;
+    /**
+     * Positif dans le sens horaire
+     */
+    protected double velocityAng;
+    /**
+     * vecteur normal dans le sens horaire
+     */
+    protected float n1X,n1Y;
+    /**
+     * vecteur normal dans le sens inverse horaire
+     */
+    protected float n2X,n2Y;
+
+
     /**
      * 
      */
@@ -15,10 +31,35 @@ public class Flipper extends ElementKinetic{
         this.smoothness = smoothness;
         this.elasticity = elasticity;
         this.isOnRight = isOnRight;
+        int quadrant = 0;
+        int deltaX = tip.positionX-centre.positionX;
+        int deltaY = tip.positionY-centre.positionY;
+        if((deltaX<=0)&&(deltaY<=0)){
+            quadrant=3;
+        }
+        if((deltaX>=0)&&(deltaY<=0)){
+            quadrant=4;
+        } 
+        this.angle = Math.acos((deltaX)/Math.sqrt(deltaX*deltaX + deltaY*deltaY));
+        if(quadrant>2){
+            this.angle = 2*Math.PI - angle;
+        }
         int r = 5;
         ElementBasic s = new ElementBasic(centre.positionX + r, centre.positionY);
         Curve base = new Curve(s, s, centre, r, this.smoothness, this.elasticity);
 
         
+    }
+
+    public void rotate(){
+        if(isOnRight){
+            angle += GameTable.frameTime*velocityAng;
+        }else{
+            angle -= GameTable.frameTime*velocityAng;
+        }
+        
+        tip.positionX = (int)Math.cos(angle);
+        tip.positionY = (int)Math.sin(angle);
+
     }
 }

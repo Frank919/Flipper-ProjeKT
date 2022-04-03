@@ -44,7 +44,7 @@ public class Ball extends ElementKinetic{
     /**
      * Cette méthode permet de calculer la variation de la vitesse en raison de la gravitation,
      * qui impacte la vitesse selon Y.
-     */
+     */               
     public final void falls(){
         int g = 10;
         velocityY+=g*GameTable.frameTime;
@@ -68,23 +68,33 @@ public class Ball extends ElementKinetic{
      *          Un {@code elementBasic} qui sera heurté et frotté par la balle
      */
     public void collidesWith(ElementBasic e){
-        /**
-         * 只考虑完全弹性碰撞
-         */
+        //Calculer le coefficient répondissement et celui de fricion
+        float coeffRebound = elasticity * e.elasticity;
+        float coeffFriction = smoothness * e.smoothness;
+        //Calculer la vitesse normale à un obstacle
+        float vNX = (float)( (velocityX * e.nX + velocityX * e.nY) * e.nX);
+        float vNY = (float)( (velocityX * e.nX + velocityX * e.nY) * e.nY);
+        //Calculer la vitesse tangentielle à un obstacle
+        float vTX = velocityX - vNX;
+        float vTY = velocityY - vNY;
         if(e instanceof ElementKinetic){
-            ElementKinetic eK = (ElementKinetic)e;
-            velocityX -= velocityX - eK.velocityX;
-            velocityY -= velocityY - eK.velocityY;
+            if(e instanceof Flipper){
+                Flipper eF = (Flipper)e;
+                //Collision 碰撞将法向速度反转，并考虑弹力系数
+                vNX = - coeffRebound * vNX;
+                vNY = - coeffRebound * vNY;
+                //Friciton 摩擦将减小切向速度
+                vTX = (1 - coeffFriction) * vTX;
+                vTY = (1 - coeffFriction) * vTY;
+                //Conclusion 将法向速度和切向速度相加，还原得到正交的速度
+                velocityX = vTX + vNX;
+                velocityY = vTY + vNY;
+
+            }else if(e instanceof Launcher){
+                Flipper eL = (Flipper)e;
+ 
+             }
         }else if(e instanceof ElementStatic){
-            ElementStatic eS = (ElementStatic)e;
-            float coeffRebound = elasticity * e.elasticity;
-            float coeffFriction = smoothness * e.smoothness;
-            //Calculer la vitesse normale à un obstacle 计算法向速度
-            float vNX = (float)( (velocityX * eS.nX + velocityX * eS.nY) * eS.nX);
-            float vNY = (float)( (velocityX * eS.nX + velocityX * eS.nY) * eS.nY);
-            //Calculer la vitesse tangentielle à un obstacle 计算切向速度
-            float vTX = velocityX - vNX;
-            float vTY = velocityY - vNY;
             //Collision 碰撞将法向速度反转，并考虑弹力系数
             vNX = - coeffRebound * vNX;
             vNY = - coeffRebound * vNY;
@@ -118,9 +128,10 @@ public class Ball extends ElementKinetic{
     public boolean isOnContectWith(ElementBasic e){
         if(e instanceof ElementStatic){
             float distance = (float)Math.sqrt(
-                        Math.pow((e.positionX - positionX),2) +   
-                        Math.pow((e.positionY - positionY),2)
-                    );
+                        (e.positionX - positionX)*(e.positionX - positionX) 
+                        + (e.positionY - positionY)*(e.positionY - positionY)
+                        
+            );
             if(distance <= radius){
                 return true;
             }
@@ -142,9 +153,9 @@ public class Ball extends ElementKinetic{
 
             // Calculer la distance entre la balle et la droite représentant le flipper
             float distance = (float)Math.sqrt(
-                        Math.pow(v1X,2) + Math.pow(v1Y,2) 
-                        - Math.pow((v1X*v3X+v1Y*v3Y),2)
-                        / (Math.pow(v3X,2) + Math.pow(v3Y,2) )
+                        v1X*v1X + v1Y*v1Y
+                        - (v1X*v3X+v1Y*v3Y)*(v1X*v3X+v1Y*v3Y)
+                        / (v3X*v3X + v3Y*v3Y)
             );
             // Si la distance est inférieur au rayon 
             // et si la balle se trouve entre le centre et le tip du flipper
@@ -161,6 +172,10 @@ public class Ball extends ElementKinetic{
      * @return la position de la balle dans le table vrai
      */
     public String toString(){
-        return "( " + (positionX - GameTable.detectionRange) + " , " + (positionY - GameTable.detectionRange) + " )";
+        return "( " 
+            + (positionX - GameTable.detectionRange) 
+            + " , " 
+            + (positionY - GameTable.detectionRange) 
+            + " )";
     }
 }
