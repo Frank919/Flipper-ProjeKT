@@ -9,7 +9,7 @@ public class GameTable{
     public static float dt = (float) 0.000001;
 
     //C'est aussi le margin du pseudoTable
-    public static int detectionRange = 100;
+    public static int detectionRange = 5;
     public static int margin = detectionRange;
 
     public static int width;
@@ -33,7 +33,7 @@ public class GameTable{
     /**
      * Créer des balles différentes
      */
-    public Ball xiangpiqiu= new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
+    public Ball ballA= new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     public Ball gangqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     
     
@@ -80,6 +80,8 @@ public class GameTable{
          * ...
          */
         new Boundary(1, (float)0.5);
+        Flipper flipperLeft = new Flipper(new ElementBasic(1, 2), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
+        Flipper flipperRight = new Flipper(new ElementBasic(1, 2), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
         
 
 
@@ -95,18 +97,28 @@ public class GameTable{
 
         while(true){
             //Supprimer la balle de pseudoTable 
-            pseudoTable[xiangpiqiu.positionX][xiangpiqiu.positionY] = new ElementBasic();
-            for(int i = xiangpiqiu.positionX - detectionRange; i < xiangpiqiu.positionX + detectionRange; i++){
-                for(int j = xiangpiqiu.positionY - detectionRange; j < xiangpiqiu.positionY + detectionRange; j++){
-                    if (xiangpiqiu.isOnContectWith(pseudoTable[i][j])){
-                        xiangpiqiu.collidesWith(pseudoTable[i][j]);
+            pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
+            ballA.falls();
+            if(ballA.isOnContectWith(flipperLeft)){
+                ballA.collidesWith(flipperLeft);
+                ballA.moves();
+            }
+            if(ballA.isOnContectWith(flipperRight)){
+                ballA.collidesWith(flipperRight);
+                ballA.moves();
+            }
+            for(int i = ballA.positionX - detectionRange; i < ballA.positionX + detectionRange; i++){
+                for(int j = ballA.positionY - detectionRange; j < ballA.positionY + detectionRange; j++){
+                    if (ballA.isOnContectWith(pseudoTable[i][j])){
+                        ballA.collidesWith(pseudoTable[i][j]);
+                        ballA.moves();
                     }
                 }
             }
             //Rajouter la balle dans pseudoTable 
-            pseudoTable[xiangpiqiu.positionX][xiangpiqiu.positionY] = xiangpiqiu;
-            System.out.println(xiangpiqiu.toString());
-            if(xiangpiqiu.isOut()){
+            pseudoTable[ballA.positionX][ballA.positionY] = ballA;
+            System.out.println(ballA.toString());
+            if(ballA.isOut()){
                 break;
             }
             break;

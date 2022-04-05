@@ -78,7 +78,7 @@ public class Ball extends ElementKinetic{
                 //Vecteur1 centre--->balle
                 int v1X = positionX - eF.centre.positionX;
                 int v1Y = positionY - eF.centre.positionY;
-                //Vecteur2 centre--->tip
+                //Vecteur3 centre--->tip
                 int v3X = eF.tip.positionX - eF.centre.positionX;
                 int v3Y = eF.tip.positionY - eF.centre.positionY;
                 //Vecteur1 X vecteur3
@@ -120,8 +120,8 @@ public class Ball extends ElementKinetic{
 
             }else if(e instanceof Launcher){
                 Flipper eL = (Flipper)e;
- 
-             }
+                
+            }
         }else if(e instanceof ElementStatic){
             //Calculer la vitesse normale à un obstacle
             float vNX = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nX);
@@ -139,18 +139,6 @@ public class Ball extends ElementKinetic{
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
         }  
-    }
-    /**
-     * Déterminer si on a la fin du jeu
-     * @return  {@code true} si la balle est en dehors du table
-     *      <li>{@code false} sinon
-     *      
-     */
-    public boolean isOut(){
-        if(positionY>GameTable.height){
-            return true;
-        }
-        return false;
     }
     
     /**
@@ -171,13 +159,13 @@ public class Ball extends ElementKinetic{
         }
         if(e instanceof Flipper){
             Flipper eF = (Flipper)e;
-            
+            //Vecteur1 centre--->balle
             int v1X = positionX - eF.centre.positionX;
             int v1Y = positionY - eF.centre.positionY;
-
+            //Vecteur3 tip--->balle
             int v2X = positionX - eF.tip.positionX;
             int v2Y = positionY - eF.tip.positionY;
-
+            //Vecteur3 centre--->tip
             int v3X = eF.tip.positionX - eF.centre.positionX;
             int v3Y = eF.tip.positionY - eF.centre.positionY;
 
@@ -200,6 +188,18 @@ public class Ball extends ElementKinetic{
         return false;
     }
 
+    /**
+     * Déterminer si on a la fin du jeu
+     * @return  {@code true} si la balle est en dehors du table
+     *      <li>{@code false} sinon
+     *      
+     */
+    public boolean isOut(){
+        if(positionY>GameTable.height){
+            return true;
+        }
+        return false;
+    }
     /**
      * 
      * @return la position de la balle dans le table vrai
