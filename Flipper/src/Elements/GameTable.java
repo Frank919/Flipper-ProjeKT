@@ -8,7 +8,9 @@ public class GameTable{
     public static float frameTime = (float)1.0/frameRate;
     public static float dt = (float) 0.000001;
 
-    //C'est aussi le margin du pseudoTable
+    /**
+     * C'est aussi le margin du pseudoTable
+     */
     public static int detectionRange = 5;
     public static int margin = detectionRange;
 
@@ -35,8 +37,16 @@ public class GameTable{
      */
     public Ball ballA= new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     public Ball gangqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
-    
-    
+
+    /**
+     * Zone des éléments
+     */
+    protected Flipper flipperRight;
+    protected Flipper flipperLeft;
+    /**
+     * État du jeu
+     */
+    public boolean isRunning;
     /**
      * 
      * @param w
@@ -73,15 +83,13 @@ public class GameTable{
         }
         System.out.println("\nThe pseudo game table generated with success");
 
-
-
         /**
          * 在此处构造所有障碍物，障碍物构造器会将其填入table[][]当中
          * ...
          */
         new Boundary(1, (float)0.5);
-        Flipper flipperLeft = new Flipper(new ElementBasic(1, 2), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
-        Flipper flipperRight = new Flipper(new ElementBasic(1, 2), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
+        flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
+        flipperRight = new Flipper(new ElementBasic(640, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
         
 
 
@@ -94,11 +102,15 @@ public class GameTable{
             }
         }
         System.out.println("\nAll Elements copied to pseudoTable with success");
+    }
 
+    public boolean startGame(){ 
+        isRunning = true;
         while(true){
             //Supprimer la balle de pseudoTable 
             pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
             ballA.falls();
+            ballA.moves();
             if(ballA.isOnContectWith(flipperLeft)){
                 ballA.collidesWith(flipperLeft);
                 ballA.moves();
@@ -119,11 +131,18 @@ public class GameTable{
             pseudoTable[ballA.positionX][ballA.positionY] = ballA;
             System.out.println(ballA.toString());
             if(ballA.isOut()){
+                isRunning = false;
                 break;
             }
-            break;
+            //break;
         }
+        return isRunning;
     }
+
+    public String toString(){
+        return "Gmae is running : " + isRunning + "\n";
+    }
+
 
 
 }

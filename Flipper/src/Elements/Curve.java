@@ -74,13 +74,13 @@ public class Curve extends Obstacle{
                 int x2 = (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2 = (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                float nx1 = (centreX-x1)/Math.abs(centreX-x1);
-                float ny1 = (centreY-y1)/Math.abs(centreX-x1);
-                float nx2 = -(centreX-x2)/Math.abs(centreX-x2);
-                float ny2 = -(centreY-y2)/Math.abs(centreY-y2);
+                float nx1 = -(centreX-x1)/radius;
+                float ny1 = -(centreY-y1)/radius;
+                float nx2 = (centreX-x2)/innerRadius;
+                float ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e);
+                GameTable.table[x1-1][y1-1]=new Obstacle(nx1, ny1, s, e);
+                GameTable.table[x2-1][y2-1]=new Obstacle(nx2, ny2, s, e);
             } 
         }else if(startCeta >= endCeta){
             for(double ceta=startCeta;ceta<=2*Math.PI;ceta+=0.001){
@@ -89,13 +89,13 @@ public class Curve extends Obstacle{
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                float nx1 = (centreX-x1)/Math.abs(centreX-x1);
-                float ny1 = (centreY-y1)/Math.abs(centreX-x1);
-                float nx2 = -(centreX-x2)/Math.abs(centreX-x2);
-                float ny2 = -(centreY-y2)/Math.abs(centreY-y2);
+                float nx1 = -(centreX-x1)/radius;
+                float ny1 = -(centreY-y1)/radius;
+                float nx2 = (centreX-x2)/innerRadius;
+                float ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
+                GameTable.table[x1-1][y1-1]=new Obstacle(nx1, ny1, s, e);
+                GameTable.table[x2-1][y2-1]=new Obstacle(nx2, ny2, s, e); 
             }
 
             for(double ceta=0;ceta<=endCeta;ceta+=0.001){
@@ -104,13 +104,13 @@ public class Curve extends Obstacle{
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
                 
-                float nx1 = (centreX-x1)/Math.abs(centreX-x1);
-                float ny1 = (centreY-y1)/Math.abs(centreX-x1);
-                float nx2 = -(centreX-x2)/Math.abs(centreX-x2);
-                float ny2 = -(centreY-y2)/Math.abs(centreY-y2);
+                float nx1 = -(centreX-x1)/radius;
+                float ny1 = -(centreY-y1)/radius;
+                float nx2 = (centreX-x2)/innerRadius;
+                float ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
+                GameTable.table[x1-1][y1-1]=new Obstacle(nx1, ny1, s, e);
+                GameTable.table[x2-1][y2-1]=new Obstacle(nx2, ny2, s, e); 
             }
         }
     }
