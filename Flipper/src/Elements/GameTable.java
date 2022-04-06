@@ -12,7 +12,7 @@ public class GameTable{
      * C'est aussi le margin du pseudoTable
      */
     public static int detectionRange = 5;
-    public static int margin = detectionRange;
+    public static int margin = 20;
 
     public static int width;
     public static int height;
@@ -107,7 +107,7 @@ public class GameTable{
     public boolean startGame() throws InterruptedException{ 
         this.isRunning = true;
         while(true){
-            Thread.sleep((long) (1000*frameTime));
+            Thread.sleep((long) (17));
             //Supprimer la balle de pseudoTable 
             pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
             ballA.falls();
