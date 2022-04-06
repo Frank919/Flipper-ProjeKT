@@ -3,21 +3,19 @@ package Elements;
 
 public class Ball extends ElementKinetic{
     protected int radius;
-    protected float force[] = new float[2];
     
     /**
      * Construire une balle
      * @param positionX
-     *          Coordonnée X initiale du centre de cette balle dans le table vrai
+     *          Coordonnée X initiale du centre de la balle dans le table vrai
      * @param positionY
-     *          Coordonnée Y initiale du centre de cette balle dans le table vrai
+     *          Coordonnée Y initiale du centre de la balle dans le table vrai
      * @param radius
-     *          Radium de cette balle
+     *          Radium de la balle
      * @param messe
-     *          Masse de cette balle
+     *          Masse de la balle
      * @param smoothness
      *          Glissement défini entre 0 et 1 
-     * 
      * @param elasticity
      *          Élasticity défini entre 0 et 1 
      * 
@@ -25,7 +23,7 @@ public class Ball extends ElementKinetic{
      */
     public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
         /**
-         * Ici on met la balle dans le pseudoTable car tous les calculs et simulations s'y passent.
+         * Ici on met la balle dans le pseudoTable car tous les calculs s'y passent.
          * Donc on fait décaler la position.
          */
         super(positionX + GameTable.detectionRange, positionY + GameTable.detectionRange, messe, smoothness, elasticity);
@@ -54,10 +52,10 @@ public class Ball extends ElementKinetic{
      * Cette méthode permet de calculer la variation de la vitesse en raison de la collision et de la frction,
      * qui impacte la vitesse normale et tangentielle.
      * 
-     * Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets frotté,
+     * Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets en contact,
      * donc entre 0 et 1.
      * Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
-     * Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
+     *    Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
      * 
      * Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
      * donc entre 0 et 1.
@@ -71,7 +69,6 @@ public class Ball extends ElementKinetic{
         //Calculer le coefficient répondissement et celui de fricion
         float coeffRebound = elasticity * e.elasticity;
         float coeffFriction = smoothness * e.smoothness;
-        
         if(e instanceof ElementKinetic){
             if(e instanceof Flipper){
                 Flipper eF = (Flipper)e;
@@ -117,10 +114,6 @@ public class Ball extends ElementKinetic{
                 //Conclusion 
                 velocityX = vTX + vNX;
                 velocityY = vTY + vNY;
-
-            }else if(e instanceof Launcher){
-                Flipper eL = (Flipper)e;
-                
             }
         }else if(e instanceof ElementStatic){
             //Calculer la vitesse normale à un obstacle
@@ -187,9 +180,63 @@ public class Ball extends ElementKinetic{
         }
         return false;
     }
+    /**
+     * Mettre en place la balle manuellement
+     * @param x
+     *      position X qu'on souhaite donner
+     * @param y
+     *      position Y qu'on souhaite donner
+     */
+    public void setPosition(int x, int y){
+        this.positionX = x;
+        this.positionY = y;
+    }
 
     /**
-     * Déterminer si on a la fin du jeu
+     * 
+     * @return la position X de la balle
+     */
+    public int getPositionX(){
+        int x = positionX;
+        return x;
+    }
+
+    /**
+     * 
+     * @return la position Y de la balle
+     */
+    public int getPositionY(){
+        int y = positionY;
+        return y;
+    }
+
+    /**
+     * Donner manuellement la vitesse de la balle
+     * @param vx
+     *      vitesse X qu'on souhaite donner
+     * @param vy
+     *      vitesse Y qu'on souhaite donner
+     */
+    public void setVelocity(double vx, double vy){
+        this.velocityX = (float)vx;
+        this.velocityY = (float)vy;
+    }
+    /**
+     * 
+     * @return la vitesse Y de la balle
+     */
+    public float getVelocityX(){
+        return velocityX;
+    }
+    /**
+     * 
+     * @return la vitesse Y de la balle
+     */
+    public float getVelocityY(){
+        return velocityY;
+    }
+    /**
+     * Déterminer si on a la fin du jeu 
      * @return  {@code true} si la balle est en dehors du table
      *      <li>{@code false} sinon
      *      

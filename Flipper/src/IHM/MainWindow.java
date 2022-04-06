@@ -5,8 +5,9 @@ import Elements.*;
 
 public class MainWindow extends JPanel{
     
-    public MainWindow(){
-        new GameTable(720, 640);
+    public MainWindow() throws InterruptedException{
+        GameTable GT = new GameTable(720, 640);
+        GT.startGame();
         
     }
 }

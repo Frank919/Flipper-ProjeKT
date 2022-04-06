@@ -35,7 +35,7 @@ public class GameTable{
     /**
      * Créer des balles différentes
      */
-    public Ball ballA= new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
+    public Ball ballA = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     public Ball gangqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
 
     /**
@@ -104,9 +104,10 @@ public class GameTable{
         System.out.println("\nAll Elements copied to pseudoTable with success");
     }
 
-    public boolean startGame(){ 
-        isRunning = true;
+    public boolean startGame() throws InterruptedException{ 
+        this.isRunning = true;
         while(true){
+            Thread.sleep((long) (1000*frameTime));
             //Supprimer la balle de pseudoTable 
             pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
             ballA.falls();

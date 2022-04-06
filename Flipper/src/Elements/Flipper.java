@@ -75,13 +75,22 @@ public class Flipper extends ElementKinetic{
         
     }
 
-    public void rotate(){
+    public void rotateUp(){
         if(isOnRight){
             angle += GameTable.frameTime*velocityAng;
         }else{
             angle -= GameTable.frameTime*velocityAng;
         }
-        
+        tip.positionX = (int)Math.cos(angle);
+        tip.positionY = (int)Math.sin(angle);
+    }
+
+    public void rotateDown(){
+        if(! isOnRight){
+            angle += GameTable.frameTime*velocityAng;
+        }else{
+            angle -= GameTable.frameTime*velocityAng;
+        }
         tip.positionX = (int)Math.cos(angle);
         tip.positionY = (int)Math.sin(angle);
 

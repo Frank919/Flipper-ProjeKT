@@ -7,14 +7,12 @@ public class ElementKinetic extends ElementBasic{
      */
     protected int mass;
 
-    //protected float[] velocity =  new float[2];
-
     /**
-     * La composition X de vitesse en pixel/s.
+     * La composition X de vitesse en pixel/s, positive vers la droite.
      */
     protected float velocityX;
     /**
-     * La composition Y de vitesse en pixel/s.
+     * La composition Y de vitesse en pixel/s, positive vers le bas.
      */
     protected float velocityY;
 
