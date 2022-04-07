@@ -47,6 +47,4 @@ public class ElementBasic {
         this.smoothness=smoothness;
         this.elasticity=elasticity;
     }
-
-
 }

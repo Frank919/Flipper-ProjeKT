@@ -71,15 +71,17 @@ public class Flipper extends ElementKinetic{
         int r = 5;
         ElementBasic s = new ElementBasic(centre.positionX + r, centre.positionY);
         Curve base = new Curve(s, s, centre, r, this.smoothness, this.elasticity);
-
-        
     }
 
     public void rotateUp(){
         if(isOnRight){
-            angle += GameTable.frameTime*velocityAng;
+            while(angle <= Math.PI*5/4){
+                angle += GameTable.frameTime*velocityAng;
+            }
         }else{
-            angle -= GameTable.frameTime*velocityAng;
+            while(angle >= -Math.PI/4){
+                angle -= GameTable.frameTime*velocityAng;
+            }
         }
         tip.positionX = (int)Math.cos(angle);
         tip.positionY = (int)Math.sin(angle);
@@ -87,9 +89,13 @@ public class Flipper extends ElementKinetic{
 
     public void rotateDown(){
         if(! isOnRight){
-            angle += GameTable.frameTime*velocityAng;
+            while(angle <= Math.PI/4){
+                angle += GameTable.frameTime*velocityAng;
+            }
         }else{
-            angle -= GameTable.frameTime*velocityAng;
+            while(angle >= Math.PI*3/4){
+                angle -= GameTable.frameTime*velocityAng;
+            }
         }
         tip.positionX = (int)Math.cos(angle);
         tip.positionY = (int)Math.sin(angle);
