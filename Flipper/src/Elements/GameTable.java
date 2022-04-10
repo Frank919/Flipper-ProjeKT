@@ -1,6 +1,6 @@
 package Elements;
 
-public class GameTable{
+public class GameTable {
     /**
      * 每一帧运算一次小球位置
      */
@@ -108,6 +108,7 @@ public class GameTable{
         this.isRunning = true;
         while(true){
             Thread.sleep((long) (17));
+            flipperRight.rotateUp();
             //Supprimer la balle de pseudoTable 
             pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
             ballA.falls();

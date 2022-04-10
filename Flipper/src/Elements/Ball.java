@@ -69,52 +69,50 @@ public class Ball extends ElementKinetic{
         //Calculer le coefficient répondissement et celui de fricion
         float coeffRebound = elasticity * e.elasticity;
         float coeffFriction = smoothness * e.smoothness;
-        if(e instanceof ElementKinetic){
-            if(e instanceof Flipper){
-                Flipper eF = (Flipper)e;
-                //Vecteur1 centre--->balle
-                int v1X = positionX - eF.centre.positionX;
-                int v1Y = positionY - eF.centre.positionY;
-                //Vecteur3 centre--->tip
-                int v3X = eF.tip.positionX - eF.centre.positionX;
-                int v3Y = eF.tip.positionY - eF.centre.positionY;
-                //Vecteur1 X vecteur3
-                float produitVectoriel = v1X * v3Y - v3X * v1Y;
-                //Vecteur1 . vecteur3
-                float produitScalaire = v1X * v3X + v1Y * v3Y;
-                //Déterminer quelle surface à impacter
-                if( produitVectoriel <= 0){
-                    eF.nX = eF.n1X;
-                    eF.nY = eF.n1Y;
-                }else{
-                    eF.nX = eF.n2X;
-                    eF.nY = eF.n2Y;
-                }
-                //Calculer la vitesse normale au flipper
-                float vNX = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nX);
-                float vNY = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nY);
-                //Calculer la vitesse tangentielle au flipper
-                float vTX = velocityX - vNX;
-                float vTY = velocityY - vNY;
-
-                //Déterminer la position contact sur le flipper
-                float rayon = (float)(produitScalaire / Math.pow((v3X*v3X + v3Y*v3Y),2));
-                float velocityLineX = (float)(eF.velocityAng * rayon * nX);
-                float velocityLineY = (float)(eF.velocityAng * rayon * nY);
-                //Calculer la vitesse normale du flipper
-                float vFNX = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nX);
-                float vFNY = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nY);
-
-                //Collision 
-                vNX = - coeffRebound * vNX + vFNX - vNX;
-                vNY = - coeffRebound * vNY + vFNY - vNY;
-                //Friciton 
-                vTX = (1 - coeffFriction) * vTX;
-                vTY = (1 - coeffFriction) * vTY;
-                //Conclusion 
-                velocityX = vTX + vNX;
-                velocityY = vTY + vNY;
+        if(e instanceof Flipper){
+            Flipper eF = (Flipper)e;
+            //Vecteur1 centre--->balle
+            int v1X = positionX - eF.centre.positionX;
+            int v1Y = positionY - eF.centre.positionY;
+            //Vecteur3 centre--->tip
+            int v3X = eF.tip.positionX - eF.centre.positionX;
+            int v3Y = eF.tip.positionY - eF.centre.positionY;
+            //Vecteur1 X vecteur3
+            float produitVectoriel = v1X * v3Y - v3X * v1Y;
+            //Vecteur1 . vecteur3
+            float produitScalaire = v1X * v3X + v1Y * v3Y;
+            //Déterminer quelle surface à impacter
+            if( produitVectoriel <= 0){
+                eF.nX = eF.n1X;
+                eF.nY = eF.n1Y;
+            }else{
+                eF.nX = eF.n2X;
+                eF.nY = eF.n2Y;
             }
+            //Calculer la vitesse normale au flipper
+            float vNX = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nX);
+            float vNY = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nY);
+            //Calculer la vitesse tangentielle au flipper
+            float vTX = velocityX - vNX;
+            float vTY = velocityY - vNY;
+
+            //Déterminer la position contact sur le flipper
+            float rayon = (float)(produitScalaire / Math.pow((v3X*v3X + v3Y*v3Y),2));
+            float velocityLineX = (float)(eF.velocityAng * rayon * nX);
+            float velocityLineY = (float)(eF.velocityAng * rayon * nY);
+            //Calculer la vitesse normale du flipper
+            float vFNX = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nX);
+            float vFNY = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nY);
+
+            //Collision 
+            vNX = - coeffRebound * vNX + vFNX - vNX;
+            vNY = - coeffRebound * vNY + vFNY - vNY;
+            //Friciton 
+            vTX = (1 - coeffFriction) * vTX;
+            vTY = (1 - coeffFriction) * vTY;
+            //Conclusion 
+            velocityX = vTX + vNX;
+            velocityY = vTY + vNY;
         }else if(e instanceof ElementStatic){
             //Calculer la vitesse normale à un obstacle
             float vNX = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nX);
