@@ -2,11 +2,18 @@ package Elements;
 
 public class GameTable {
     /**
-     * 每一帧运算一次小球位置
+     * Fois d'actualisation en 1 seconde
      */
-    public static int frameRate = 60;
-    public static float frameTime = (float)1.0/frameRate;
-    public static float dt = (float) 0.000001;
+    public static int refreshRate = 480;
+    /**
+     * Interval temporel entre 2 actualisations 
+     */
+    public static float refreshTime = (float)1.0/refreshRate;
+    /**
+     * Interval en milliseconde
+     */
+    public static long refreshTimeMS = (long)(1000*refreshTime);
+
 
     /**
      * C'est aussi le margin du pseudoTable
@@ -35,6 +42,7 @@ public class GameTable {
     /**
      * Créer des balles différentes
      */
+    public Ball ball; 
     public Ball ballA = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
     public Ball gangqiu = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
 
@@ -107,8 +115,7 @@ public class GameTable {
     public boolean startGame() throws InterruptedException{ 
         this.isRunning = true;
         while(true){
-            Thread.sleep((long) (17));
-            flipperRight.rotateUp();
+            Thread.sleep(refreshTimeMS);
             //Supprimer la balle de pseudoTable 
             pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
             ballA.falls();

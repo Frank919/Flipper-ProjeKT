@@ -1,9 +1,10 @@
-import IHM.MainWindow;
+import IHM.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        new MainWindow();
-        
+        new GameRules();
+        //new SelectionBall();
+        //new MainWindow();
         
         
     }

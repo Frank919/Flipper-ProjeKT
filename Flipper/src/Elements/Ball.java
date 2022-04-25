@@ -34,8 +34,8 @@ public class Ball extends ElementKinetic{
      * Mettre à jour la position de la balle
      */
     public void moves(){
-        positionX += velocityX * GameTable.frameTime;
-        positionY += velocityY * GameTable.frameTime;
+        positionX += velocityX * GameTable.refreshTime;
+        positionY += velocityY * GameTable.refreshTime;
     }
     
 
@@ -45,7 +45,7 @@ public class Ball extends ElementKinetic{
      */               
     public final void falls(){
         int g = 150;
-        velocityY+=g*GameTable.frameTime;
+        velocityY+=g*GameTable.refreshTime;
     }
 
     /**

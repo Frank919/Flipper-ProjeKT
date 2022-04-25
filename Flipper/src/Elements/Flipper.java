@@ -76,11 +76,11 @@ public class Flipper extends ElementKinetic{
     public void rotateUp(){
         if(isOnRight){
             while(angle <= Math.PI*5/4){
-                angle += GameTable.frameTime*velocityAng;
+                angle += GameTable.refreshTime*velocityAng;
             }
         }else{
             while(angle >= -Math.PI/4){
-                angle -= GameTable.frameTime*velocityAng;
+                angle -= GameTable.refreshTime*velocityAng;
             }
         }
         tip.positionX = (int)Math.cos(angle);
@@ -90,11 +90,11 @@ public class Flipper extends ElementKinetic{
     public void rotateDown(){
         if(! isOnRight){
             while(angle <= Math.PI/4){
-                angle += GameTable.frameTime*velocityAng;
+                angle += GameTable.refreshTime*velocityAng;
             }
         }else{
             while(angle >= Math.PI*3/4){
-                angle -= GameTable.frameTime*velocityAng;
+                angle -= GameTable.refreshTime*velocityAng;
             }
         }
         tip.positionX = (int)Math.cos(angle);
