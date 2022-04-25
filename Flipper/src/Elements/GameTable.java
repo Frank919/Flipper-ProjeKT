@@ -1,6 +1,8 @@
 package Elements;
 
-public class GameTable {
+import java.awt.*;
+
+public class GameTable implements toBeDrawn{
     /**
      * Fois d'actualisation en 1 seconde
      */
@@ -112,10 +114,14 @@ public class GameTable {
         System.out.println("\nAll Elements copied to pseudoTable with success");
     }
 
-    public boolean startGame() throws InterruptedException{ 
+    public boolean startGame() { 
         this.isRunning = true;
         while(true){
-            Thread.sleep(refreshTimeMS);
+            try {
+                Thread.sleep(refreshTimeMS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //Supprimer la balle de pseudoTable 
             pseudoTable[ballA.positionX][ballA.positionY] = new ElementBasic();
             ballA.falls();
@@ -148,9 +154,16 @@ public class GameTable {
         return isRunning;
     }
 
+    @Override
+    public void drawImage(Graphics g){
+
+    }
+
+
     public String toString(){
         return "Gmae is running : " + isRunning + "\n";
     }
+    
 
 
 

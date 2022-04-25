@@ -9,9 +9,11 @@ import java.awt.event.*;
 public class MainWindow extends JFrame implements KeyListener{
     public boolean isPressedL;
 	public boolean isPressedJ;
+    public GameTable GT;
+    public GamePanel GP;
+    
     public MainWindow() {
-
-       
+        
         this.setTitle("Jeu du flipper");
 		this.setSize(879,754);
 		// Pour placer la fenêtre au centre de l'écran
@@ -42,7 +44,28 @@ public class MainWindow extends JFrame implements KeyListener{
 		add(panneauJeu);
 		add(panneauScore);
 		
-		this.setVisible(true);
+		
+        this.startGame();
+    }
+    public void startGame(){
+        GT = new GameTable(640, 720);
+        GP = new GamePanel(GT);
+        this.add(GP);
+        this.setVisible(true);
+
+        while(true){
+            try {
+                Thread.sleep(GameTable.refreshTimeMS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+            if(ballA.isOut()){
+                isRunning = false;
+                break;
+            }
+            //break;
+        }
 
     }
     // méthodes pour associer la touche J au fait que la manette réagit
@@ -59,8 +82,6 @@ public class MainWindow extends JFrame implements KeyListener{
 	}
 	
 	public void keyPressed(KeyEvent e){
-		
-			
 		if(e.getKeyCode()==KeyEvent.VK_J){
 			isPressedJ=true;
 		}else if(e.getKeyCode()==KeyEvent.VK_L){
