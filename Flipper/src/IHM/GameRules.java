@@ -47,14 +47,14 @@ public class GameRules extends JFrame implements ActionListener{
 		panneauRegles.add(demandePseudo);
 		
 			// pour entrer son pseudo
-		JTextField saisirPseudo = new JTextField();
+		saisirPseudo = new JTextField();
 		saisirPseudo.setBounds(400,0,200,50);
 		saisirPseudo.setLayout(null);
 		saisirPseudo.setBackground(Color.white);
 		panneauRegles.add(saisirPseudo);
 		
 			// affichage du texte qui donne les règles du jeu
-		JLabel consigne1 = new JLabel();
+		consigne1 = new JLabel();
 		consigne1.setBounds(325,70,300,50);
 		consigne1.setLayout(null);
 		consigne1.setText("But du jeu :");
@@ -62,7 +62,7 @@ public class GameRules extends JFrame implements ActionListener{
 		consigne1.setForeground(Color.white);
 		panneauRegles.add(consigne1);
 		
-		JLabel consigne11 = new JLabel();
+		consigne11 = new JLabel();
 		consigne11.setBounds(250,150,500,50);
 		consigne11.setLayout(null);
 		consigne11.setText("Aies le plus grand score !");
@@ -70,7 +70,7 @@ public class GameRules extends JFrame implements ActionListener{
 		consigne11.setForeground(Color.white);
 		panneauRegles.add(consigne11);
 		
-		JLabel consigne2 = new JLabel(); // NE S'AFFICHE PAS
+		consigne2 = new JLabel(); // NE S'AFFICHE PAS
 		consigne2.setBounds(130,220,700,50);
 		consigne2.setLayout(null);
 		consigne2.setText("Pour jouer, tu as besoin de seulement 2 touches :");
@@ -79,12 +79,12 @@ public class GameRules extends JFrame implements ActionListener{
 		panneauRegles.add(consigne2);
 		
 		
-		JLabel lettreJ = new JLabel();
-		lettreJ.setIcon(new ImageIcon("C:/Users/camil/OneDrive/Pictures/J.png"));
+		lettreJ = new JLabel();
+		lettreJ.setIcon(new ImageIcon("Flipper/src/Resource/J.png"));
 		lettreJ.setBounds(200,350,100,100);
 		panneauRegles.add(lettreJ);
 		
-		JLabel consigne21 = new JLabel();
+		consigne21 = new JLabel();
 		consigne21.setBounds(350,375,400,50);
 		consigne21.setLayout(null);
 		consigne21.setText(": pour le cote gauche");
@@ -92,12 +92,12 @@ public class GameRules extends JFrame implements ActionListener{
 		consigne21.setForeground(Color.white);
 		panneauRegles.add(consigne21);
 		
-		JLabel lettreL = new JLabel();
-		lettreL.setIcon(new ImageIcon("C:/Users/camil/OneDrive/Pictures/L.png"));
+		lettreL = new JLabel();
+		lettreL.setIcon(new ImageIcon("Flipper/src/Resource/L.png"));
 		lettreL.setBounds(200,450,100,100);
 		panneauRegles.add(lettreL);
 		
-		JLabel consigne3 = new JLabel();
+		consigne3 = new JLabel();
 		consigne3.setBounds(350,475,400,50);
 		consigne3.setLayout(null);
 		consigne3.setText(": pour le cote droit");
@@ -105,7 +105,7 @@ public class GameRules extends JFrame implements ActionListener{
 		consigne3.setForeground(Color.white);
 		panneauRegles.add(consigne3);
 		
-		JLabel consigne4 = new JLabel();
+		consigne4 = new JLabel();
 		consigne4.setBounds(150,600,450,50);
 		consigne4.setLayout(null);
 		consigne4.setText("A toi de jouer !");
@@ -113,7 +113,7 @@ public class GameRules extends JFrame implements ActionListener{
 		consigne4.setForeground(Color.white);
 		panneauRegles.add(consigne4);
 		
-		JButton boutonCommencer = new JButton("Commencer");
+		boutonCommencer = new JButton("Commencer");
 		boutonCommencer.setBounds(400,600,200,50);
 		boutonCommencer.setLayout(null);
 		boutonCommencer.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));		

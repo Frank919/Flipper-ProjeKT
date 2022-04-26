@@ -11,9 +11,10 @@ public class MainWindow extends JFrame implements KeyListener{
 	public boolean isPressedJ;
     public GameTable GT;
     public GamePanel GP;
+    public Ball ball;
     
-    public MainWindow() {
-        
+    public MainWindow(Ball ball) {
+        this.ball  = ball;
         this.setTitle("Jeu du flipper");
 		this.setSize(879,754);
 		// Pour placer la fenêtre au centre de l'écran
@@ -34,7 +35,7 @@ public class MainWindow extends JFrame implements KeyListener{
 		panneauScore.setBackground(Color.white);
 		
 		JLabel afficheJeu = new JLabel();
-		afficheJeu.setIcon(new ImageIcon("C:/Users/camil/OneDrive/Pictures/flipperJEU.png"));
+		afficheJeu.setIcon(new ImageIcon("Flipper/src/Resource/background.jpg"));
 		afficheJeu.setBounds(0,0,479,754);		
 		
 		panneauJeu.add(afficheJeu);
@@ -46,9 +47,10 @@ public class MainWindow extends JFrame implements KeyListener{
 		
 		
         this.startGame();
+		
     }
     public void startGame(){
-        GT = new GameTable(640, 720);
+        GT = new GameTable(640, 720, ball);
         GP = new GamePanel(GT);
         this.add(GP);
         this.setVisible(true);
@@ -60,8 +62,7 @@ public class MainWindow extends JFrame implements KeyListener{
                 e.printStackTrace();
             }
             
-            if(ballA.isOut()){
-                isRunning = false;
+            if(GT.ball.isOut()){
                 break;
             }
             //break;

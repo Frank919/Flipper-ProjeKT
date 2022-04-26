@@ -12,6 +12,7 @@ public class SelectionBall extends JFrame implements ActionListener {
 	private JButton boutonBalle1;
 	private JButton boutonBalle2;
 	private JButton boutonBalle3;
+	private Ball ball;
     
     public SelectionBall(){
         this.setTitle("Choix de la balle");
@@ -29,7 +30,7 @@ public class SelectionBall extends JFrame implements ActionListener {
 		panneauBalle.setBackground(Color.white);
 		
 		// affichage du texte
-		JLabel demandeBalle = new JLabel();
+		demandeBalle = new JLabel();
 		demandeBalle.setBounds(25,0,200,50);
 		demandeBalle.setLayout(null);
 		demandeBalle.setText("Choisis la balle :");
@@ -44,12 +45,12 @@ public class SelectionBall extends JFrame implements ActionListener {
 		
 		// balle 1
 		
-		JLabel balle1 = new JLabel();
+		balle1 = new JLabel();
 		balle1.setIcon(new ImageIcon("Flipper/src/Resource/balle1.png"));
 		balle1.setBounds(100,50,100,100);
 		panneauBalle.add(balle1);
 		
-		JButton boutonBalle1 = new JButton("Choisir");
+		boutonBalle1 = new JButton("Choisir");
 		boutonBalle1.setBounds(50,150,100,30);
 		boutonBalle1.setLayout(null);
 		boutonBalle1.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,20));		
@@ -57,14 +58,15 @@ public class SelectionBall extends JFrame implements ActionListener {
 		boutonBalle1.setBackground(Color.green);
 		panneauBalle.add(boutonBalle1);
 		
+		
 		// balle 2
 		
-		JLabel balle2 = new JLabel();
+		balle2 = new JLabel();
 		balle2.setIcon(new ImageIcon("Flipper/src/Resource/balle2.png"));
 		balle2.setBounds(250,50,100,100);
 		panneauBalle.add(balle2);
 		
-		JButton boutonBalle2 = new JButton("Choisir");
+		boutonBalle2 = new JButton("Choisir");
 		boutonBalle2.setBounds(200,150,100,30);
 		boutonBalle2.setLayout(null);
 		boutonBalle2.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,20));		
@@ -74,12 +76,12 @@ public class SelectionBall extends JFrame implements ActionListener {
 		
 		// balle 3
 		
-		JLabel balle3 = new JLabel();
+		balle3 = new JLabel();
 		balle3.setIcon(new ImageIcon("Flipper/src/Resource/balle3.png"));
 		balle3.setBounds(400,50,100,100);
 		panneauBalle.add(balle3);
 		
-		JButton boutonBalle3 = new JButton("Choisir");
+		boutonBalle3 = new JButton("Choisir");
 		boutonBalle3.setBounds(350,150,100,30);
 		boutonBalle3.setLayout(null);
 		boutonBalle3.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,20));		
@@ -100,18 +102,15 @@ public class SelectionBall extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-		this.dispose();
-		
         if (e.getSource()==boutonBalle1){
-            
-            // AJOUTER ICI LE CODE Pour DIRE QUE CE SERA LA BALLE AFFICHEE POUR LE JEU DU FLIPPER
+            ball = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
         } else if (e.getSource()==boutonBalle2){
-            
-            // AJOUTER ICI LE CODE Pour DIRE QUE CE SERA LA BALLE AFFICHEE POUR LE JEU DU FLIPPER
+			ball = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
         } else if(e.getSource()==boutonBalle3){
-            
-            // AJOUTER ICI LE CODE Pour DIRE QUE CE SERA LA BALLE AFFICHEE POUR LE JEU DU FLIPPER
+            ball = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
         }
-		MainWindow mW = new MainWindow();
-}
+		this.dispose();
+		new MainWindow(ball);
+		
+	}
 }

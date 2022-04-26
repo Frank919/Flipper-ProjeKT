@@ -34,6 +34,7 @@ public class Ball extends ElementKinetic{
      * Mettre à jour la position de la balle
      */
     public void moves(){
+        this.falls();
         positionX += velocityX * GameTable.refreshTime;
         positionY += velocityY * GameTable.refreshTime;
     }
@@ -43,7 +44,7 @@ public class Ball extends ElementKinetic{
      * Cette méthode permet de calculer la variation de la vitesse en raison de la gravitation,
      * qui impacte la vitesse selon Y.
      */               
-    public final void falls(){
+    public void falls(){
         int g = 150;
         velocityY+=g*GameTable.refreshTime;
     }
@@ -113,7 +114,7 @@ public class Ball extends ElementKinetic{
             //Conclusion 
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
-        }else if(e instanceof ElementStatic){
+        }else if(e instanceof Obstacle){
             //Calculer la vitesse normale à un obstacle
             float vNX = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nX);
             float vNY = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nY);
@@ -139,7 +140,7 @@ public class Ball extends ElementKinetic{
      *      si la balle est en contact avec une chose
      */
     public boolean isOnContectWith(ElementBasic e){
-        if(e instanceof ElementStatic){
+        if(e instanceof Obstacle){
             float distance = (float)Math.sqrt(
                         (e.positionX - positionX)*(e.positionX - positionX) 
                         + (e.positionY - positionY)*(e.positionY - positionY)
@@ -153,7 +154,7 @@ public class Ball extends ElementKinetic{
             //Vecteur1 centre--->balle
             int v1X = positionX - eF.centre.positionX;
             int v1Y = positionY - eF.centre.positionY;
-            //Vecteur3 tip--->balle
+            //Vecteur2 tip--->balle
             int v2X = positionX - eF.tip.positionX;
             int v2Y = positionY - eF.tip.positionY;
             //Vecteur3 centre--->tip

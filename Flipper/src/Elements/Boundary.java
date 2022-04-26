@@ -1,6 +1,6 @@
 package Elements;
 
-public class Boundary extends ElementStatic{
+public class Boundary extends Obstacle{
     
     /**
      * Construire les bords de GameTable, qui sont 3 ségements situés à gauche, en haut et à droit.
