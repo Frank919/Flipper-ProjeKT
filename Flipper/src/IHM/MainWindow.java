@@ -42,10 +42,10 @@ public class MainWindow extends JFrame implements KeyListener{
 		//panneauJeu.setBackground(Color.black);
 		
 		
-		panneauScore = new JPanel();
-		panneauScore.setBounds(480,0,400,754);
-		panneauScore.setLayout(null); // permet de placer manuellement les composants
-		panneauScore.setBackground(Color.white);
+		//panneauScore = new JPanel();
+		//panneauScore.setBounds(480,0,400,754);
+		//panneauScore.setLayout(null); // permet de placer manuellement les composants
+		//panneauScore.setBackground(Color.white);
 		
 		//JLabel afficheJeu = new JLabel();
 		//afficheJeu.setIcon(new ImageIcon("Flipper/src/Resource/background.jpg"));
@@ -56,17 +56,21 @@ public class MainWindow extends JFrame implements KeyListener{
 		//Pour ajouter le panneau jaune à la JFrame
 
 		//add(panneauJeu);
-		add(panneauScore);
+		//add(panneauScore);
 		
-		this.setVisible(true);
-        //this.startGame();
+		
+        this.startGame();
 		
     }
     public void startGame(){
-        GT = new GameTable(640, 720, ball);
-        GP = new GamePanel(GT);
+        GT = new GameTable(640, 720, this.ball);
+		Picture ball = new Picture("balle1"/*+GT.ball.getNum()*/);
+		//Pictures back = new Pictures("background");
+        GP = new GamePanel(ball);
+		ball.setX(GT.ball.getPositionX());
+		ball.setY(GT.ball.getPositionY());
         this.add(GP);
-        
+        this.setVisible(true);
 
         while(true){
             try {
@@ -74,13 +78,16 @@ public class MainWindow extends JFrame implements KeyListener{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-			
             GT.refresh();
-
+			ball.setX(GT.ball.getPositionX());
+			ball.setY(GT.ball.getPositionY());
+			GP.repaint();
             if(GT.ball.isOut()){
+				this.dispose();
+				System.out.println("game over");
+                System.exit(0);
                 break;
             }
-            //break;
         }
 
     }

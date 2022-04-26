@@ -49,8 +49,8 @@ public class GameTable implements toBeDrawn{
     /**
      * Zone des éléments
      */
-    protected Flipper flipperRight;
-    protected Flipper flipperLeft;
+    public Flipper flipperRight;
+    public Flipper flipperLeft;
     /**
      * État du jeu
      */
@@ -99,7 +99,7 @@ public class GameTable implements toBeDrawn{
         flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
         flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
         
-        
+
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 pseudoTable[i+margin][j+margin]=table[i][j];

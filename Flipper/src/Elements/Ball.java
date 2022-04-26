@@ -3,6 +3,7 @@ package Elements;
 
 public class Ball extends ElementKinetic{
     protected int radius;
+    protected int num;
     
     /**
      * Construire une balle
@@ -21,13 +22,14 @@ public class Ball extends ElementKinetic{
      * 
      * @see #collidesWith(ElementBasic e)
      */
-    public Ball(int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
+    public Ball(int num,int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
         /**
          * Ici on met la balle dans le pseudoTable car tous les calculs s'y passent.
          * Donc on fait décaler la position.
          */
         super(positionX + GameTable.margin, positionY + GameTable.margin, messe, smoothness, elasticity);
         this.radius=radius; 
+        this.num = num;
     }
 
     /**
@@ -191,6 +193,14 @@ public class Ball extends ElementKinetic{
         this.positionY = y;
     }
 
+    /**
+     * 
+     * @return le numero de la balle
+     */
+    public int getNum(){
+        int n = num;
+        return n;
+    }
     /**
      * 
      * @return la position X de la balle

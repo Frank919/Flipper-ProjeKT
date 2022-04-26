@@ -4,19 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DemoPanel extends JPanel {
-    private Demo demo;
+    private Demo[] demos;
 
-    public DemoPanel(){
+    //public DemoPanel(){
         
+    //
+    public DemoPanel(Demo... demos){
+        this.demos = demos;
     }
-    public DemoPanel(Demo demo){
-        this.demo = demo;
-    }
+    
     public void paint(Graphics g){
         super.paint(g);
-        
-        g.drawImage(demo.getImage(),demo.getX(),demo.getY(),100,100,null);
-        
-
+        for (Demo demo : this.demos) {
+            g.drawImage(demo.getImage(),demo.getX(),demo.getY(),demo.getW(),demo.getH(),null);
+        }
     }
 }

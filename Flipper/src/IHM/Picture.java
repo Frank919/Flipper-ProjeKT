@@ -1,12 +1,11 @@
 package IHM;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class Demo{
+public class Picture {
     private int x,y,w,h;
     private Image image;
-    public Demo(String name){
+    public Picture(String name){
         this.image = new ImageIcon("Flipper/src/Resource/"+name+".png").getImage();
         this.w = image.getWidth(null);
         this.h = image.getHeight(null);
