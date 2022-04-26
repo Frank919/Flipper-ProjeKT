@@ -45,9 +45,6 @@ public class GameTable implements toBeDrawn{
      * Créer des balles différentes
      */
     public Ball ball; 
-    public Ball ball1 = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
-    public Ball ball2 = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
-    public Ball ball3 = new Ball(2, 3, 4, 5, (float)0.3, (float)0.1);
 
     /**
      * Zone des éléments
@@ -102,8 +99,7 @@ public class GameTable implements toBeDrawn{
         flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
         flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
         
-
-
+        
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 pseudoTable[i+margin][j+margin]=table[i][j];
@@ -113,44 +109,39 @@ public class GameTable implements toBeDrawn{
             }
         }
         System.out.println("\nAll Elements copied to pseudoTable with success");
+
+        this.initialize();
     }
 
-    public boolean startGame() { 
+    public boolean initialize(){
+        
+        return true;
+    }
+
+    public boolean refresh() { 
         this.isRunning = true;
-        while(true){
-            try {
-                Thread.sleep(refreshTimeMS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //Supprimer la balle de pseudoTable 
-            pseudoTable[ball1.positionX][ball1.positionY] = new ElementBasic();
-            ball1.falls();
-            ball1.moves();
-            if(ball1.isOnContectWith(flipperLeft)){
-                ball1.collidesWith(flipperLeft);
-                ball1.moves();
-            }
-            if(ball1.isOnContectWith(flipperRight)){
-                ball1.collidesWith(flipperRight);
-                ball1.moves();
-            }
-            for(int i = ball1.positionX - detectionRange; i < ball1.positionX + detectionRange; i++){
-                for(int j = ball1.positionY - detectionRange; j < ball1.positionY + detectionRange; j++){
-                    if (ball1.isOnContectWith(pseudoTable[i][j])){
-                        ball1.collidesWith(pseudoTable[i][j]);
-                        ball1.moves();
-                    }
+        //Supprimer la balle de pseudoTable 
+        pseudoTable[ball.positionX][ball.positionY] = new ElementBasic();
+        
+        if(ball.isOnContectWith(flipperLeft)){
+            ball.collidesWith(flipperLeft);
+        }
+        if(ball.isOnContectWith(flipperRight)){
+            ball.collidesWith(flipperRight);
+        }
+        for(int i = ball.positionX - detectionRange; i < ball.positionX + detectionRange; i++){
+            for(int j = ball.positionY - detectionRange; j < ball.positionY + detectionRange; j++){
+                if (ball.isOnContectWith(pseudoTable[i][j])){
+                    ball.collidesWith(pseudoTable[i][j]);
                 }
             }
-            //Rajouter la balle dans pseudoTable 
-            pseudoTable[ball1.positionX][ball1.positionY] = ball1;
-            System.out.println(ball1.toString());
-            if(ball1.isOut()){
-                isRunning = false;
-                break;
-            }
-            //break;
+        }
+        ball.moves();
+        //Rajouter la balle dans pseudoTable 
+        pseudoTable[ball.positionX][ball.positionY] = ball;
+        System.out.println(ball.toString());
+        if(ball.isOut()){
+            isRunning = false;
         }
         return isRunning;
     }
