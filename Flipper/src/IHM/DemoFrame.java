@@ -4,6 +4,7 @@ import javax.swing.*;
 import Elements.*;
 
 public class DemoFrame extends JFrame {
+    private Ball ball = new Ball(1,2, 3, 4, 5, (float)0.3, (float)0.1);
     public DemoFrame() {
         this.setTitle("Demo");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -15,11 +16,9 @@ public class DemoFrame extends JFrame {
         
     }
     public void startGame(){
-        GameTable GT = new GameTable(640, 720, new Ball(1,2, 3, 4, 5, (float)0.3, (float)0.1));
-		Picture ball = new Picture("balle1");
+        GameTable GT = new GameTable(640, 720,ball );
+		Picture ball = new Picture("balle"+this.ball.getNum());
         GamePanel GP = new GamePanel(ball);
-
-
 
 		ball.setX(GT.ball.getPositionX());
 		ball.setY(GT.ball.getPositionY());

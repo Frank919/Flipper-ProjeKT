@@ -125,9 +125,12 @@ public class GameTable{
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 pseudoTable[i+margin][j+margin]=table[i][j];
+                if(table[i][j] instanceof Obstacle){
+                    System.out.print("o");
+                }
             }
             if(i%(w/100)==0){
-                System.out.print("-");
+                System.out.println("-");
             }
         }
         System.out.println("\nAll Elements copied to pseudoTable with success");
@@ -147,14 +150,17 @@ public class GameTable{
         
         if(ball.isOnContectWith(flipperLeft)){
             ball.collidesWith(flipperLeft);
+            System.out.println("ccc");
         }
         if(ball.isOnContectWith(flipperRight)){
             ball.collidesWith(flipperRight);
+            System.out.println("ccc");
         }
         for(int i = ball.positionX - detectionRange; i < ball.positionX + detectionRange; i++){
             for(int j = ball.positionY - detectionRange; j < ball.positionY + detectionRange; j++){
-                if (ball.isOnContectWith(pseudoTable[i+margin][j+margin])){
-                    ball.collidesWith(pseudoTable[i+margin][j+margin]);
+                if (ball.isOnContectWith(pseudoTable[i][j])){
+                    ball.collidesWith(pseudoTable[i][j]);
+                    System.out.println("ccc");
                 }
             }
         }

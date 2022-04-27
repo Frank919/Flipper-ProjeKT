@@ -12,7 +12,7 @@ public class SelectionBall extends JFrame implements ActionListener {
 	private JButton boutonBalle1;
 	private JButton boutonBalle2;
 	private JButton boutonBalle3;
-	private Ball ball;
+	
     
     public SelectionBall(){
         this.setTitle("Choix de la balle");
@@ -102,6 +102,7 @@ public class SelectionBall extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+		Ball ball = null;
         if (e.getSource()==boutonBalle1){
             ball = new Ball(1,2, 3, 4, 5, (float)0.3, (float)0.1);
         } else if (e.getSource()==boutonBalle2){
@@ -110,7 +111,8 @@ public class SelectionBall extends JFrame implements ActionListener {
             ball = new Ball(3,2, 3, 4, 5, (float)0.3, (float)0.1);
         }
 		this.dispose();
-		new MainWindow(ball);
+		new MainWindow(ball.getNum());
+		
 		
 	}
 }
