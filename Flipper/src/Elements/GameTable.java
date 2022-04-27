@@ -4,7 +4,7 @@ public class GameTable{
     /**
      * Fois d'actualisation en 1 seconde
      */
-    public static int refreshRate = 60;
+    public static int refreshRate = 120;
     /**
      * Interval temporel entre 2 actualisations 
      */
@@ -153,8 +153,8 @@ public class GameTable{
         }
         for(int i = ball.positionX - detectionRange; i < ball.positionX + detectionRange; i++){
             for(int j = ball.positionY - detectionRange; j < ball.positionY + detectionRange; j++){
-                if (ball.isOnContectWith(pseudoTable[i][j])){
-                    ball.collidesWith(pseudoTable[i][j]);
+                if (ball.isOnContectWith(pseudoTable[i+margin][j+margin])){
+                    ball.collidesWith(pseudoTable[i+margin][j+margin]);
                 }
             }
         }
