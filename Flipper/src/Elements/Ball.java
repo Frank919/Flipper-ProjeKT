@@ -251,7 +251,7 @@ public class Ball extends ElementKinetic{
      *      
      */
     public boolean isOut(){
-        if(positionY>GameTable.height){
+        if(positionY - GameTable.margin>=GameTable.height){
             return true;
         }
         return false;

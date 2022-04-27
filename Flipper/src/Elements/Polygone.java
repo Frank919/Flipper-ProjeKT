@@ -15,7 +15,7 @@ public class Polygone extends Obstacle{
         this.smoothness = s;
         this.elasticity = e;
         for(int i=0;i<elm.length;i++){
-            apex[i] = (Obstacle)elm[i];
+            //apex[i] = (Obstacle)elm[i];
             //le vecteur normal
             float nx = 0;
             float ny = 0;

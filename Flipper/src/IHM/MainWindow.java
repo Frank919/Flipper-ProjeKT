@@ -9,64 +9,59 @@ import java.awt.event.*;
 public class MainWindow extends JFrame implements KeyListener{
     public boolean isPressedL;
 	public boolean isPressedJ;
-    public GameTable GT;
-    public GamePanel GP;
-	JPanel panneauScore;
-    public Ball ball;
+    //private GameTable GT;
+    //private GamePanel GP;
+	private JPanel panneauScore;
+	private JPanel panneauJeu;
+    private Ball ball;
 	/**
 	 * Largeur de la fenetre principale
 	 */
-	public static int WIDTH = 640;
+	public static final int WIDTH = 840;
 	/**
 	 * Hauteur de la fenetre principale
 	 */
-	public static int HEIGHT = 720;
+	public static final int HEIGHT = 720;
 
     
     public MainWindow(Ball ball) {
         this.ball  = ball;
         this.setTitle("Jeu du flipper");
-		this.setResizable(false);
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension size = new Dimension(WIDTH, HEIGHT);
-        int width = toolkit.getScreenSize().width;
-        int height = toolkit.getScreenSize().height;
-        this.setBounds((int) (width - size.getWidth()) / 2,
-                (int) (height - size.getHeight()) / 3, (int) size.getWidth(), (int) size.getHeight());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(480,720);
+		this.setResizable(false);
+		//Toolkit toolkit = Toolkit.getDefaultToolkit();
+        //Dimension size = new Dimension(WIDTH, HEIGHT);
+        //int width = toolkit.getScreenSize().width;
+        //int height = toolkit.getScreenSize().height;
+        //this.setBounds((int) (width - size.getWidth()) / 2,
+                //(int) (height - size.getHeight()) / 3, (int) size.getWidth(), (int) size.getHeight());
 		
 		
-		//JPanel panneauJeu = new JPanel();
-		//panneauJeu.setBounds(0,0,479,754);
-		//panneauJeu.setLayout(null); // permet de placer manuellement les composants
-		//panneauJeu.setBackground(Color.black);
+		
+		/*panneauJeu = new JPanel();
+			panneauJeu.setBounds(0,0,WIDTH,HEIGHT);
+			panneauJeu.setLayout(null); // permet de placer manuellement les composants
+			panneauJeu.setBackground(Color.black);
 		
 		
-		//panneauScore = new JPanel();
-		//panneauScore.setBounds(480,0,400,754);
-		//panneauScore.setLayout(null); // permet de placer manuellement les composants
-		//panneauScore.setBackground(Color.white);
-		
-		//JLabel afficheJeu = new JLabel();
-		//afficheJeu.setIcon(new ImageIcon("Flipper/src/Resource/background.jpg"));
-		//afficheJeu.setBounds(0,0,479,754);		
-		//panneauJeu.add(afficheJeu);
-		
-		
-		//Pour ajouter le panneau jaune à la JFrame
-
-		//add(panneauJeu);
-		//add(panneauScore);
-		
+		panneauScore = new JPanel();
+			panneauScore.setBounds(GameTable.width,0,WIDTH - GameTable.width,HEIGHT);
+			panneauScore.setLayout(null); // permet de placer manuellement les composants
+			panneauScore.setBackground(Color.white);
+			panneauJeu.add(panneauScore);
+		*/
 		
         this.startGame();
 		
     }
     public void startGame(){
-        GT = new GameTable(640, 720, this.ball);
-		Picture ball = new Picture("balle1"/*+GT.ball.getNum()*/);
-		//Pictures back = new Pictures("background");
-        GP = new GamePanel(ball);
+        GameTable GT = new GameTable(480, 720, this.ball);
+		Picture ball = new Picture("balle"+this.ball.getNum());
+        GamePanel GP = new GamePanel(ball);
+
+
+
 		ball.setX(GT.ball.getPositionX());
 		ball.setY(GT.ball.getPositionY());
         this.add(GP);
@@ -82,6 +77,7 @@ public class MainWindow extends JFrame implements KeyListener{
 			ball.setX(GT.ball.getPositionX());
 			ball.setY(GT.ball.getPositionY());
 			GP.repaint();
+
             if(GT.ball.isOut()){
 				this.dispose();
 				System.out.println("game over");
@@ -89,7 +85,6 @@ public class MainWindow extends JFrame implements KeyListener{
                 break;
             }
         }
-
     }
     // méthodes pour associer la touche J au fait que la manette réagit
 	// On créé une méthode isPressedJ qui devient TRUE lorsqu'on appuie sur J

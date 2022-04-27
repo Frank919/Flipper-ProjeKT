@@ -79,8 +79,8 @@ public class Curve extends Obstacle{
                 float nx2 = (centreX-x2)/innerRadius;
                 float ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1-1][y1-1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2-1][y2-1]=new Obstacle(nx2, ny2, s, e);
+                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
+                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e);
             } 
         }else if(startCeta >= endCeta){
             for(double ceta=startCeta;ceta<=2*Math.PI;ceta+=0.001){
@@ -94,8 +94,8 @@ public class Curve extends Obstacle{
                 float nx2 = (centreX-x2)/innerRadius;
                 float ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1-1][y1-1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2-1][y2-1]=new Obstacle(nx2, ny2, s, e); 
+                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
+                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
             }
 
             for(double ceta=0;ceta<=endCeta;ceta+=0.001){
@@ -109,8 +109,8 @@ public class Curve extends Obstacle{
                 float nx2 = (centreX-x2)/innerRadius;
                 float ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1-1][y1-1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2-1][y2-1]=new Obstacle(nx2, ny2, s, e); 
+                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
+                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
             }
         }
     }

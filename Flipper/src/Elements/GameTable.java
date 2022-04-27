@@ -1,12 +1,10 @@
 package Elements;
 
-import java.awt.*;
-
-public class GameTable implements toBeDrawn{
+public class GameTable{
     /**
      * Fois d'actualisation en 1 seconde
      */
-    public static int refreshRate = 480;
+    public static int refreshRate = 60;
     /**
      * Interval temporel entre 2 actualisations 
      */
@@ -96,9 +94,33 @@ public class GameTable implements toBeDrawn{
          * ...
          */
         new Boundary(1, (float)0.5);
+        float smooth=(float)0.5;
+        float elasticity = (float)0.6;
         flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
         flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
-        
+        /*Curve curve1 = new Curve(new ElementBasic(115,90), new ElementBasic(115,90), new ElementBasic(161,90), 46,smooth,elasticity);
+        Curve curve2 = new Curve(new ElementBasic(376,107), new ElementBasic(376,107), new ElementBasic(285,107), 91,smooth,elasticity);
+        Curve curve3 = new Curve(new ElementBasic(127,165), new ElementBasic(1,82), new ElementBasic(151,-2), 172,smooth,elasticity); 
+        Curve curve4 = new Curve(new ElementBasic(2,283), new ElementBasic(246,268), new ElementBasic(125,285), 119,smooth,elasticity);
+        Curve curve5 = new Curve(new ElementBasic(138,314), new ElementBasic(190,282), new ElementBasic(141,261), 54,smooth,elasticity);
+        Curve curve6 = new Curve(new ElementBasic(380,386), new ElementBasic(380,386), new ElementBasic(306,386), 74,smooth,elasticity);
+        Curve curve7 = new Curve(new ElementBasic(39,420), new ElementBasic(39,420), new ElementBasic(39,402), 18,smooth,elasticity);
+        Curve curve8 = new Curve(new ElementBasic(122,424), new ElementBasic(122,424), new ElementBasic(105,424), 17,smooth,elasticity);
+        Curve curve9 = new Curve(new ElementBasic(74,476), new ElementBasic(74,476), new ElementBasic(57,476), 17,smooth,elasticity);
+        Curve curve10 = new Curve(new ElementBasic(313,605), new ElementBasic(418,605), new ElementBasic(365,602), 54,smooth,elasticity);
+        */
+        ElementBasic[] elm1={new ElementBasic(362,280),new ElementBasic(441,139),new ElementBasic(441,331)};
+        Polygone polygone1= new Polygone (elm1,smooth,elasticity);
+        ElementBasic[] elm2={new ElementBasic(47,315),new ElementBasic(57,315),new ElementBasic(57,355),new ElementBasic(47,355)};
+        Polygone polygone2= new Polygone (elm2,smooth,elasticity);
+        ElementBasic[] elm3={new ElementBasic(82,314),new ElementBasic(93,314),new ElementBasic(93,355),new ElementBasic(82,353)};
+        Polygone polygone3= new Polygone (elm3,smooth,elasticity);
+        ElementBasic[] elm4={new ElementBasic( 38,585),new ElementBasic(84,666),new ElementBasic(21,666)};
+        Polygone polygone4= new Polygone (elm4,smooth,elasticity);
+        ElementBasic[] elm5={new ElementBasic(115,488),new ElementBasic(169,489),new ElementBasic(164,624)};
+        Polygone polygone5= new Polygone (elm5,smooth,elasticity);
+        ElementBasic[] elm6={new ElementBasic(212,541),new ElementBasic(255,541),new ElementBasic(231,649)};
+        Polygone polygone6= new Polygone (elm6,smooth,elasticity);
 
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
@@ -146,10 +168,6 @@ public class GameTable implements toBeDrawn{
         return isRunning;
     }
 
-    @Override
-    public void drawImage(Graphics g){
-
-    }
 
 
     public String toString(){

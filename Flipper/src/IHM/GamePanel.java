@@ -10,6 +10,7 @@ public class GamePanel extends JPanel {
     private Image backgroundImage = new ImageIcon("Flipper/src/Resource/background.png").getImage();
 
     public GamePanel(Picture... pcs){
+        this.setBounds(0, 0, 480, 720);
         this.pcs = pcs;
     }
     public void paint(Graphics g){
@@ -18,6 +19,5 @@ public class GamePanel extends JPanel {
         for (Picture pc : this.pcs) {
             g.drawImage(pc.getImage(),pc.getX(),pc.getY(),pc.getW(),pc.getH(),null);
         }
-        
     }
 }
