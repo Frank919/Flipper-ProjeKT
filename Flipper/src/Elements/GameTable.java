@@ -70,7 +70,7 @@ public class GameTable{
         table = new ElementBasic[width][height];
         for(int i=0;i<w;i++){
             for(int j=0;j<h;j++){
-                table[i][j]=new ElementBasic();
+                table[i][j]=new Space(i,j);
             }
             if(i%(w/100)==0){
                 System.out.print("-");
@@ -81,7 +81,7 @@ public class GameTable{
         pseudoTable = new ElementBasic[pseudoWidth][pseudoHeight];
         for(int i=0;i<pseudoWidth;i++){
             for(int j=0;j<pseudoHeight;j++){
-                pseudoTable[i][j]=new ElementBasic();
+                pseudoTable[i][j]=new Space(i,j);
             }
             if(i%(w/100)==0){
                 System.out.print("-");
@@ -146,7 +146,7 @@ public class GameTable{
     public boolean refresh() { 
         this.isRunning = true;
         //Supprimer la balle de pseudoTable 
-        pseudoTable[ball.positionX][ball.positionY] = new ElementBasic();
+        pseudoTable[ball.positionX][ball.positionY] = new Space(ball.positionX,ball.positionY);
         
         if(ball.isOnContectWith(flipperLeft)){
             ball.collidesWith(flipperLeft);
