@@ -98,7 +98,7 @@ public class GameTable{
         float elasticity = (float)0.6;
         flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
         flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
-        /*Curve curve1 = new Curve(new ElementBasic(115,90), new ElementBasic(115,90), new ElementBasic(161,90), 46,smooth,elasticity);
+        Curve curve1 = new Curve(new ElementBasic(115,90), new ElementBasic(115,90), new ElementBasic(161,90), 46,smooth,elasticity);
         Curve curve2 = new Curve(new ElementBasic(376,107), new ElementBasic(376,107), new ElementBasic(285,107), 91,smooth,elasticity);
         Curve curve3 = new Curve(new ElementBasic(127,165), new ElementBasic(1,82), new ElementBasic(151,-2), 172,smooth,elasticity); 
         Curve curve4 = new Curve(new ElementBasic(2,283), new ElementBasic(246,268), new ElementBasic(125,285), 119,smooth,elasticity);
@@ -108,7 +108,7 @@ public class GameTable{
         Curve curve8 = new Curve(new ElementBasic(122,424), new ElementBasic(122,424), new ElementBasic(105,424), 17,smooth,elasticity);
         Curve curve9 = new Curve(new ElementBasic(74,476), new ElementBasic(74,476), new ElementBasic(57,476), 17,smooth,elasticity);
         Curve curve10 = new Curve(new ElementBasic(313,605), new ElementBasic(418,605), new ElementBasic(365,602), 54,smooth,elasticity);
-        */
+        
         ElementBasic[] elm1={new ElementBasic(362,280),new ElementBasic(441,139),new ElementBasic(441,331)};
         Polygone polygone1= new Polygone (elm1,smooth,elasticity);
         ElementBasic[] elm2={new ElementBasic(47,315),new ElementBasic(57,315),new ElementBasic(57,355),new ElementBasic(47,355)};
@@ -125,7 +125,7 @@ public class GameTable{
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 pseudoTable[i+margin][j+margin]=table[i][j];
-                if(table[i][j] instanceof Obstacle){
+                if(pseudoTable[i][j] instanceof Obstacle){
                     System.out.print("o");
                 }
             }

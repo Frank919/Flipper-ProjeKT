@@ -9,14 +9,14 @@ public class DemoFrame extends JFrame {
         this.setTitle("Demo");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setSize(480,720);
+        this.setSize(640,1000);
         
-        //start();
-        startGame();
+        start();
+        //startGame();
         
     }
     public void startGame(){
-        GameTable GT = new GameTable(640, 720,ball );
+        GameTable GT = new GameTable(640, 1000,ball );
 		Picture ball = new Picture("balle"+this.ball.getNum());
         GamePanel GP = new GamePanel(ball);
 
@@ -49,6 +49,7 @@ public class DemoFrame extends JFrame {
         Demo demo1 = new Demo("balle1");
         Demo demo2 = new Demo("balle2");
         DemoPanel p = new DemoPanel(demo1,demo2);
+        new Thread(p).start();
         this.add(p);
         this.setVisible(true);
         while(true){
@@ -70,5 +71,6 @@ public class DemoFrame extends JFrame {
 
     public static void main(String[] args) {
         new DemoFrame();
+        
     }
 }

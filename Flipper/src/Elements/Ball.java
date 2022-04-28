@@ -22,7 +22,7 @@ public class Ball extends ElementKinetic{
      * 
      * @see #collidesWith(ElementBasic e)
      */
-    public Ball(int num,int positionX, int positionY, int radius,int messe,float smoothness,float elasticity){
+    public Ball(int num,int positionX, int positionY, int radius,int messe,double smoothness,double elasticity){
         /**
          * Ici on met la balle dans le pseudoTable car tous les calculs s'y passent.
          * Donc on fait décaler la position.
@@ -70,8 +70,8 @@ public class Ball extends ElementKinetic{
      */
     public void collidesWith(ElementBasic e){
         //Calculer le coefficient répondissement et celui de fricion
-        float coeffRebound = elasticity * e.elasticity;
-        float coeffFriction = smoothness * e.smoothness;
+        double coeffRebound = elasticity * e.elasticity;
+        double coeffFriction = smoothness * e.smoothness;
         if(e instanceof Flipper){
             Flipper eF = (Flipper)e;
             //Vecteur1 centre--->balle
@@ -81,9 +81,9 @@ public class Ball extends ElementKinetic{
             int v3X = eF.tip.positionX - eF.centre.positionX;
             int v3Y = eF.tip.positionY - eF.centre.positionY;
             //Vecteur1 X vecteur3
-            float produitVectoriel = v1X * v3Y - v3X * v1Y;
+            double produitVectoriel = v1X * v3Y - v3X * v1Y;
             //Vecteur1 . vecteur3
-            float produitScalaire = v1X * v3X + v1Y * v3Y;
+            double produitScalaire = v1X * v3X + v1Y * v3Y;
             //Déterminer quelle surface à impacter
             if( produitVectoriel <= 0){
                 eF.nX = eF.n1X;
@@ -93,19 +93,19 @@ public class Ball extends ElementKinetic{
                 eF.nY = eF.n2Y;
             }
             //Calculer la vitesse normale au flipper
-            float vNX = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nX);
-            float vNY = (float)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nY);
+            double vNX = (double)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nX);
+            double vNY = (double)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nY);
             //Calculer la vitesse tangentielle au flipper
-            float vTX = velocityX - vNX;
-            float vTY = velocityY - vNY;
+            double vTX = velocityX - vNX;
+            double vTY = velocityY - vNY;
 
             //Déterminer la position contact sur le flipper
-            float rayon = (float)(produitScalaire / Math.pow((v3X*v3X + v3Y*v3Y),2));
-            float velocityLineX = (float)(eF.velocityAng * rayon * nX);
-            float velocityLineY = (float)(eF.velocityAng * rayon * nY);
+            double rayon = (double)(produitScalaire / Math.pow((v3X*v3X + v3Y*v3Y),2));
+            double velocityLineX = (double)(eF.velocityAng * rayon * nX);
+            double velocityLineY = (double)(eF.velocityAng * rayon * nY);
             //Calculer la vitesse normale du flipper
-            float vFNX = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nX);
-            float vFNY = (float)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nY);
+            double vFNX = (double)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nX);
+            double vFNY = (double)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nY);
 
             //Collision 
             vNX = - coeffRebound * vNX + vFNX - vNX;
@@ -118,11 +118,11 @@ public class Ball extends ElementKinetic{
             velocityY = vTY + vNY;
         }else if(e instanceof Obstacle){
             //Calculer la vitesse normale à un obstacle
-            float vNX = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nX);
-            float vNY = (float)( (velocityX * e.nX + velocityY * e.nY) * e.nY);
+            double vNX = (double)( (velocityX * e.nX + velocityY * e.nY) * e.nX);
+            double vNY = (double)( (velocityX * e.nX + velocityY * e.nY) * e.nY);
             //Calculer la vitesse tangentielle à un obstacle
-            float vTX = velocityX - vNX;
-            float vTY = velocityY - vNY;
+            double vTX = velocityX - vNX;
+            double vTY = velocityY - vNY;
             //Collision 
             vNX = - coeffRebound * vNX;
             vNY = - coeffRebound * vNY;
@@ -143,7 +143,7 @@ public class Ball extends ElementKinetic{
      */
     public boolean isOnContectWith(ElementBasic e){
         if(e instanceof Obstacle){
-            float distance = (float)Math.sqrt(
+            double distance = (double)Math.sqrt(
                         (e.positionX - positionX)*(e.positionX - positionX) 
                         + (e.positionY - positionY)*(e.positionY - positionY)
             );
@@ -163,11 +163,11 @@ public class Ball extends ElementKinetic{
             int v3X = eF.tip.positionX - eF.centre.positionX;
             int v3Y = eF.tip.positionY - eF.centre.positionY;
 
-            // float produitVectoriel = v1X * v2Y - v2X * v1Y;
-            float produitScalaire = v1X * v2X + v1Y * v2Y;
+            // double produitVectoriel = v1X * v2Y - v2X * v1Y;
+            double produitScalaire = v1X * v2X + v1Y * v2Y;
 
             // Calculer la distance entre la balle et la droite représentant le flipper
-            float distance = (float)Math.sqrt(
+            double distance = (double)Math.sqrt(
                         v1X*v1X + v1Y*v1Y
                         - (v1X*v3X+v1Y*v3Y)*(v1X*v3X+v1Y*v3Y)
                         / (v3X*v3X + v3Y*v3Y)
@@ -227,21 +227,21 @@ public class Ball extends ElementKinetic{
      *      vitesse Y qu'on souhaite donner
      */
     public void setVelocity(double vx, double vy){
-        this.velocityX = (float)vx;
-        this.velocityY = (float)vy;
+        this.velocityX = (double)vx;
+        this.velocityY = (double)vy;
     }
     /**
      * 
      * @return la vitesse Y de la balle
      */
-    public float getVelocityX(){
+    public double getVelocityX(){
         return velocityX;
     }
     /**
      * 
      * @return la vitesse Y de la balle
      */
-    public float getVelocityY(){
+    public double getVelocityY(){
         return velocityY;
     }
     /**

@@ -10,11 +10,11 @@ public class ElementKinetic extends ElementBasic{
     /**
      * La composition X de vitesse en pixel/s, positive vers la droite.
      */
-    protected float velocityX;
+    protected double velocityX;
     /**
      * La composition Y de vitesse en pixel/s, positive vers le bas.
      */
-    protected float velocityY;
+    protected double velocityY;
 
     /**
      * L'accélération est définie selon l'axe X et l"axe Y, en pixel/s^2.
@@ -27,7 +27,7 @@ public class ElementKinetic extends ElementBasic{
     public ElementKinetic(int PositionX,int PositionY){
         super(PositionX, PositionY);
     }
-    public ElementKinetic(int positionX,int positionY, int mass,float smoothness,float elasticity){
+    public ElementKinetic(int positionX,int positionY, int mass,double smoothness,double elasticity){
         super(positionX, positionY,smoothness,elasticity);
         this.mass = mass;
     }

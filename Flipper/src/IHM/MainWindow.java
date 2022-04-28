@@ -17,16 +17,16 @@ public class MainWindow extends JFrame {
 	/**
 	 * Largeur de la fenetre principale
 	 */
-	public static final int WIDTH = 840;
+	public static final int WIDTH = 640;
 	/**
 	 * Hauteur de la fenetre principale
 	 */
-	public static final int HEIGHT = 720;
+	public static final int HEIGHT = 1000;
 
     
     public MainWindow(int n) {
 		if(n==1){
-			this.ball  = new Ball(1,2, 3, 4, 5, (float)0.3, (float)0.1);
+			this.ball  = new Ball(1,100, 3, 4, 5, (float)0.3, (float)0.1);
 		}
 		if(n==2){
 			this.ball  = new Ball(2,2, 3, 4, 5, (float)0.3, (float)0.1);

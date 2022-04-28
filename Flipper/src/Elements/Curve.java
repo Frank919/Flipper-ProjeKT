@@ -2,7 +2,7 @@ package Elements;
 
 public class Curve extends Obstacle{
     
-    protected float radius;
+    protected double radius;
     protected int centreX, centreY;
 
    
@@ -21,7 +21,7 @@ public class Curve extends Obstacle{
      * @param e
      *      L'élasticité
      */
-    public Curve(ElementBasic startPoint, ElementBasic endPoint, ElementBasic centre, int radius, float s, float e){
+    public Curve(ElementBasic startPoint, ElementBasic endPoint, ElementBasic centre, int radius, double s, double e){
 
         this.centreX=centre.positionX;
         this.centreY=centre.positionY;
@@ -30,32 +30,35 @@ public class Curve extends Obstacle{
         //我们直接造有的obstacle
 
         //确定象限
-        int startQuadrant = 0;
-        int endQuadrant = 0;
-        int deltaX = 0;
-        int deltaY = 0;
+        int startQuadrant = 1;
+        int endQuadrant = 1;
+        
 
-        deltaX = startPoint.positionX-centreX;
-        deltaY = startPoint.positionY-centreY;
-        if(((deltaX)<=0)&&((deltaY)<=0)){
+
+        double deltaXStrat = startPoint.positionX-centreX;
+        double deltaYStrat= startPoint.positionY-centreY;
+        if(((deltaXStrat)<0)&&((deltaYStrat)<0)){
             startQuadrant=3;
         }
-        if(((deltaX)>=0)&&((deltaY)<=0)){
+        if(((deltaXStrat)>=0)&&((deltaYStrat)<=0)){
             startQuadrant=4;
         }
 
-        deltaX = endPoint.positionX-centreX;
-        deltaY = endPoint.positionY-centreY;
-        if(((deltaX)<=0)&&((deltaY)<=0)){
+        double deltaXEnd = endPoint.positionX-centreX;
+        double deltaYEnd = endPoint.positionY-centreY;
+        if(((deltaXEnd)<=0)&&((deltaYEnd)<=0)){
             endQuadrant=3;
         }
-        if(((deltaX)>=0)&&((deltaY)<=0)){
+        if(((deltaXEnd)>=0)&&((deltaYEnd)<=0)){
             endQuadrant=4;
         }
 
+        
+
         //求角度(0-pi)
-        double startCeta = Math.acos((deltaX)/radius);
-        double endCeta = Math.acos((deltaX)/radius);
+        double startCeta = Math.acos((deltaXStrat)/radius);
+        double endCeta = Math.acos((deltaXEnd)/radius);
+        
 
 
         //用象限确定ceta
@@ -63,8 +66,10 @@ public class Curve extends Obstacle{
             startCeta = 2*Math.PI-startCeta;
         }
         if(endQuadrant>2){
-            endCeta =2 *Math.PI-endCeta;
+            endCeta = 2*Math.PI-endCeta;
         } 
+        
+        System.out.println(startCeta+","+endCeta);
         
         //造obstacles((x1,y1)是外面一层，（x2，y2）是里面一层)
         if(startCeta < endCeta){
@@ -74,10 +79,12 @@ public class Curve extends Obstacle{
                 int x2 = (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2 = (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                float nx1 = -(centreX-x1)/radius;
-                float ny1 = -(centreY-y1)/radius;
-                float nx2 = (centreX-x2)/innerRadius;
-                float ny2 = (centreY-y2)/innerRadius;
+                double nx1 = -(centreX-x1)/radius;
+                double ny1 = -(centreY-y1)/radius;
+                double nx2 = (centreX-x2)/innerRadius;
+                double ny2 = (centreY-y2)/innerRadius;
+
+                
 
                 GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
                 GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e);
@@ -89,10 +96,10 @@ public class Curve extends Obstacle{
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                float nx1 = -(centreX-x1)/radius;
-                float ny1 = -(centreY-y1)/radius;
-                float nx2 = (centreX-x2)/innerRadius;
-                float ny2 = (centreY-y2)/innerRadius;
+                double nx1 = -(centreX-x1)/radius;
+                double ny1 = -(centreY-y1)/radius;
+                double nx2 = (centreX-x2)/innerRadius;
+                double ny2 = (centreY-y2)/innerRadius;
 
                 GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
                 GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
@@ -104,10 +111,11 @@ public class Curve extends Obstacle{
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
                 
-                float nx1 = -(centreX-x1)/radius;
-                float ny1 = -(centreY-y1)/radius;
-                float nx2 = (centreX-x2)/innerRadius;
-                float ny2 = (centreY-y2)/innerRadius;
+                double nx1 = -(centreX-x1)/radius;
+                double ny1 = -(centreY-y1)/radius;
+                double nx2 = (centreX-x2)/innerRadius;
+                double ny2 = (centreY-y2)/innerRadius;
+
 
                 GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
                 GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 

@@ -11,14 +11,14 @@ public class ElementBasic {
      * 
      * @see Elements.Ball#collidesWith()
      */
-    protected float smoothness;
+    protected double smoothness;
 
     /**
      * L'elasticité est definie entre 0 et 1.
      * 
      * @see Elements.Ball#collidesWith()
      */
-    protected float elasticity;
+    protected double elasticity;
 
     /**
      * Les vecteurs normales selon X et Y
@@ -32,17 +32,13 @@ public class ElementBasic {
         this.positionX=positionX;
         this.positionY=positionY;
     }
-    public ElementBasic(int positionX,int positionY,float smoothness,float elasticity){
-        this(positionX, positionY);
-        this.smoothness=smoothness;
-        this.elasticity=elasticity;
-    }
+    
     public ElementBasic(int positionX,int positionY,double nx,double ny){
         this(positionX, positionY);
         this.nX=nx;
         this.nY=ny;
     }
-    public ElementBasic(int positionX,int positionY,double nx,double ny,float smoothness,float elasticity){
+    public ElementBasic(int positionX,int positionY,double nx,double ny,double smoothness,double elasticity){
         this(positionX, positionY, nx, ny);
         this.smoothness=smoothness;
         this.elasticity=elasticity;
