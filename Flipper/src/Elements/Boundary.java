@@ -1,6 +1,6 @@
 package Elements;
 
-public class Boundary extends Obstacle{
+public class Boundary extends ElementStatic{
     
     /**
      * Construire les bords de GameTable, qui sont 3 ségements situés à gauche, en haut et à droit.
@@ -71,7 +71,7 @@ public class Boundary extends Obstacle{
                 }
                 for(int y = min;y<=max;y++){
                     int x = (int)start.positionX;
-                    GameTable.table[x-1][y-1]=new Obstacle(nx, ny, s, e);
+                    GameTable.table[x-1][y-1]=new Obstacle(x,y,nx, ny, s, e);
                 }
             }
             if(deltaY == 0){
@@ -84,7 +84,7 @@ public class Boundary extends Obstacle{
                 }
                 for(int x = min;x<=max;x++){
                     int y = (int)start.positionY;
-                    GameTable.table[x-1][y-1]=new Obstacle(nx, ny, s, e);
+                    GameTable.table[x-1][y-1]=new Obstacle(x,y,nx, ny, s, e);
                 }
             }
         }

@@ -67,7 +67,7 @@ public class MainWindow extends JFrame {
     }
 	
     public void startGame(){
-        GameTable GT = new GameTable(480, 720, this.ball);
+        GameTable GT = new GameTable(WIDTH, HEIGHT, this.ball);
 		Picture ball = new Picture("balle"+this.ball.getNum());
         GamePanel GP = new GamePanel(ball);
 

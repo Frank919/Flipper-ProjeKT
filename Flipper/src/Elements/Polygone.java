@@ -1,6 +1,6 @@
 package Elements;
 
-public class Polygone extends Obstacle{
+public class Polygone extends ElementStatic{
     protected Obstacle[] apex;
     /**
      * 
@@ -77,7 +77,7 @@ public class Polygone extends Obstacle{
                 }
                 for(int x = min;x<=max;x++){
                     int y = (int)(k*x+b);
-                    GameTable.table[x-1][y-1]=new Obstacle(nx, ny, s, e);
+                    GameTable.table[x-1][y-1]=new Obstacle(x,y,nx, ny, s, e);
                 }
             }else{
                 if(start.positionY<end.positionY){
@@ -89,7 +89,7 @@ public class Polygone extends Obstacle{
                 }
                 for(int y = min;y<=max;y++){
                     int x = (int)start.positionX;
-                    GameTable.table[x-1][y-1]=new Obstacle(nx, ny, s, e);
+                    GameTable.table[x-1][y-1]=new Obstacle(x,y,nx, ny, s, e);
                 }
             }
         }

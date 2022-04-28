@@ -1,6 +1,6 @@
 package Elements;
 
-public class Curve extends Obstacle{
+public class Curve extends ElementStatic{
     
     protected double radius;
     protected int centreX, centreY;
@@ -86,8 +86,8 @@ public class Curve extends Obstacle{
 
                 
 
-                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e);
+                GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
+                GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e); 
             } 
         }else if(startCeta >= endCeta){
             for(double ceta=startCeta;ceta<=2*Math.PI;ceta+=0.001){
@@ -101,8 +101,8 @@ public class Curve extends Obstacle{
                 double nx2 = (centreX-x2)/innerRadius;
                 double ny2 = (centreY-y2)/innerRadius;
 
-                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
+                GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
+                GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e); 
             }
 
             for(double ceta=0;ceta<=endCeta;ceta+=0.001){
@@ -117,8 +117,8 @@ public class Curve extends Obstacle{
                 double ny2 = (centreY-y2)/innerRadius;
 
 
-                GameTable.table[x1][y1]=new Obstacle(nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(nx2, ny2, s, e); 
+                GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
+                GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e);  
             }
         }
     }
