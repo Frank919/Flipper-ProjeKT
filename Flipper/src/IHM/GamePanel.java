@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
     private Picture[] pcs;
-    private Image backgroundImage = new ImageIcon("Flipper/src/Resource/background.png").getImage();
+    private Image backgroundImage = new ImageIcon("./Flipper/src/Resource/background.png").getImage();
 
     public GamePanel(Picture... pcs){
         this.setBounds(0, 0, GameTable.width, GameTable.height);

@@ -28,7 +28,9 @@ public class ElementKinetic extends ElementBasic{
         super(PositionX, PositionY);
     }
     public ElementKinetic(int positionX,int positionY, int mass,double smoothness,double elasticity){
-        super(positionX, positionY,smoothness,elasticity);
+        super(positionX, positionY);
+        this.smoothness = smoothness;
+        this.elasticity = elasticity;
         this.mass = mass;
     }
 

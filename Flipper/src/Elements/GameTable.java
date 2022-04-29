@@ -1,14 +1,15 @@
 package Elements;
 
-public class GameTable{
+public class GameTable implements Runnable{
+    public Ball ball; 
     /**
      * Fois d'actualisation en 1 seconde
      */
-    public static int refreshRate = 120;
+    public static int refreshRate = 144;
     /**
      * Interval temporel entre 2 actualisations 
      */
-    public static float refreshTime = (float)1.0/refreshRate;
+    public static double refreshTime = (double)1.0/refreshRate;
     /**
      * Interval en milliseconde
      */
@@ -18,7 +19,7 @@ public class GameTable{
     /**
      * C'est aussi le margin du pseudoTable
      */
-    public static int detectionRange = 5;
+    public static int detectionRange = 4;
     public static int margin = 20;
 
     public static int width;
@@ -42,7 +43,7 @@ public class GameTable{
     /**
      * Créer des balles différentes
      */
-    public Ball ball; 
+    
 
     /**
      * Zone des éléments
@@ -67,12 +68,16 @@ public class GameTable{
         this.pseudoWidth = w + 2 * margin;
         this.pseudoHeight = h + 2 * margin;
 
+        this.buildAll();
+        this.initialize();
+    }
+    public boolean buildAll(){
         table = new ElementBasic[width][height];
-        for(int i=0;i<w;i++){
-            for(int j=0;j<h;j++){
+        for(int i=0;i<width;i++){
+            for(int j=0;j<height;j++){
                 table[i][j]=new Space(i,j);
             }
-            if(i%(w/100)==0){
+            if(i%(width/100)==0){
                 System.out.print("-");
             }
         }
@@ -83,7 +88,7 @@ public class GameTable{
             for(int j=0;j<pseudoHeight;j++){
                 pseudoTable[i][j]=new Space(i,j);
             }
-            if(i%(w/100)==0){
+            if(i%(width/100)==0){
                 System.out.print("-");
             }
         }
@@ -93,12 +98,13 @@ public class GameTable{
          * 在此处构造所有障碍物，障碍物构造器会将其填入table[][]当中
          * ...
          */
-        new Boundary(1, (float)0.5);
-        float smooth=(float)0.5;
-        float elasticity = (float)0.6;
-        flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, false);
-        flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (float)0.5,(float)0.6, true);
-        Curve curve1 = new Curve(new ElementBasic(115,90), new ElementBasic(115,90), new ElementBasic(161,90), 46,smooth,elasticity);
+        
+        new Boundary(1.0, 0.5);
+        double smooth=(double)0.5;
+        double elasticity = (double)1;
+        //flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (double)0.5,(double)0.6, false);
+        //flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (double)0.5,(double)0.6, true);
+        /*Curve curve1 = new Curve(new ElementBasic(115,90), new ElementBasic(115,90), new ElementBasic(161,90), 46,smooth,elasticity);
         Curve curve2 = new Curve(new ElementBasic(376,107), new ElementBasic(376,107), new ElementBasic(285,107), 91,smooth,elasticity);
         Curve curve3 = new Curve(new ElementBasic(127,165), new ElementBasic(1,82), new ElementBasic(151,-2), 172,smooth,elasticity); 
         Curve curve4 = new Curve(new ElementBasic(2,283), new ElementBasic(246,268), new ElementBasic(125,285), 119,smooth,elasticity);
@@ -121,7 +127,7 @@ public class GameTable{
         Polygone polygone5= new Polygone (elm5,smooth,elasticity);
         ElementBasic[] elm6={new ElementBasic(212,541),new ElementBasic(255,541),new ElementBasic(231,649)};
         Polygone polygone6= new Polygone (elm6,smooth,elasticity);
-
+        */
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
                 pseudoTable[i+margin][j+margin]=table[i][j];
@@ -129,58 +135,67 @@ public class GameTable{
                     System.out.print("o");
                 }
             }
-            if(i%(w/100)==0){
+            if(i%(width/100)==0){
                 System.out.println("-");
             }
         }
         System.out.println("\nAll Elements copied to pseudoTable with success");
-
-        this.initialize();
+        return true;
     }
-
     public boolean initialize(){
-        
+        this.ball.setPosition(100, 100);
+        this.ball.setVelocity(500, 0);
         return true;
     }
 
     public boolean refresh() { 
+        
         this.isRunning = true;
         //Supprimer la balle de pseudoTable 
-        pseudoTable[ball.positionX][ball.positionY] = new Space(ball.positionX,ball.positionY);
+        pseudoTable[ball.positionX][ball.positionY] = new Space(ball.positionX - GameTable.margin,ball.positionY - GameTable.margin);
         
         if(ball.isOnContectWith(flipperLeft)){
             ball.collidesWith(flipperLeft);
-            System.out.println("ccc");
+            System.out.println("ccc1");
         }
         if(ball.isOnContectWith(flipperRight)){
             ball.collidesWith(flipperRight);
-            System.out.println("ccc");
+            System.out.println("ccc2");
         }
-        for(int i = ball.positionX - detectionRange; i < ball.positionX + detectionRange; i++){
-            for(int j = ball.positionY - detectionRange; j < ball.positionY + detectionRange; j++){
+        
+        outloop:
+        for(int i = ball.positionX - detectionRange; i < ball.positionX + detectionRange - 1; i++){
+            for(int j = ball.positionY - detectionRange; j < ball.positionY + detectionRange - 1; j++){
                 if (ball.isOnContectWith(pseudoTable[i][j])){
                     ball.collidesWith(pseudoTable[i][j]);
-                    System.out.println("ccc");
+                    System.out.println(
+                        "contact on ("+(i-margin+1)+" , "+(j-margin+1)+") "
+                        +"normal="+"("+pseudoTable[i][j].nX+","+pseudoTable[i][j].nY+")"
+                    );
+                    do{
+                        ball.moves();
+                    } while(ball.isOnContectWith(pseudoTable[i][j]));
+                    break outloop;
                 }
             }
         }
-        ball.moves();
+        
         //Rajouter la balle dans pseudoTable 
         pseudoTable[ball.positionX][ball.positionY] = ball;
-        System.out.println(ball.toString());
+        ball.moves();
         if(ball.isOut()){
             isRunning = false;
         }
         return isRunning;
     }
 
-
-
     public String toString(){
         return "Gmae is running : " + isRunning + "\n";
     }
     
+    public void run(){
 
+    }
 
 
 }

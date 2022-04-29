@@ -11,14 +11,14 @@ public class Polygone extends ElementStatic{
      * @param e
      *      Elasticity entre 0 et 1
      */
-    public Polygone(ElementBasic[] elm, float s, float e){
+    public Polygone(ElementBasic[] elm, double s, double e){
         this.smoothness = s;
         this.elasticity = e;
         for(int i=0;i<elm.length;i++){
             //apex[i] = (Obstacle)elm[i];
             //le vecteur normal
-            float nx = 0;
-            float ny = 0;
+            double nx = 0;
+            double ny = 0;
             
             //Le début et la fin d'un ségement
             ElementBasic start = new ElementBasic();
@@ -35,15 +35,15 @@ public class Polygone extends ElementStatic{
              */
             int deltaY = end.positionY - start.positionY;
             int deltaX = end.positionX - start.positionX;
-            float k = 0;
-            float b = 0;
+            double k = 0;
+            double b = 0;
             if(deltaX!=0){
                 //La pente
                 k = deltaY / deltaX;
                 //L'ordonée à l'origine
                 b = start.positionY - k * start.positionX;
                 //Le vecteur normal
-                ny = (float)Math.sqrt(1/(1+k*k));
+                ny = (double)Math.sqrt(1/(1+k*k));
                 nx = - k * ny;
             }else{
                 nx = 1;
@@ -54,7 +54,7 @@ public class Polygone extends ElementStatic{
              *  Si le produit vectoriel est positif, on change le signe de nx et ny,
              *  car on me veut que le vecteur vers l'extérieur
              */ 
-            float produitVectoriel = (nx*deltaY)-(ny*deltaX);
+            double produitVectoriel = (nx*deltaY)-(ny*deltaX);
             if(produitVectoriel>0){
                 ny = -ny;
                 nx = -nx;

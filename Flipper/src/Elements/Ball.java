@@ -27,7 +27,7 @@ public class Ball extends ElementKinetic{
          * Ici on met la balle dans le pseudoTable car tous les calculs s'y passent.
          * Donc on fait décaler la position.
          */
-        super(positionX + GameTable.margin, positionY + GameTable.margin, messe, smoothness, elasticity);
+        super(positionX + GameTable.margin, positionY + GameTable.margin,messe,smoothness,elasticity);
         this.radius=radius; 
         this.num = num;
     }
@@ -37,8 +37,25 @@ public class Ball extends ElementKinetic{
      */
     public void moves(){
         this.falls();
-        positionX += velocityX * GameTable.refreshTime;
-        positionY += velocityY * GameTable.refreshTime;
+        double deltaX = velocityX * GameTable.refreshTime;
+        double deltaY = velocityY * GameTable.refreshTime;
+        
+        if(deltaX>0&&deltaX<1){
+            deltaX = 1;
+        }
+        if(deltaY>0&&deltaY<1){
+            deltaY = 1;
+        }
+        if(deltaX<0&&deltaX>-1){
+            deltaX = -1;
+        }
+        if(deltaY<0&&deltaY>-1){
+            deltaY = -1;
+        }
+        //System.out.println("deltaX = "  + deltaX+" deltaY = "+ deltaY);
+        positionX += deltaX;
+        positionY += deltaY;
+        System.out.println(this.toString());
     }
     
 
@@ -47,7 +64,7 @@ public class Ball extends ElementKinetic{
      * qui impacte la vitesse selon Y.
      */               
     public void falls(){
-        int g = 150;
+        int g = 360;
         velocityY+=g*GameTable.refreshTime;
     }
 
@@ -55,12 +72,12 @@ public class Ball extends ElementKinetic{
      * Cette méthode permet de calculer la variation de la vitesse en raison de la collision et de la frction,
      * qui impacte la vitesse normale et tangentielle.
      * 
-     * Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets en contact,
+     * <p>Le {@code coeffRebound} est défini par le produit de {@code elasticity} des deux objets en contact,
      * donc entre 0 et 1.
      * Et si    {@code coeffRebound = 0}, la vitesse normale se sera anullée.
      *    Si    {@code coeffRebound = 1}, la vitesse normale ne varie pas.
      * 
-     * Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
+     * <p>Le {@code coeffFriction} est défini par le produit de {@code smoothness} des deux objets frotté,
      * donc entre 0 et 1.
      * Et si    {@code coeffFriction = 1}, la vitesse tangentielle se sera anullée.
      *    Si    {@code coeffFriction = 0}, la vitesse tangentielle ne varie pas.
@@ -70,8 +87,8 @@ public class Ball extends ElementKinetic{
      */
     public void collidesWith(ElementBasic e){
         //Calculer le coefficient répondissement et celui de fricion
-        double coeffRebound = elasticity * e.elasticity;
-        double coeffFriction = smoothness * e.smoothness;
+        double coeffRebound = 1 - elasticity * e.elasticity;
+        double coeffFriction = 1 - smoothness * e.smoothness;
         if(e instanceof Flipper){
             Flipper eF = (Flipper)e;
             //Vecteur1 centre--->balle
@@ -127,11 +144,12 @@ public class Ball extends ElementKinetic{
             vNX = - coeffRebound * vNX;
             vNY = - coeffRebound * vNY;
             //Friciton 
-            vTX = (1 - coeffFriction) * vTX;
-            vTY = (1 - coeffFriction) * vTY;
+            vTX = coeffFriction * vTX;
+            vTY = coeffFriction * vTY;
             //Conclusion 
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;
+            
         }  
     }
     
@@ -143,13 +161,14 @@ public class Ball extends ElementKinetic{
      */
     public boolean isOnContectWith(ElementBasic e){
         if(e instanceof Obstacle){
-            double distance = (double)Math.sqrt(
-                        (e.positionX - positionX)*(e.positionX - positionX) 
-                        + (e.positionY - positionY)*(e.positionY - positionY)
+            double distance = Math.sqrt(
+                (e.positionX - getPositionX())*(e.positionX - getPositionX()) + 
+                (e.positionY - getPositionY())*(e.positionY - getPositionY())
             );
-            if(distance <= radius){
+            if(distance <= GameTable.detectionRange){
                 return true;
             }
+            //return true;
         }
         if(e instanceof Flipper){
             Flipper eF = (Flipper)e;
@@ -184,13 +203,13 @@ public class Ball extends ElementKinetic{
     /**
      * Mettre en place la balle manuellement
      * @param x
-     *      position X qu'on souhaite donner
+     *      position réel X qu'on souhaite donner
      * @param y
-     *      position Y qu'on souhaite donner
+     *      position réel Y qu'on souhaite donner
      */
     public void setPosition(int x, int y){
-        this.positionX = x;
-        this.positionY = y;
+        this.positionX = x + GameTable.margin;
+        this.positionY = y + GameTable.margin;
     }
 
     /**
@@ -203,19 +222,19 @@ public class Ball extends ElementKinetic{
     }
     /**
      * 
-     * @return la position X de la balle
+     * @return la position réel X de la balle
      */
     public int getPositionX(){
-        int x = positionX;
+        int x = positionX - GameTable.margin;
         return x;
     }
 
     /**
      * 
-     * @return la position Y de la balle
+     * @return la position réel Y de la balle
      */
     public int getPositionY(){
-        int y = positionY;
+        int y = positionY - GameTable.margin;
         return y;
     }
 
@@ -261,10 +280,17 @@ public class Ball extends ElementKinetic{
      * @return la position de la balle dans le table vrai
      */
     public String toString(){
-        return "( " 
+        return "Position = "
+            +"( " 
             + (positionX - GameTable.margin) 
             + " , " 
-            + (positionY - GameTable.margin) 
+            + (positionY - GameTable.margin)
+            + " )" 
+            + " Velocity = "
+            + "("
+            + velocityX
+            + " , " 
+            + velocityY 
             + " )";
     }
 }

@@ -15,17 +15,17 @@ public class Flipper extends ElementKinetic{
     /**
      * vecteur normal dans le sens horaire
      */
-    protected float n1X,n1Y;
+    protected double n1X,n1Y;
     /**
      * vecteur normal dans le sens inverse horaire
      */
-    protected float n2X,n2Y;
+    protected double n2X,n2Y;
 
 
     /**
      * 
      */
-    public Flipper(ElementBasic centre, ElementBasic tip, float smoothness, float elasticity,Boolean isOnRight){
+    public Flipper(ElementBasic centre, ElementBasic tip, double smoothness, double elasticity,Boolean isOnRight){
         this.centre = centre;
         this.tip = tip;
         this.smoothness = smoothness;
@@ -47,12 +47,12 @@ public class Flipper extends ElementKinetic{
         /**
          * Calculer le vecteur normal
          */
-        float k = 0;
+        double k = 0;
         if(deltaX!=0){
             //La pente
             k = deltaY / deltaX;
             //Le vecteur normal
-            n1Y = (float)Math.sqrt(1/(1+k*k));
+            n1Y = (double)Math.sqrt(1/(1+k*k));
             n1X = - k * n1Y;
         }else{
             n1X = 1;
@@ -60,7 +60,7 @@ public class Flipper extends ElementKinetic{
         }
         // Si le produit vectoriel nxv est positif, on change le signe de nx et ny,
         //car on me veut que le vecteur n1 dans le sens horaire
-        float produitVectoriel = (n1X*deltaY)-(n1Y*deltaX);
+        double produitVectoriel = (n1X*deltaY)-(n1Y*deltaX);
         if(produitVectoriel > 0){
             n1Y = -n1Y; 
             n1X = -n1X;

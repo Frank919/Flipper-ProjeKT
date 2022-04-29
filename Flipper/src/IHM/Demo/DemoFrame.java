@@ -1,7 +1,8 @@
-package IHM;
+package IHM.Demo;
 
 import javax.swing.*;
 import Elements.*;
+import IHM.*;
 
 public class DemoFrame extends JFrame {
     private Ball ball = new Ball(1,2, 3, 4, 5, (float)0.3, (float)0.1);

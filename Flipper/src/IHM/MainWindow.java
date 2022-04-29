@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements Runnable{
     public boolean isPressedL;
 	public boolean isPressedJ;
     //private GameTable GT;
@@ -26,13 +26,13 @@ public class MainWindow extends JFrame {
     
     public MainWindow(int n) {
 		if(n==1){
-			this.ball  = new Ball(1,100, 3, 4, 5, (float)0.3, (float)0.1);
+			this.ball  = new Ball(1,100, 3, 4, 5, 0.3, 0.5);
 		}
 		if(n==2){
-			this.ball  = new Ball(2,2, 3, 4, 5, (float)0.3, (float)0.1);
+			this.ball  = new Ball(2,2, 3, 4, 5, 0.3, 0.5);
 		}
 		if(n==3){
-			this.ball  = new Ball(3,2, 3, 4, 5, (float)0.3, (float)0.1);
+			this.ball  = new Ball(3,2, 3, 4, 5, 0.3, 0.5);
 		}
         //this.ball  = ball;
         this.setTitle("Jeu du flipper");
@@ -71,8 +71,8 @@ public class MainWindow extends JFrame {
 		Picture ball = new Picture("balle"+this.ball.getNum());
         GamePanel GP = new GamePanel(ball);
 
-		ball.setX(GT.ball.getPositionX());
-		ball.setY(GT.ball.getPositionY());
+		ball.setX(GT.ball.getPositionX()-20);
+		ball.setY(GT.ball.getPositionY()-20);
         this.add(GP);
         this.setVisible(true);
 
@@ -99,17 +99,7 @@ public class MainWindow extends JFrame {
 	// On créé une méthode isPressedJ qui devient TRUE lorsqu'on appuie sur J
 	// Lorsque isPressedJ devient TRUE, alors ça va déclencher le mouvement de la manette (A CODER)
 	
-	
-	public static void main(String[] args) {
-        new MainWindow(1);
-    
+	public void run(){
+
 	}
-	
-	/**
-	
-	public void paint(Graphics g){
-		g.setColor(Color.red);
-		g.drawLine(500,500,50,50);
-		g.drawOval(500,500,50,50);
-	} **/
 }
