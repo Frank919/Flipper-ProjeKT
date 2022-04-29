@@ -102,8 +102,8 @@ public class GameTable implements Runnable{
         new Boundary(1.0, 0.5);
         double smooth=(double)0.5;
         double elasticity = (double)1;
-        //flipperLeft = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (double)0.5,(double)0.6, false);
-        //flipperRight = new Flipper(new ElementBasic(6, 6), new ElementBasic(2, 3), (double)0.5,(double)0.6, true);
+        flipperLeft = new Flipper(new ElementBasic(132, 919), new ElementBasic(296, 948), 0.5,0.6, false);
+        flipperRight = new Flipper(new ElementBasic(517, 919), new ElementBasic(353, 948), 0.5,0.6, true);
         /*Curve curve1 = new Curve(new ElementBasic(115,90), new ElementBasic(115,90), new ElementBasic(161,90), 46,smooth,elasticity);
         Curve curve2 = new Curve(new ElementBasic(376,107), new ElementBasic(376,107), new ElementBasic(285,107), 91,smooth,elasticity);
         Curve curve3 = new Curve(new ElementBasic(127,165), new ElementBasic(1,82), new ElementBasic(151,-2), 172,smooth,elasticity); 
@@ -144,7 +144,7 @@ public class GameTable implements Runnable{
     }
     public boolean initialize(){
         this.ball.setPosition(100, 200);
-        this.ball.setVelocity(0, 0);
+        this.ball.setVelocity(-500, 0);
         return true;
     }
 

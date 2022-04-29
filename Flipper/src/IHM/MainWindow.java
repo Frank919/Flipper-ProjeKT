@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainWindow extends JFrame implements Runnable{
+public class MainWindow extends JFrame implements Runnable {
     public boolean isPressedL;
 	public boolean isPressedJ;
     //private GameTable GT;
@@ -68,6 +68,29 @@ public class MainWindow extends JFrame implements Runnable{
 		ballP = new Picture("balle"+this.ball.getNum());
         GP = new GamePanel(ballP);
         //this.startGame();
+		this.addKeyListener(
+			new KeyListener(){
+				public void keyPressed(KeyEvent e){
+					if(e.getKeyCode() == KeyEvent.VK_J){
+						System.out.println("JJJJJJJ");
+						GT.flipperLeft.rotateUp();
+					}
+					if(e.getKeyCode() == KeyEvent.VK_L){
+						System.out.println("LLLLLLL");
+						GT.flipperRight.rotateUp();
+					}
+				}
+				public void keyTyped(KeyEvent e){}
+				public void keyReleased(KeyEvent e){
+					if(e.getKeyCode() == KeyEvent.VK_J){
+						GT.flipperLeft.rotateDown();
+					}
+					if(e.getKeyCode() == KeyEvent.VK_L){
+						GT.flipperRight.rotateDown();
+					}
+				}
+			}
+		);
 		
     }
 	
@@ -100,9 +123,7 @@ public class MainWindow extends JFrame implements Runnable{
             }
         }
     }
-    // méthodes pour associer la touche J au fait que la manette réagit
-	// On créé une méthode isPressedJ qui devient TRUE lorsqu'on appuie sur J
-	// Lorsque isPressedJ devient TRUE, alors ça va déclencher le mouvement de la manette (A CODER)
+    
 	
 	public void run(){
 		ballP.setX(GT.ball.getPositionX()-20);

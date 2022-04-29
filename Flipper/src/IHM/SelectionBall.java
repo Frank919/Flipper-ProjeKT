@@ -113,10 +113,5 @@ public class SelectionBall extends JFrame implements ActionListener {
         }
 		new Thread(new MainWindow(ball.getNum())).start();
 		this.dispose();
-		
-		
-		
-		
-		
 	}
 }
