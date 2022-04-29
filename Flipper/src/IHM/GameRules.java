@@ -80,7 +80,7 @@ public class GameRules extends JFrame implements ActionListener{
 		
 		
 		lettreJ = new JLabel();
-		lettreJ.setIcon(new ImageIcon("Flipper/src/Resource/J.png"));
+		lettreJ.setIcon(new ImageIcon("./Flipper/src/Resource/J.png"));
 		lettreJ.setBounds(200,350,100,100);
 		panneauRegles.add(lettreJ);
 		
@@ -93,7 +93,7 @@ public class GameRules extends JFrame implements ActionListener{
 		panneauRegles.add(consigne21);
 		
 		lettreL = new JLabel();
-		lettreL.setIcon(new ImageIcon("Flipper/src/Resource/L.png"));
+		lettreL.setIcon(new ImageIcon("./Flipper/src/Resource/L.png"));
 		lettreL.setBounds(200,450,100,100);
 		panneauRegles.add(lettreL);
 		
