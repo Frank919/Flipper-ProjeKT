@@ -6,7 +6,7 @@ public class Picture {
     private int x,y,w,h;
     private Image image;
     public Picture(String name){
-        this.image = new ImageIcon("Flipper/src/Resource/"+name+".png").getImage();
+        this.image = new ImageIcon("./Flipper/src/Resource/"+name+".png").getImage();
         this.w = image.getWidth(null);
         this.h = image.getHeight(null);
         this.x = 50;

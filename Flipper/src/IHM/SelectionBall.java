@@ -109,9 +109,11 @@ public class SelectionBall extends JFrame implements ActionListener {
 			ball = new Ball(2,2, 3, 4, 5, (float)0.3, (float)0.1);
         } else if(e.getSource()==boutonBalle3){
             ball = new Ball(3,2, 3, 4, 5, (float)0.3, (float)0.1);
+			
         }
+		new Thread(new MainWindow(ball.getNum())).start();
 		this.dispose();
-		new MainWindow(ball.getNum());
+		
 		
 		
 		

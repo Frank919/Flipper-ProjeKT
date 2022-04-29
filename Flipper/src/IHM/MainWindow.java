@@ -14,6 +14,9 @@ public class MainWindow extends JFrame implements Runnable{
 	private JPanel panneauScore;
 	private JPanel panneauJeu;
     private Ball ball;
+	private GameTable GT; 
+	private Picture ballP; 
+    private GamePanel GP; 
 	/**
 	 * Largeur de la fenetre principale
 	 */
@@ -61,18 +64,20 @@ public class MainWindow extends JFrame implements Runnable{
 			panneauScore.setBackground(Color.white);
 			panneauJeu.add(panneauScore);
 		*/
-		
-        this.startGame();
+		GT = new GameTable(WIDTH, HEIGHT, this.ball);
+		ballP = new Picture("balle"+this.ball.getNum());
+        GP = new GamePanel(ballP);
+        //this.startGame();
 		
     }
 	
     public void startGame(){
-        GameTable GT = new GameTable(WIDTH, HEIGHT, this.ball);
-		Picture ball = new Picture("balle"+this.ball.getNum());
-        GamePanel GP = new GamePanel(ball);
+        //GameTable GT = new GameTable(WIDTH, HEIGHT, this.ball);
+		//Picture ballP = new Picture("balle"+this.ball.getNum());
+        //GamePanel GP = new GamePanel(ballP);
 
-		ball.setX(GT.ball.getPositionX()-20);
-		ball.setY(GT.ball.getPositionY()-20);
+		ballP.setX(GT.ball.getPositionX()-20);
+		ballP.setY(GT.ball.getPositionY()-20);
         this.add(GP);
         this.setVisible(true);
 
@@ -83,8 +88,8 @@ public class MainWindow extends JFrame implements Runnable{
                 e.printStackTrace();
             }
             GT.refresh();
-			ball.setX(GT.ball.getPositionX());
-			ball.setY(GT.ball.getPositionY());
+			ballP.setX(GT.ball.getPositionX());
+			ballP.setY(GT.ball.getPositionY());
 			GP.repaint();
 
             if(GT.ball.isOut()){
@@ -100,6 +105,28 @@ public class MainWindow extends JFrame implements Runnable{
 	// Lorsque isPressedJ devient TRUE, alors ça va déclencher le mouvement de la manette (A CODER)
 	
 	public void run(){
+		ballP.setX(GT.ball.getPositionX()-20);
+		ballP.setY(GT.ball.getPositionY()-20);
+        this.add(GP);
+        this.setVisible(true);
 
+        while(true){
+            try {
+                Thread.sleep(GameTable.refreshTimeMS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            GT.refresh();
+			ballP.setX(GT.ball.getPositionX());
+			ballP.setY(GT.ball.getPositionY());
+			GP.repaint();
+
+            if(GT.ball.isOut()){
+				this.dispose();
+				System.out.println("game over");
+                System.exit(0);
+                break;
+			}
+		}
 	}
 }

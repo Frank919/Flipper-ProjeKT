@@ -5,7 +5,7 @@ public class GameTable implements Runnable{
     /**
      * Fois d'actualisation en 1 seconde
      */
-    public static int refreshRate = 144;
+    public static int refreshRate = 120;
     /**
      * Interval temporel entre 2 actualisations 
      */
@@ -143,8 +143,8 @@ public class GameTable implements Runnable{
         return true;
     }
     public boolean initialize(){
-        this.ball.setPosition(100, 100);
-        this.ball.setVelocity(500, 0);
+        this.ball.setPosition(100, 200);
+        this.ball.setVelocity(0, 0);
         return true;
     }
 
@@ -153,7 +153,7 @@ public class GameTable implements Runnable{
         this.isRunning = true;
         //Supprimer la balle de pseudoTable 
         pseudoTable[ball.positionX][ball.positionY] = new Space(ball.positionX - GameTable.margin,ball.positionY - GameTable.margin);
-        
+        ball.falls();
         if(ball.isOnContectWith(flipperLeft)){
             ball.collidesWith(flipperLeft);
             System.out.println("ccc1");
