@@ -114,19 +114,18 @@ public class GameTable implements Runnable{
         Curve curve9 = new Curve(new ElementBasic(56,636), new ElementBasic(56,636), new ElementBasic(81,636), 25,smooth,elasticity);//+
         Curve curve10 = new Curve(new ElementBasic(418,802), new ElementBasic(558,802), new ElementBasic(489,798), 72,smooth,elasticity);
         Curve curve11 = new Curve(new ElementBasic(549,1), new ElementBasic(612,64), new ElementBasic(549,64), 63,smooth,elasticity);
-        ElementBasic[] elm1={new ElementBasic(483,37),new ElementBasic(589,184),new ElementBasic(589,439)};
+        ElementBasic[] elm1={new ElementBasic(480,373),new ElementBasic(583,217),new ElementBasic(583,439)};
         Polygone polygone1= new Polygone (elm1,smooth,elasticity);
-        ElementBasic[] elm2={new ElementBasic(62,417),new ElementBasic(76,417),new ElementBasic(76,471),new ElementBasic(63,471)};
-        Polygone polygone2= new Polygone (elm2,smooth,elasticity);
-        ElementBasic[] elm3={new ElementBasic(109,416),new ElementBasic(124,416),new ElementBasic(124,471),new ElementBasic(110,468)};
-        Polygone polygone3= new Polygone (elm3,smooth,elasticity);
-        ElementBasic[] elm4={new ElementBasic(50,776),new ElementBasic(112,883),new ElementBasic(28,883)};
+        ElementBasic[] elm4={new ElementBasic(281,712),new ElementBasic(337,712),new ElementBasic(218,822)};
         Polygone polygone4= new Polygone (elm4,smooth,elasticity);
-        ElementBasic[] elm5={new ElementBasic(153,647),new ElementBasic(226,648),new ElementBasic(219,828)};
+        ElementBasic[] elm5={new ElementBasic(154,776),new ElementBasic(225,647),new ElementBasic(219,828)};
         Polygone polygone5= new Polygone (elm5,smooth,elasticity);
-        ElementBasic[] elm6={new ElementBasic(283,717),new ElementBasic(340,717),new ElementBasic(309,861)};
+        ElementBasic[] elm6={new ElementBasic(32,876),new ElementBasic(54,772),new ElementBasic(114,876)};
         Polygone polygone6= new Polygone (elm6,smooth,elasticity);
-        
+        ElementBasic[] elm2={new ElementBasic(112,468),new ElementBasic(112,419),new ElementBasic(124,419),new ElementBasic(125,468)};
+        Polygone polygone2= new Polygone (elm2,smooth,elasticity);
+        ElementBasic[] elm3={new ElementBasic(65,468),new ElementBasic(65,419),new ElementBasic(78,419),new ElementBasic(78,468)};
+        Polygone polygone3= new Polygone (elm3,smooth,elasticity);
         
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
@@ -143,8 +142,8 @@ public class GameTable implements Runnable{
         return true;
     }
     public boolean initialize(){
-        this.ball.setPosition(600, 100);
-        this.ball.setVelocity(-400, 0);
+        this.ball.setPosition(600, 200);
+        this.ball.setVelocity(-300, 0);
         return true;
     }
 
