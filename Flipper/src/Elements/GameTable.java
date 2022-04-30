@@ -20,7 +20,7 @@ public class GameTable implements Runnable{
     /**
      * C'est aussi le margin du pseudoTable
      */
-    public static int detectionRange = 4;
+    public static int detectionRange = 5;
     public static int margin = 20;
 
     public static int width;
@@ -142,8 +142,10 @@ public class GameTable implements Runnable{
         return true;
     }
     public boolean initialize(){
-        this.ball.setPosition(600, 200);
-        this.ball.setVelocity(-300, 0);
+        //600,900,0,-1300 to start the game
+
+        this.ball.setPosition(250, 400);
+        this.ball.setVelocity(-100, 0);
         return true;
     }
 

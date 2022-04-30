@@ -19,9 +19,17 @@ public class SelectionBall extends JFrame implements ActionListener {
     
     public SelectionBall(){
         this.setTitle("Choix de la balle");
-		this.setSize(500,500);
 		// Pour placer la fenêtre au centre de l'écran
-		this.setLocation(500,250);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension size = new Dimension(500, 500);
+        int width = toolkit.getScreenSize().width;
+        int height = toolkit.getScreenSize().height;
+        this.setBounds(
+			(int) (width - size.getWidth()) / 2,
+            (int) (height - size.getHeight()) / 3, 
+			(int) size.getWidth(), 
+			(int) size.getHeight()
+		);
 		// Pour permettre la fermeture de la fenêtre lors de l'appui sur la croix rouge
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

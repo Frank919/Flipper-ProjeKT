@@ -21,12 +21,20 @@ public class GameRules extends JFrame implements ActionListener{
 	private JButton boutonCommencer;
 	 
     public GameRules(){
-			// Création de la fenêtre principale JFrame		
+		// Création de la fenêtre principale JFrame		
 		this.setTitle("Règles du jeu du flipper");
-		this.setSize(800,800);
+
 		// Pour placer la fenêtre au centre de l'écran
-		this.setLocation(500,250);
-		// Pour permettre la fermeture de la fenêtre lors de l'appui sur la croix rouge
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension size = new Dimension(800, 800);
+        int width = toolkit.getScreenSize().width;
+        int height = toolkit.getScreenSize().height;
+        this.setBounds(
+			(int) (width - size.getWidth()) / 2,
+            (int) (height - size.getHeight()) / 3, 
+			(int) size.getWidth(), 
+			(int) size.getHeight()
+		);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

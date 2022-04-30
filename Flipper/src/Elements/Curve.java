@@ -25,7 +25,7 @@ public class Curve extends ElementStatic{
 
         this.centreX=centre.positionX;
         this.centreY=centre.positionY;
-        int innerRadius = radius - 5;
+        int innerRadius = radius - 4;
 
         //我们直接造有的obstacle
 
