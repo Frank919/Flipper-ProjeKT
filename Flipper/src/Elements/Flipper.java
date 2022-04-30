@@ -1,9 +1,9 @@
 package Elements;
 
 public class Flipper extends ElementKinetic{
-    protected ElementBasic centre;
-    protected ElementBasic tip;
-    protected boolean isOnRight;
+    public ElementBasic centre;
+    public ElementBasic tip;
+    public boolean isOnRight;
     /**
      * Positif dans le sens horaire
      */

@@ -6,17 +6,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainWindow extends JFrame implements Runnable {
-    public boolean isPressedL;
-	public boolean isPressedJ;
+
+public class MainWindow extends JFrame implements ActionListener,KeyListener{
+
     //private GameTable GT;
     //private GamePanel GP;
 	private JPanel panneauScore;
 	private JPanel panneauJeu;
-    private Ball ball;
 	private GameTable GT; 
+    private GamePanel GP;
+
+	private Ball ball;
 	private Picture ballP; 
-    private GamePanel GP; 
+	private Picture flipperLP;
+	private Picture flipperRP;
+	private Timer timer;
+	private Timer timer2;
 	/**
 	 * Largeur de la fenetre principale
 	 */
@@ -27,35 +32,32 @@ public class MainWindow extends JFrame implements Runnable {
 	public static final int HEIGHT = 1000;
 
     
-    public MainWindow(int n) {
-		if(n==1){
-			this.ball  = new Ball(1,100, 3, 4, 5, 0.3, 0.5);
-		}
-		if(n==2){
-			this.ball  = new Ball(2,2, 3, 4, 5, 0.3, 0.5);
-		}
-		if(n==3){
-			this.ball  = new Ball(3,2, 3, 4, 5, 0.3, 0.5);
-		}
-        //this.ball  = ball;
+    public MainWindow(Ball ball) {
+		
+		
+        this.ball  = ball;
         this.setTitle("Jeu du flipper");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		//this.setSize(480,720);
+
 		
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension size = new Dimension(WIDTH, HEIGHT);
         int width = toolkit.getScreenSize().width;
         int height = toolkit.getScreenSize().height;
-        this.setBounds((int) (width - size.getWidth()) / 2,
-                (int) (height - size.getHeight()) / 3, (int) size.getWidth(), (int) size.getHeight());
+        this.setBounds(
+			(int) (width - size.getWidth()) / 2,
+            (int) (height - size.getHeight()) / 3, 
+			(int) size.getWidth(), 
+			(int) size.getHeight()
+		);
 		
 		
 		
-		/*panneauJeu = new JPanel();
+		panneauJeu = new JPanel();
 			panneauJeu.setBounds(0,0,WIDTH,HEIGHT);
 			panneauJeu.setLayout(null); // permet de placer manuellement les composants
-			panneauJeu.setBackground(Color.black);
+			//panneauJeu.setBackground(Color.black);
 		
 		
 		panneauScore = new JPanel();
@@ -63,91 +65,71 @@ public class MainWindow extends JFrame implements Runnable {
 			panneauScore.setLayout(null); // permet de placer manuellement les composants
 			panneauScore.setBackground(Color.white);
 			panneauJeu.add(panneauScore);
-		*/
-		GT = new GameTable(WIDTH, HEIGHT, this.ball);
-		ballP = new Picture("balle"+this.ball.getNum());
-        GP = new GamePanel(ballP);
-        //this.startGame();
-		this.addKeyListener(
-			new KeyListener(){
-				public void keyPressed(KeyEvent e){
-					if(e.getKeyCode() == KeyEvent.VK_J){
-						System.out.println("JJJJJJJ");
-						GT.flipperLeft.rotateUp();
-					}
-					if(e.getKeyCode() == KeyEvent.VK_L){
-						System.out.println("LLLLLLL");
-						GT.flipperRight.rotateUp();
-					}
-				}
-				public void keyTyped(KeyEvent e){}
-				public void keyReleased(KeyEvent e){
-					if(e.getKeyCode() == KeyEvent.VK_J){
-						GT.flipperLeft.rotateDown();
-					}
-					if(e.getKeyCode() == KeyEvent.VK_L){
-						GT.flipperRight.rotateDown();
-					}
-				}
-			}
-		);
 		
-    }
-	
-    public void startGame(){
-        //GameTable GT = new GameTable(WIDTH, HEIGHT, this.ball);
-		//Picture ballP = new Picture("balle"+this.ball.getNum());
-        //GamePanel GP = new GamePanel(ballP);
+		
+		ballP = new Picture("balle"+this.ball.getNum());
+		flipperLP = new Picture("flipperL");
+		flipperLP.setX(132-15);
+		flipperLP.setY(919-15);
+		flipperRP = new Picture("flipperR");
+		flipperRP.setX(517-145);
+		flipperRP.setY(919-15);
 
-		ballP.setX(GT.ball.getPositionX()-20);
-		ballP.setY(GT.ball.getPositionY()-20);
+		GP = new GamePanel(ballP,flipperLP,flipperRP);
+		GP.setBounds(0, 0, GameTable.width, GameTable.height);
+		panneauJeu.add(GP);
+
+        GT = new GameTable(WIDTH, HEIGHT, this.ball);
+
+		
         this.add(GP);
+		this.addKeyListener(this);
         this.setVisible(true);
 
-        while(true){
-            try {
-                Thread.sleep(GameTable.refreshTimeMS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            GT.refresh();
-			ballP.setX(GT.ball.getPositionX());
-			ballP.setY(GT.ball.getPositionY());
-			GP.repaint();
-
-            if(GT.ball.isOut()){
-				this.dispose();
-				System.out.println("game over");
-                System.exit(0);
-                break;
-            }
-        }
+		timer = new Timer((int)GameTable.refreshTimeMS, this);
+		//timer2 = new Timer((int)GameTable.refreshTimeMS, this);
+		timer.start();
+		//timer2.start();
     }
-    
 	
-	public void run(){
-		ballP.setX(GT.ball.getPositionX()-20);
-		ballP.setY(GT.ball.getPositionY()-20);
-        this.add(GP);
-        this.setVisible(true);
-
-        while(true){
-            try {
-                Thread.sleep(GameTable.refreshTimeMS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            GT.refresh();
-			ballP.setX(GT.ball.getPositionX());
-			ballP.setY(GT.ball.getPositionY());
-			GP.repaint();
-
-            if(GT.ball.isOut()){
-				this.dispose();
-				System.out.println("game over");
-                System.exit(0);
-                break;
-			}
+	
+	public void keyPressed(KeyEvent e){
+		if(e.getKeyCode()==KeyEvent.VK_J){
+			GT.flipperLeft.rotateUp();
+			System.out.println("jjjjj");
+		}
+		if(e.getKeyCode()==KeyEvent.VK_L){
+			GT.flipperRight.rotateUp();
+			System.out.println("LLLL");
 		}
 	}
+	public void keyReleased(KeyEvent e){
+		if(e.getKeyCode()==KeyEvent.VK_J){
+			GT.flipperLeft.rotateDown();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_L){
+			GT.flipperRight.rotateDown();
+		}
+		timer.start();
+	}
+	public void keyTyped(KeyEvent e){
+		
+	}
+	public void actionPerformed(ActionEvent e) { 
+		if (e.getSource() == timer){
+			
+			GT.refresh();
+			ballP.setX(GT.ball.getPositionX()-20);
+			ballP.setY(GT.ball.getPositionY()-20);
+			GP.repaint();
+
+            if(GT.ball.isOut()){
+				this.dispose();
+				System.out.println("game over");
+                System.exit(0);
+            }
+		}
+		
+	}
+	
 }

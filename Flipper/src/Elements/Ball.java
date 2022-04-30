@@ -64,7 +64,7 @@ public class Ball extends ElementKinetic{
      * qui impacte la vitesse selon Y.
      */               
     public void falls(){
-        double g = 400;
+        double g = 800;
         double deltaVY = g*GameTable.refreshTime;
         if(deltaVY<1){
             deltaVY = 1;
@@ -114,8 +114,8 @@ public class Ball extends ElementKinetic{
                 eF.nY = eF.n2Y;
             }
             //Calculer la vitesse normale au flipper
-            double vNX = (double)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nX);
-            double vNY = (double)( (velocityX * eF.nX + velocityX * eF.nY) * eF.nY);
+            double vNX = (double)( (velocityX * eF.nX + velocityY * eF.nY) * eF.nX);
+            double vNY = (double)( (velocityX * eF.nX + velocityY * eF.nY) * eF.nY);
             //Calculer la vitesse tangentielle au flipper
             double vTX = velocityX - vNX;
             double vTY = velocityY - vNY;
@@ -129,11 +129,11 @@ public class Ball extends ElementKinetic{
             double vFNY = (double)( (velocityLineX * eF.nX + velocityLineY * eF.nY) * eF.nY);
 
             //Collision 
-            vNX = - coeffRebound * vNX + vFNX - vNX;
-            vNY = - coeffRebound * vNY + vFNY - vNY;
+            vNX = - coeffRebound * vNX + vFNX ;
+            vNY = - coeffRebound * vNY + vFNY ;
             //Friciton 
-            vTX = (1 - coeffFriction) * vTX;
-            vTY = (1 - coeffFriction) * vTY;
+            vTX = coeffFriction * vTX;
+            vTY = coeffFriction * vTY;
             //Conclusion 
             velocityX = vTX + vNX;
             velocityY = vTY + vNY;

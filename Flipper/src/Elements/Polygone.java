@@ -43,19 +43,19 @@ public class Polygone extends ElementStatic{
                 //L'ordonée à l'origine
                 b = start.positionY - k * start.positionX;
                 //Le vecteur normal
-                ny = (double)Math.sqrt(1/(1+k*k));
-                nx = - k * ny;
+                nx = (double)Math.sqrt(1/(1+k*k));
+                ny = - k * nx;
             }else{
                 nx = 1;
                 ny = 0;
             }
 
             /**
-             *  Si le produit vectoriel est positif, on change le signe de nx et ny,
+             *  Si le produit vectoriel est pas positif, on change le signe de nx et ny,
              *  car on me veut que le vecteur vers l'extérieur
              */ 
             double produitVectoriel = (nx*deltaY)-(ny*deltaX);
-            if(produitVectoriel>0){
+            if(produitVectoriel < 0){
                 ny = -ny;
                 nx = -nx;
             }
