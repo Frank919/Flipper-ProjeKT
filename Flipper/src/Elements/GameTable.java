@@ -79,20 +79,17 @@ public class GameTable implements Runnable{
             for(int j=0;j<height;j++){
                 table[i][j]=new Space(i,j);
             }
-            if(i%(width/100)==0){
-                System.out.print("-");
-            }
+            
         }
         System.out.println("\nThe game table generated with success");
+        System.out.println("w = " + width);
 
         pseudoTable = new ElementBasic[pseudoWidth][pseudoHeight];
         for(int i=0;i<pseudoWidth;i++){
             for(int j=0;j<pseudoHeight;j++){
                 pseudoTable[i][j]=new Space(i,j);
             }
-            if(i%(width/100)==0){
-                System.out.print("-");
-            }
+            
         }
         System.out.println("\nThe pseudo game table generated with success");
 
@@ -106,28 +103,28 @@ public class GameTable implements Runnable{
         double elasticity = 1;
         flipperLeft = new Flipper(new ElementBasic(132, 919), new ElementBasic(296, 948), 0.5,0.1, false);
         flipperRight = new Flipper(new ElementBasic(517, 919), new ElementBasic(353, 948), 0.5,0.1, true);
-        /*Curve curve1 = new Curve(new ElementBasic(160,12), new ElementBasic(160,12), new ElementBasic(224,12), 64,smooth,elasticity);
-        Curve curve2 = new Curve(new ElementBasic(523,148), new ElementBasic(523,148), new ElementBasic(396,148), 126,smooth,elasticity);
-        Curve curve3 = new Curve(new ElementBasic(176,229), new ElementBasic(1,113), new ElementBasic(210,-3), 239,smooth,elasticity); 
-        Curve curve4 = new Curve(new ElementBasic(3,393), new ElementBasic(342,372), new ElementBasic(174,396), 169,smooth,elasticity);
-        Curve curve5 = new Curve(new ElementBasic(192,436), new ElementBasic(264,391), new ElementBasic(196,326), 74,smooth,elasticity);
-        Curve curve6 = new Curve(new ElementBasic(528,536), new ElementBasic(528,536), new ElementBasic(425,536), 102,smooth,elasticity);
-        Curve curve7 = new Curve(new ElementBasic(54,58), new ElementBasic(54,58), new ElementBasic(54,558), 500,smooth,elasticity);
-        Curve curve8 = new Curve(new ElementBasic(169,588), new ElementBasic(169,588), new ElementBasic(146,588), 23,smooth,elasticity);
-        Curve curve9 = new Curve(new ElementBasic(102,661), new ElementBasic(102,661), new ElementBasic(79,661), 23,smooth,elasticity);
-        Curve curve10 = new Curve(new ElementBasic(435,840), new ElementBasic(581,840), new ElementBasic(507,836), 73,smooth,elasticity);
-        */
-        ElementBasic[] elm1={new ElementBasic(503,38),new ElementBasic(614,193),new ElementBasic(631,345)};
+        Curve curve1 = new Curve(new ElementBasic(92,103), new ElementBasic(92,103), new ElementBasic(131,103), 39,smooth,elasticity);//+
+        Curve curve2 = new Curve(new ElementBasic(256,144), new ElementBasic(256,144), new ElementBasic(367,144), 111,smooth,elasticity);//+
+        Curve curve3 = new Curve(new ElementBasic(170,219), new ElementBasic(1,109), new ElementBasic(202,-3), 234,smooth,elasticity); 
+        Curve curve4 = new Curve(new ElementBasic(3,375), new ElementBasic(329,355), new ElementBasic(167,378), 167,smooth,elasticity);
+        Curve curve5 = new Curve(new ElementBasic(184,416), new ElementBasic(254,374), new ElementBasic(188,346), 73,smooth,elasticity);
+        Curve curve6 = new Curve(new ElementBasic(319,514), new ElementBasic(319,514), new ElementBasic(422,514), 103,smooth,elasticity);//+
+        Curve curve7 = new Curve(new ElementBasic(33,533), new ElementBasic(33,533), new ElementBasic(58,533), 25,smooth,elasticity);//+
+        Curve curve8 = new Curve(new ElementBasic(124,564), new ElementBasic(124,564), new ElementBasic(147,564), 24,smooth,elasticity);//+
+        Curve curve9 = new Curve(new ElementBasic(56,636), new ElementBasic(56,636), new ElementBasic(81,636), 25,smooth,elasticity);//+
+        Curve curve10 = new Curve(new ElementBasic(418,802), new ElementBasic(558,802), new ElementBasic(489,798), 72,smooth,elasticity);
+        Curve curve11 = new Curve(new ElementBasic(549,1), new ElementBasic(612,64), new ElementBasic(549,64), 63,smooth,elasticity);
+        ElementBasic[] elm1={new ElementBasic(483,37),new ElementBasic(589,184),new ElementBasic(589,439)};
         Polygone polygone1= new Polygone (elm1,smooth,elasticity);
-        ElementBasic[] elm2={new ElementBasic(65,473),new ElementBasic(79,437),new ElementBasic(79,493),new ElementBasic(65,493)};
+        ElementBasic[] elm2={new ElementBasic(62,417),new ElementBasic(76,417),new ElementBasic(76,471),new ElementBasic(63,471)};
         Polygone polygone2= new Polygone (elm2,smooth,elasticity);
-        ElementBasic[] elm3={new ElementBasic(114,436),new ElementBasic(129,436),new ElementBasic(129,493),new ElementBasic(114,490)};
+        ElementBasic[] elm3={new ElementBasic(109,416),new ElementBasic(124,416),new ElementBasic(124,471),new ElementBasic(110,468)};
         Polygone polygone3= new Polygone (elm3,smooth,elasticity);
-        ElementBasic[] elm4={new ElementBasic(52,821),new ElementBasic(116,925),new ElementBasic(29,925)};
+        ElementBasic[] elm4={new ElementBasic(50,776),new ElementBasic(112,883),new ElementBasic(28,883)};
         Polygone polygone4= new Polygone (elm4,smooth,elasticity);
-        ElementBasic[] elm5={new ElementBasic(160,677),new ElementBasic(253,679),new ElementBasic(228,866)};
+        ElementBasic[] elm5={new ElementBasic(153,647),new ElementBasic(226,648),new ElementBasic(219,828)};
         Polygone polygone5= new Polygone (elm5,smooth,elasticity);
-        ElementBasic[] elm6={new ElementBasic(294,751),new ElementBasic(354,751),new ElementBasic(321,901)};
+        ElementBasic[] elm6={new ElementBasic(283,717),new ElementBasic(340,717),new ElementBasic(309,861)};
         Polygone polygone6= new Polygone (elm6,smooth,elasticity);
         
         
@@ -146,8 +143,8 @@ public class GameTable implements Runnable{
         return true;
     }
     public boolean initialize(){
-        this.ball.setPosition(450, 200);
-        this.ball.setVelocity(-500, 0);
+        this.ball.setPosition(600, 100);
+        this.ball.setVelocity(-400, 0);
         return true;
     }
 

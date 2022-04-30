@@ -1,5 +1,7 @@
 package Elements;
 
+import java.awt.event.KeyEvent;
+
 public class Flipper extends ElementKinetic{
     public ElementBasic centre;
     public ElementBasic tip;
@@ -101,4 +103,36 @@ public class Flipper extends ElementKinetic{
         tip.positionY = (int)Math.sin(angle);
 
     }
+    
+    public void keyPressed(KeyEvent e){
+		if(e.getKeyCode()==KeyEvent.VK_J){
+			if(isOnRight){
+                this.rotateUp();
+                System.out.println("JJJ");
+            }
+		}
+		if(e.getKeyCode()==KeyEvent.VK_L){
+            if(!isOnRight){
+                this.rotateUp();
+                System.out.println("LLLL");
+            }
+			
+		}
+	}
+	public void keyReleased(KeyEvent e){
+		if(e.getKeyCode()==KeyEvent.VK_J){
+			if(isOnRight){
+                this.rotateDown();
+                System.out.println("JJJ");
+            };
+		}
+		if(e.getKeyCode()==KeyEvent.VK_L){
+			if(!isOnRight){
+                this.rotateDown();
+                System.out.println("LLLL");
+            }
+		}
+		
+	}
+	
 }

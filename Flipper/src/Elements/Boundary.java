@@ -22,6 +22,9 @@ public class Boundary extends ElementStatic{
         for(int x=1; x<GameTable.width;x++){
             GameTable.table[x][0]=new Obstacle(x,1,0, 1, s, e);
         }
+        for(int x=415; x<511;x++){
+            GameTable.table[x][798]=new Obstacle(x,1,0, 1, s, e);
+        }
 
     }
 }

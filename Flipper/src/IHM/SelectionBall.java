@@ -4,6 +4,8 @@ import Elements.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.EventQueue;
+
 public class SelectionBall extends JFrame implements ActionListener {
     private JLabel demandeBalle;
 	private JLabel balle1;
@@ -12,6 +14,7 @@ public class SelectionBall extends JFrame implements ActionListener {
 	private JButton boutonBalle1;
 	private JButton boutonBalle2;
 	private JButton boutonBalle3;
+	private Ball ball;
 	
     
     public SelectionBall(){
@@ -102,7 +105,7 @@ public class SelectionBall extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-		Ball ball = null;
+		
         if (e.getSource()==boutonBalle1){
             ball = new Ball(1,2, 3, 4, 5, 1.0, 0.1);
         } else if (e.getSource()==boutonBalle2){
@@ -111,7 +114,12 @@ public class SelectionBall extends JFrame implements ActionListener {
             ball = new Ball(3,2, 3, 4, 5, 0.5, 0.5);
 			
         }
-		new MainWindow(ball);
 		this.dispose();
+		EventQueue.invokeLater(() -> {
+            new MainWindow(ball);
+        });
+        
+		
+		
 	}
 }

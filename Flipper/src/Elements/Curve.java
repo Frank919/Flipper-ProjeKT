@@ -25,7 +25,7 @@ public class Curve extends ElementStatic{
 
         this.centreX=centre.positionX;
         this.centreY=centre.positionY;
-        int innerRadius = radius - 1;
+        int innerRadius = radius - 5;
 
         //我们直接造有的obstacle
 
@@ -69,56 +69,82 @@ public class Curve extends ElementStatic{
             endCeta = 2*Math.PI-endCeta;
         } 
         
-        System.out.println(startCeta+","+endCeta);
+        //System.out.println(startCeta+","+endCeta);
         
         //造obstacles((x1,y1)是外面一层，（x2，y2）是里面一层)
         if(startCeta < endCeta){
-            for(double ceta=startCeta;ceta<=endCeta;ceta+=0.001){
+            for(double ceta=startCeta;ceta<=endCeta;ceta+=0.00001){
                 int x1 = (int)(radius*Math.cos(ceta)+centreX);
                 int y1 = (int)(radius*Math.sin(ceta)+centreY);
                 int x2 = (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2 = (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                double nx1 = -(centreX-x1)/radius;
-                double ny1 = -(centreY-y1)/radius;
-                double nx2 = (centreX-x2)/innerRadius;
-                double ny2 = (centreY-y2)/innerRadius;
+                
+
+                double nx1 = -(centreX-x1)/Math.sqrt(Math.pow(centreX-x1,2)+Math.pow(centreY-y1,2));
+                double ny1 = -(centreY-y1)/Math.sqrt(Math.pow(centreX-x1,2)+Math.pow(centreY-y1,2));
+                double nx2 = (centreX-x2)/Math.sqrt(Math.pow(centreX-x2,2)+Math.pow(centreY-y2,2));
+                double ny2 = (centreY-y2)/Math.sqrt(Math.pow(centreX-x2,2)+Math.pow(centreY-y2,2));
 
                 
 
-                GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e); 
+                if((x1<640)&&(y1<1000)&&(x1>=0)&&(y1>=0)
+                &&(nx1!=Double.POSITIVE_INFINITY)&&(ny1!=Double.POSITIVE_INFINITY)&&(nx2!=Double.POSITIVE_INFINITY)&&(ny2!=Double.POSITIVE_INFINITY)
+                &&(nx1!=Double.NEGATIVE_INFINITY)&&(ny1!=Double.NEGATIVE_INFINITY)&&(nx2!=Double.NEGATIVE_INFINITY)&&(ny2!=Double.NEGATIVE_INFINITY)){
+                    //System.out.println(x1+","+y1+","+nx1+","+ ny1+","+ s+","+ e);
+                    //System.out.println(x2+","+y2+","+nx2+","+ ny2+","+ s+","+ e);
+                    GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e);
+                    GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
+                    
+                }
             } 
         }else if(startCeta >= endCeta){
-            for(double ceta=startCeta;ceta<=2*Math.PI;ceta+=0.001){
+            for(double ceta=startCeta;ceta<=2*Math.PI;ceta+=0.00001){
                 int x1= (int)(radius*Math.cos(ceta)+centreX);
                 int y1= (int)(radius*Math.sin(ceta)+centreY);
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
 
-                double nx1 = -(centreX-x1)/radius;
-                double ny1 = -(centreY-y1)/radius;
-                double nx2 = (centreX-x2)/innerRadius;
-                double ny2 = (centreY-y2)/innerRadius;
+                double nx1 = -(centreX-x1)/Math.sqrt(Math.pow(centreX-x1,2)+Math.pow(centreY-y1,2));
+                double ny1 = -(centreY-y1)/Math.sqrt(Math.pow(centreX-x1,2)+Math.pow(centreY-y1,2));
+                double nx2 = (centreX-x2)/Math.sqrt(Math.pow(centreX-x2,2)+Math.pow(centreY-y2,2));
+                double ny2 = (centreY-y2)/Math.sqrt(Math.pow(centreX-x2,2)+Math.pow(centreY-y2,2));
 
-                GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e); 
+                if((x1<640)&&(y1<1000)&&(x1>=0)&&(y1>=0)
+                &&(nx1!=Double.POSITIVE_INFINITY)&&(ny1!=Double.POSITIVE_INFINITY)&&(nx2!=Double.POSITIVE_INFINITY)&&(ny2!=Double.POSITIVE_INFINITY)
+                &&(nx1!=Double.NEGATIVE_INFINITY)&&(ny1!=Double.NEGATIVE_INFINITY)&&(nx2!=Double.NEGATIVE_INFINITY)&&(ny2!=Double.NEGATIVE_INFINITY)){
+                    //System.out.println(x1+","+y1+","+nx1+","+ ny1+","+ s+","+ e);
+                    //System.out.println(x2+","+y2+","+nx2+","+ ny2+","+ s+","+ e);
+                    GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e);
+                    GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
+                    
+                }
             }
 
-            for(double ceta=0;ceta<=endCeta;ceta+=0.001){
+            for(double ceta=0;ceta<=endCeta;ceta+=0.00001){
                 int x1= (int)(radius*Math.cos(ceta)+centreX);
                 int y1= (int)(radius*Math.sin(ceta)+centreY);
                 int x2= (int)(innerRadius*Math.cos(ceta)+centreX);
                 int y2= (int)(innerRadius*Math.sin(ceta)+centreY);
+
                 
-                double nx1 = -(centreX-x1)/radius;
-                double ny1 = -(centreY-y1)/radius;
-                double nx2 = (centreX-x2)/innerRadius;
-                double ny2 = (centreY-y2)/innerRadius;
+                
+                double nx1 = -(centreX-x1)/Math.sqrt(Math.pow(centreX-x1,2)+Math.pow(centreY-y1,2));
+                double ny1 = -(centreY-y1)/Math.sqrt(Math.pow(centreX-x1,2)+Math.pow(centreY-y1,2));
+                double nx2 = (centreX-x2)/Math.sqrt(Math.pow(centreX-x2,2)+Math.pow(centreY-y2,2));
+                double ny2 = (centreY-y2)/Math.sqrt(Math.pow(centreX-x2,2)+Math.pow(centreY-y2,2));
 
-
-                GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
-                GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e);  
+                if((x1<640)&&(y1<1000)&&(x1>=0)&&(y1>=0)
+                &&(nx1!=Double.POSITIVE_INFINITY)&&(ny1!=Double.POSITIVE_INFINITY)&&(nx2!=Double.POSITIVE_INFINITY)&&(ny2!=Double.POSITIVE_INFINITY)
+                &&(nx1!=Double.NEGATIVE_INFINITY)&&(ny1!=Double.NEGATIVE_INFINITY)&&(nx2!=Double.NEGATIVE_INFINITY)&&(ny2!=Double.NEGATIVE_INFINITY)){
+                    //System.out.println(x1+","+y1+","+nx1+","+ ny1+","+ s+","+ e);
+                    //System.out.println(x2+","+y2+","+nx2+","+ ny2+","+ s+","+ e);
+                    GameTable.table[x2][y2]=new Obstacle(x2,y2,nx2, ny2, s, e);
+                    GameTable.table[x1][y1]=new Obstacle(x1,y1,nx1, ny1, s, e);
+                    
+                    
+                }
+                  
             }
         }
     }
