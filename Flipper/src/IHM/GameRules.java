@@ -83,9 +83,9 @@ public class GameRules extends JFrame implements ActionListener{
 		panneauRegles.add(consigne11);
 		
 		consigne2 = new JLabel(); // NE S'AFFICHE PAS
-		consigne2.setBounds(130,220,700,50);
+		consigne2.setBounds(120,220,700,50);
 		consigne2.setLayout(null);
-		consigne2.setText("Pour jouer, tu as besoin de seulement 2 touches :");
+		consigne2.setText("(WIP)Pour jouer, tu as besoin de seulement 2 touches (WIP):");
 		consigne2.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,25));		
 		consigne2.setForeground(Color.white);
 		panneauRegles.add(consigne2);
