@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable{
 	private Picture flipperLP;
 	private Picture flipperRP;
     private Image backgroundImage = new ImageIcon("./Flipper/src/Resource/background.png").getImage();
+    
     /**
      * 
      * @param ball la balle choisie
