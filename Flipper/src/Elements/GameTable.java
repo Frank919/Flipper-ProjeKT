@@ -1,12 +1,17 @@
 package Elements;
 
 
+/**
+ * @author Chenglai FANG
+ * @Description: Le conteneur de tous les éléments, obstacles, balles, manèttes...Tous les calcul s'y passent.
+ * @date 01/05/2022
+ */
 public class GameTable implements Runnable{
     public Ball ball; 
     /**
      * Fois d'actualisation en 1 seconde
      */
-    public static int refreshRate = 120;
+    public static int refreshRate = 90;
     /**
      * Interval temporel entre 2 actualisations 
      */
@@ -56,11 +61,13 @@ public class GameTable implements Runnable{
      */
     public boolean isRunning;
     /**
-     * 
+     * Construire la table jeu
      * @param w
      *      La largeur du table
      * @param h
      *      La hauteur du table
+     * @param ball
+     *      La balle choisie
      */
     public GameTable(int w, int h,Ball ball){
         this.ball = ball;
@@ -142,10 +149,10 @@ public class GameTable implements Runnable{
         return true;
     }
     public boolean initialize(){
-        //600,900,0,-1300 to start the game
+        //600,900,0,-1500 to start the game
 
         this.ball.setPosition(600,900);
-        this.ball.setVelocity(0, -1300);
+        this.ball.setVelocity(0, -1500);
         return true;
     }
 

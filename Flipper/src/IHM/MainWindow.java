@@ -5,7 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
+/**
+ * @author Chenglai FANG
+ * @Description: La fenêtre principale du jeu
+ * @date 01/05/2022
+ */
 public class MainWindow extends JFrame {
 
 	private JPanel panneauScore;
@@ -30,7 +34,7 @@ public class MainWindow extends JFrame {
 
 		//Établir le JFrame
         this.setTitle("Jeu du flipper");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 
 		//Centrer la fenêtre sur l'écran
@@ -52,6 +56,7 @@ public class MainWindow extends JFrame {
 
 		//Commencer le Thread à actualiser tous les éléments sur le panneau
 		new Thread(GP,"GameData").start();
+		
 		
     }
 

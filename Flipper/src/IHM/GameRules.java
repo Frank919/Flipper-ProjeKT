@@ -3,7 +3,11 @@ package IHM;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * @author Camille CECCHI
+ * @Description: La fenêtre à afficher les regles
+ * @date 01/05/2022
+ */
 public class GameRules extends JFrame implements ActionListener{
     // Les Widgets à déclarer en dehors du constructeur
 	private JLabel consigne1;

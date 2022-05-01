@@ -6,7 +6,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
-
+/**
+ * @author Chenglai FANG
+ * @Description: Le panneau à déssiner les images
+ * @date 01/05/2022
+ */
 public class GamePanel extends JPanel implements Runnable{
     private List<Picture> pcs = new ArrayList<>();
     public GameTable GT; 
@@ -15,10 +19,13 @@ public class GamePanel extends JPanel implements Runnable{
 	private Picture flipperLP;
 	private Picture flipperRP;
     private Image backgroundImage = new ImageIcon("./Flipper/src/Resource/background.png").getImage();
-
+    /**
+     * 
+     * @param ball la balle choisie
+     */
     public GamePanel(Ball ball){
         this.ball = ball;
-        this.addKeyListener(new TAdapter());
+        //this.addKeyListener(new TAdapter());
         this.setFocusable(true);
         
         //Ajouter dans un ArrayList pcs tous les images en mouvement
@@ -44,14 +51,15 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
-        g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
+        g2d.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
         for (Picture pc : this.pcs) {
-            g.drawImage(pc.getImage(),pc.getX(),pc.getY(),pc.getW(),pc.getH(),null);
+            g2d.drawImage(pc.getImage(),pc.getX(),pc.getY(),pc.getW(),pc.getH(),null);
         }
 
         Toolkit.getDefaultToolkit().sync();
+        System.out.println("paint success");
     }
 
     //Actualisation
@@ -69,18 +77,19 @@ public class GamePanel extends JPanel implements Runnable{
             ballP.setX(GT.ball.getPositionX()-20);
             ballP.setY(GT.ball.getPositionY()-20);
             //REdéssiner ce panneau
-            repaint();
+            this.repaint();
             //Condition à laquelle s'arrete le jeu
             if(GT.ball.isOut()){
                 System.out.println("game over");
-                System.exit(0);
+                //System.exit(0);
+                new SelectionBall();
                 break;
             }
         }
-        
     }
 
     //Passer les touches aux flippers
+    /*
 	private class TAdapter extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
@@ -95,4 +104,5 @@ public class GamePanel extends JPanel implements Runnable{
 			GT.flipperRight.keyPressed(e);
         }
     }
+    */
 }

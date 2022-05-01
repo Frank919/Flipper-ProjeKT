@@ -1,10 +1,18 @@
 package IHM;
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * @author Chenglai FANG
+ * @Description: La classe pour stocker et manipuler les images des éléments
+ * @date 01/05/2022
+ */
 public class Picture {
     private int x,y,w,h;
     private Image image;
+    /**
+     * 
+     * @param name Le nom de l'image dans le dossier Resource
+     */
     public Picture(String name){
         this.image = new ImageIcon("./Flipper/src/Resource/"+name+".png").getImage();
         this.w = image.getWidth(null);

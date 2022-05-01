@@ -2,6 +2,11 @@ package Elements;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Chenglai FANG
+ * @Description: Les manàttes soit à gauche soit à droite dans ce jeu
+ * @date 01/05/2022
+ */
 public class Flipper extends ElementKinetic{
     public ElementBasic centre;
     public ElementBasic tip;
@@ -23,9 +28,13 @@ public class Flipper extends ElementKinetic{
      */
     protected double n2X,n2Y;
 
-
     /**
      * 
+     * @param centre centre autour duquel la manette tourne
+     * @param tip l'extrémité 
+     * @param smoothness glissance
+     * @param elasticity élasticité
+     * @param isOnRight {@code true} à droite, {@code false} à gauche 
      */
     public Flipper(ElementBasic centre, ElementBasic tip, double smoothness, double elasticity,Boolean isOnRight){
         this.centre = centre;

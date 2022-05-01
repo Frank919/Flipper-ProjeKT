@@ -1,5 +1,10 @@
 package Elements;
 
+/**
+ * @author MouZheng LI
+ * @Description: Tous les courbes de forme circulaire ouvertes ou fermées
+ * @date 01/05/2022
+ */
 public class Curve extends ElementStatic{
     
     protected double radius;

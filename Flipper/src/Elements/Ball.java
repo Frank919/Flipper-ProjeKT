@@ -1,6 +1,10 @@
 package Elements;
 
-
+/**
+ * @author Chenglai FANG
+ * @Description: Ball
+ * @date 01/05/2022
+ */
 public class Ball extends ElementKinetic{
     protected int radius;
     protected int num;
@@ -64,7 +68,7 @@ public class Ball extends ElementKinetic{
      * qui impacte la vitesse selon Y.
      */               
     public void falls(){
-        double g = 800;
+        double g = 1000;
         double deltaVY = g*GameTable.refreshTime;
         if(deltaVY<1){
             deltaVY = 1;
@@ -90,9 +94,9 @@ public class Ball extends ElementKinetic{
      *          Un {@code elementBasic} qui sera heurté et frotté par la balle
      */
     public void collidesWith(ElementBasic e){
-        //Calculer le coefficient répondissement et celui de fricion
-        double coeffRebound = 1 - elasticity * e.elasticity;
-        double coeffFriction = 1 - smoothness * e.smoothness;
+        //Calculer le coefficient rébondissement et celui de fricion
+        double coeffRebound = 1-elasticity * e.elasticity;
+        double coeffFriction =  smoothness * e.smoothness;
         if(e instanceof Flipper){
             Flipper eF = (Flipper)e;
             //Vecteur1 centre--->balle

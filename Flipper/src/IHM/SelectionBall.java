@@ -5,7 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.EventQueue;
-
+/**
+ * @author Chenglai FANG et Camille CECCHI
+ * @Description: La fenêtre à sélectionner la balle
+ * @date 01/05/2022
+ */
 public class SelectionBall extends JFrame implements ActionListener {
     private JLabel demandeBalle;
 	private JLabel balle1;
@@ -117,7 +121,7 @@ public class SelectionBall extends JFrame implements ActionListener {
         if (e.getSource()==boutonBalle1){
             ball = new Ball(1,2, 3, 4, 5, 1.0, 0.1);
         } else if (e.getSource()==boutonBalle2){
-			ball = new Ball(2,2, 3, 4, 5, 0.1, 0.9);
+			ball = new Ball(2,2, 3, 4, 5, 0.2, 0.6);
         } else if(e.getSource()==boutonBalle3){
             ball = new Ball(3,2, 3, 4, 5, 0.5, 0.5);
 			

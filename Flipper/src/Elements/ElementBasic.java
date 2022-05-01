@@ -1,5 +1,10 @@
 package Elements;
 
+/**
+ * @author Chenglai FANG
+ * @Description: Les éléments dans ce jeu
+ * @date 01/05/2022
+ */
 public class ElementBasic {
     /**
      * La position de l'élément dans un repère cartésien

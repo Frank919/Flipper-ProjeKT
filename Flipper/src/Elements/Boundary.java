@@ -1,5 +1,10 @@
 package Elements;
 
+/**
+ * @author Chenglai FANG
+ * @Description: Tous les obstacles en bord ou spéciale
+ * @date 01/05/2022
+ */
 public class Boundary extends ElementStatic{
     
     /**
