@@ -20,14 +20,20 @@ public class MainWindow extends JFrame {
 	 * Hauteur de la fenetre principale
 	 */
 	public static final int HEIGHT = 1000;
-
+	/**
+	 * Construire la fenêtre principale
+	 * @param ball
+	 * 		Une balle choisie précédement
+	 */
     public MainWindow(Ball ball) {
-		
-        this.ball  = ball;
+		this.ball  = ball;
+
+		//Établir le JFrame
         this.setTitle("Jeu du flipper");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 
+		//Centrer la fenêtre sur l'écran
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension size = new Dimension(WIDTH, HEIGHT);
         int width = toolkit.getScreenSize().width;
@@ -38,21 +44,16 @@ public class MainWindow extends JFrame {
 			(int) size.getWidth(), 
 			(int) size.getHeight()
 		);
+
+		//Initialiser le panneau aux images
 		GP = new GamePanel(ball);
 		this.add(GP);
 		this.setVisible(true);
+
+		//Commencer le Thread à actualiser tous les éléments sur le panneau
 		new Thread(GP,"GameData").start();
 		
     }
 
-	public static void main(String[] args) throws Exception {
-        //new GameRules();
-        //new SelectionBall();
-		EventQueue.invokeLater(() -> {
-            new MainWindow(new Ball(1,2, 3, 4, 5, 1.0, 0.1)).setVisible(true);;
-        });
-        
-        
-        
-    }
+	
 }

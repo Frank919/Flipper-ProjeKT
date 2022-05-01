@@ -8,9 +8,9 @@ public class Ball extends ElementKinetic{
     /**
      * Construire une balle
      * @param positionX
-     *          Coordonnée X initiale du centre de la balle dans le table vrai
+     *          Coordonnée X initiale du centre de la balle dans la table vraie
      * @param positionY
-     *          Coordonnée Y initiale du centre de la balle dans le table vrai
+     *          Coordonnée Y initiale du centre de la balle dans la table vraie
      * @param radius
      *          Radium de la balle
      * @param messe
@@ -198,7 +198,7 @@ public class Ball extends ElementKinetic{
             // Si la distance est inférieur au rayon 
             // et si la balle se trouve entre le centre et le tip du flipper
             // on considère qu'il y a une collision
-            if(distance <= radius && produitScalaire<=0){
+            if(distance <= 2*radius && produitScalaire<=0){
                 return true;
             }
         }
@@ -281,7 +281,7 @@ public class Ball extends ElementKinetic{
     }
     /**
      * 
-     * @return la position de la balle dans le table vrai
+     * @return la position de la balle dans la table vraie
      */
     public String toString(){
         return "Position = "

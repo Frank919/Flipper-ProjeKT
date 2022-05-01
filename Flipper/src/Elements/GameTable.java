@@ -28,16 +28,16 @@ public class GameTable implements Runnable{
     public int pseudoWidth;
     public int pseudoHeight;
     /**
-     * Le table vrai qu'on peut voir. Tous les obstacles et élément sont mis ici.
+     * La table vraie qu'on peut voir. Tous les obstacles et élément sont mis ici.
      */
     public static ElementBasic[][] table;
 
     /**
      * Le table qu'on ne peut voir. Tous les calculs et la balle sont mis ici.
-     * Il a des margins donc est plus grand que celui vrai.
+     * Il a des margins donc est plus grand que la vraie.
      * <p>Ceux-là existent pour le bon fonctionnement de la detection de collision.
      * Chaque élément dans ce table a donc un décalage d'un margin en X et en Y
-     * par rapport aux éléments dans le table vrai.
+     * par rapport aux éléments dans la table vraie.
      */
     public static ElementBasic[][] pseudoTable;
 
@@ -82,7 +82,7 @@ public class GameTable implements Runnable{
             
         }
         System.out.println("\nThe game table generated with success");
-        System.out.println("w = " + width);
+
 
         pseudoTable = new ElementBasic[pseudoWidth][pseudoHeight];
         for(int i=0;i<pseudoWidth;i++){
@@ -93,16 +93,13 @@ public class GameTable implements Runnable{
         }
         System.out.println("\nThe pseudo game table generated with success");
 
-        /**
-         * 在此处构造所有障碍物，障碍物构造器会将其填入table[][]当中
-         * ...
-         */
-        
+        //Construire tous les obstacles
         new Boundary(1.0, 0.5);
-        double smooth = 0.5;
-        double elasticity = 1;
+        double smooth = 0.8;
+        double elasticity = 0.5;
         flipperLeft = new Flipper(new ElementBasic(132, 919), new ElementBasic(296, 948), 0.5,0.1, false);
         flipperRight = new Flipper(new ElementBasic(517, 919), new ElementBasic(353, 948), 0.5,0.1, true);
+    
         Curve curve1 = new Curve(new ElementBasic(92,103), new ElementBasic(92,103), new ElementBasic(131,103), 39,smooth,elasticity);//+
         Curve curve2 = new Curve(new ElementBasic(256,144), new ElementBasic(256,144), new ElementBasic(367,144), 111,smooth,elasticity);//+
         Curve curve3 = new Curve(new ElementBasic(170,219), new ElementBasic(1,109), new ElementBasic(202,-3), 234,smooth,elasticity); 
@@ -113,11 +110,14 @@ public class GameTable implements Runnable{
         Curve curve8 = new Curve(new ElementBasic(124,564), new ElementBasic(124,564), new ElementBasic(147,564), 24,smooth,elasticity);//+
         Curve curve9 = new Curve(new ElementBasic(56,636), new ElementBasic(56,636), new ElementBasic(81,636), 25,smooth,elasticity);//+
         Curve curve10 = new Curve(new ElementBasic(418,802), new ElementBasic(558,802), new ElementBasic(489,798), 72,smooth,elasticity);
-        Curve curve11 = new Curve(new ElementBasic(549,1), new ElementBasic(612,64), new ElementBasic(549,64), 63,smooth,elasticity);
+        Curve curve11 = new Curve(new ElementBasic(549,2), new ElementBasic(612,64), new ElementBasic(549,64), 63,smooth,elasticity);
+        
         ElementBasic[] elm1={new ElementBasic(480,373),new ElementBasic(583,217),new ElementBasic(583,439)};
         Polygone polygone1= new Polygone (elm1,smooth,elasticity);
-        ElementBasic[] elm4={new ElementBasic(281,712),new ElementBasic(337,712),new ElementBasic(218,822)};
+        
+        ElementBasic[] elm4={new ElementBasic(281,712),new ElementBasic(337,712),new ElementBasic(298,822)};
         Polygone polygone4= new Polygone (elm4,smooth,elasticity);
+        
         ElementBasic[] elm5={new ElementBasic(154,776),new ElementBasic(225,647),new ElementBasic(219,828)};
         Polygone polygone5= new Polygone (elm5,smooth,elasticity);
         ElementBasic[] elm6={new ElementBasic(32,876),new ElementBasic(54,772),new ElementBasic(114,876)};
@@ -144,8 +144,8 @@ public class GameTable implements Runnable{
     public boolean initialize(){
         //600,900,0,-1300 to start the game
 
-        this.ball.setPosition(250, 400);
-        this.ball.setVelocity(-100, 0);
+        this.ball.setPosition(600,900);
+        this.ball.setVelocity(0, -1300);
         return true;
     }
 

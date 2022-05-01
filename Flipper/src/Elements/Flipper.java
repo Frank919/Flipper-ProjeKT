@@ -34,8 +34,8 @@ public class Flipper extends ElementKinetic{
         this.elasticity = elasticity;
         this.isOnRight = isOnRight;
         int quadrant = 0;
-        int deltaX = tip.positionX-centre.positionX;
-        int deltaY = tip.positionY-centre.positionY;
+        double deltaX = tip.positionX-centre.positionX;
+        double deltaY = tip.positionY-centre.positionY;
         if((deltaX<=0)&&(deltaY<=0)){
             quadrant=3;
         }
@@ -54,7 +54,7 @@ public class Flipper extends ElementKinetic{
             //La pente
             k = deltaY / deltaX;
             //Le vecteur normal
-            n1Y = (double)Math.sqrt(1/(1+k*k));
+            n1Y = Math.sqrt(1/(1+k*k));
             n1X = - k * n1Y;
         }else{
             n1X = 1;

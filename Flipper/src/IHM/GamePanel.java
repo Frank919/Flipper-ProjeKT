@@ -14,7 +14,6 @@ public class GamePanel extends JPanel implements Runnable{
 	private Picture ballP; 
 	private Picture flipperLP;
 	private Picture flipperRP;
-	//private Timer timer;
     private Image backgroundImage = new ImageIcon("./Flipper/src/Resource/background.png").getImage();
 
     public GamePanel(Ball ball){
@@ -22,30 +21,30 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(new TAdapter());
         this.setFocusable(true);
         
-
+        //Ajouter dans un ArrayList pcs tous les images en mouvement
         ballP = new Picture("balle"+this.ball.getNum());
 		flipperLP = new Picture("flipperL");
 		flipperLP.setX(132-15);
-		flipperLP.setY(919-15);
+		flipperLP.setY(919-35);
 		flipperRP = new Picture("flipperR");
 		flipperRP.setX(517-145);
-		flipperRP.setY(919-15);
+		flipperRP.setY(919-35);
         pcs.add(ballP);
         pcs.add(flipperLP);
         pcs.add(flipperRP);
 
-        
+        //Initialiser tous les obstacles
+        //Initialiser le back end
         GT = new GameTable(MainWindow.WIDTH, MainWindow.HEIGHT, this.ball);
 
-
-        //timer = new Timer((int)GameTable.refreshTimeMS, this);
-		//timer.start();
+        
 
     }
+    //Déssiner les images
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        //Graphics2D g2d = (Graphics2D) g;
 
         g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
         for (Picture pc : this.pcs) {
@@ -55,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
         Toolkit.getDefaultToolkit().sync();
     }
 
-    
+    //Actualisation
     @Override
     public void run(){
         while(true){
@@ -64,11 +63,14 @@ public class GamePanel extends JPanel implements Runnable{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            //Mettre à jour le back end
             GT.refresh();
+            //Mettre à jour le front end
             ballP.setX(GT.ball.getPositionX()-20);
             ballP.setY(GT.ball.getPositionY()-20);
+            //REdéssiner ce panneau
             repaint();
-    
+            //Condition à laquelle s'arrete le jeu
             if(GT.ball.isOut()){
                 System.out.println("game over");
                 System.exit(0);
@@ -77,22 +79,8 @@ public class GamePanel extends JPanel implements Runnable{
         }
         
     }
-    /*
-    public void actionPerformed(ActionEvent e) { 
-        
-		GT.refresh();
-		ballP.setX(GT.ball.getPositionX()-20);
-		ballP.setY(GT.ball.getPositionY()-20);
-		repaint();
 
-        if(GT.ball.isOut()){
-			
-			System.out.println("game over");
-            System.exit(0);
-        }	
-	}
-    */
-
+    //Passer les touches aux flippers
 	private class TAdapter extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {

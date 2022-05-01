@@ -15,7 +15,6 @@ public class Polygone extends ElementStatic{
         this.smoothness = s;
         this.elasticity = e;
         for(int i=0;i<elm.length;i++){
-            //apex[i] = (Obstacle)elm[i];
             //le vecteur normal
             double nx = 0;
             double ny = 0;
@@ -33,8 +32,8 @@ public class Polygone extends ElementStatic{
             /**
              * Calculer le vecteur normal
              */
-            int deltaY = end.positionY - start.positionY;
-            int deltaX = end.positionX - start.positionX;
+            double deltaY = end.positionY - start.positionY;
+            double deltaX = end.positionX - start.positionX;
             double k = 0;
             double b = 0;
             if(deltaX!=0){
@@ -43,9 +42,10 @@ public class Polygone extends ElementStatic{
                 //L'ordonée à l'origine
                 b = start.positionY - k * start.positionX;
                 //Le vecteur normal
-                nx = (double)Math.sqrt(1/(1+k*k));
-                ny = - k * nx;
+                ny = Math.sqrt(1/(1+k*k));
+                nx = - k * ny;
             }else{
+                
                 nx = 1;
                 ny = 0;
             }
@@ -77,6 +77,7 @@ public class Polygone extends ElementStatic{
                 }
                 for(int x = min;x<=max;x++){
                     int y = (int)(k*x+b);
+                    //System.out.println("y="+y);
                     GameTable.table[x-1][y-1]=new Obstacle(x,y,nx, ny, s, e);
                 }
             }else{
@@ -92,6 +93,7 @@ public class Polygone extends ElementStatic{
                     GameTable.table[x-1][y-1]=new Obstacle(x,y,nx, ny, s, e);
                 }
             }
+            System.out.println(nx+","+ny);
         }
     }
 }

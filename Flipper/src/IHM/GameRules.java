@@ -24,7 +24,7 @@ public class GameRules extends JFrame implements ActionListener{
 		// Création de la fenêtre principale JFrame		
 		this.setTitle("Règles du jeu du flipper");
 
-		// Pour placer la fenêtre au centre de l'écran
+		//Centrer la fenêtre sur l'écran
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension size = new Dimension(800, 800);
         int width = toolkit.getScreenSize().width;

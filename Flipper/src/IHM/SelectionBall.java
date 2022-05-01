@@ -19,7 +19,7 @@ public class SelectionBall extends JFrame implements ActionListener {
     
     public SelectionBall(){
         this.setTitle("Choix de la balle");
-		// Pour placer la fenêtre au centre de l'écran
+		//Centrer la fenêtre sur l'écran
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension size = new Dimension(500, 500);
         int width = toolkit.getScreenSize().width;
@@ -117,7 +117,7 @@ public class SelectionBall extends JFrame implements ActionListener {
         if (e.getSource()==boutonBalle1){
             ball = new Ball(1,2, 3, 4, 5, 1.0, 0.1);
         } else if (e.getSource()==boutonBalle2){
-			ball = new Ball(2,2, 3, 4, 5, 0.7, 1.0);
+			ball = new Ball(2,2, 3, 4, 5, 0.1, 0.9);
         } else if(e.getSource()==boutonBalle3){
             ball = new Ball(3,2, 3, 4, 5, 0.5, 0.5);
 			
