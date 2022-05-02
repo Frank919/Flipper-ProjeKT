@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         Toolkit.getDefaultToolkit().sync();
-        System.out.println("paint success");
+        //System.out.println("paint success");
     }
 
     //Actualisation
@@ -100,7 +100,6 @@ public class GamePanel extends JPanel implements Runnable{
 
         @Override
         public void keyPressed(KeyEvent e) {
-			System.out.println("??????");
 			GT.flipperLeft.keyPressed(e);
 			GT.flipperRight.keyPressed(e);
         }

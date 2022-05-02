@@ -18,7 +18,7 @@ public class Flipper extends ElementKinetic{
     /**
      * Positif dans le sens horaire
      */
-    protected double velocityAng;
+    protected double velocityAng = Math.PI/2;
     /**
      * vecteur normal dans le sens horaire
      */
@@ -86,11 +86,11 @@ public class Flipper extends ElementKinetic{
 
     public void rotateUp(){
         if(isOnRight){
-            while(angle <= Math.PI*5/4){
+            if(angle <= Math.PI*5/4){
                 angle += GameTable.refreshTime*velocityAng;
             }
         }else{
-            while(angle >= -Math.PI/4){
+            if(angle >= -Math.PI/4){
                 angle -= GameTable.refreshTime*velocityAng;
             }
         }
@@ -100,11 +100,11 @@ public class Flipper extends ElementKinetic{
 
     public void rotateDown(){
         if(! isOnRight){
-            while(angle <= Math.PI/4){
+            if(angle <= Math.PI/4){
                 angle += GameTable.refreshTime*velocityAng;
             }
         }else{
-            while(angle >= Math.PI*3/4){
+            if(angle >= Math.PI*3/4){
                 angle -= GameTable.refreshTime*velocityAng;
             }
         }

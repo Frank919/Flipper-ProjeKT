@@ -59,7 +59,7 @@ public class Ball extends ElementKinetic{
         //System.out.println("deltaX = "  + deltaX+" deltaY = "+ deltaY);
         positionX += deltaX;
         positionY += deltaY;
-        System.out.println(this.toString());
+        //System.out.println(this.toString());
     }
     
 
