@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
      */
     public GamePanel(Ball ball){
         this.ball = ball;
-        //this.addKeyListener(new TAdapter());
+        this.addKeyListener(new TAdapter());
         this.setFocusable(true);
         
         //Ajouter dans un ArrayList pcs tous les images en mouvement
@@ -90,7 +90,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     //Passer les touches aux flippers
-    /*
+    
 	private class TAdapter extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
@@ -105,5 +105,5 @@ public class GamePanel extends JPanel implements Runnable{
 			GT.flipperRight.keyPressed(e);
         }
     }
-    */
+    
 }
