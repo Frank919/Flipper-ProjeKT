@@ -32,14 +32,11 @@ public class Curve extends ElementStatic{
         this.centreY=centre.positionY;
         int innerRadius = radius - 4;
 
-        //我们直接造有的obstacle
 
-        //确定象限
+        //Déterminer le quadrant
         int startQuadrant = 1;
         int endQuadrant = 1;
         
-
-
         double deltaXStrat = startPoint.positionX-centreX;
         double deltaYStrat= startPoint.positionY-centreY;
         if(((deltaXStrat)<0)&&((deltaYStrat)<0)){
@@ -60,13 +57,9 @@ public class Curve extends ElementStatic{
 
         
 
-        //求角度(0-pi)
+        //Déterminer l'angle (0-pi)
         double startCeta = Math.acos((deltaXStrat)/radius);
         double endCeta = Math.acos((deltaXEnd)/radius);
-        
-
-
-        //用象限确定ceta
         if(startQuadrant>2){
             startCeta = 2*Math.PI-startCeta;
         }
@@ -74,9 +67,8 @@ public class Curve extends ElementStatic{
             endCeta = 2*Math.PI-endCeta;
         } 
         
-        //System.out.println(startCeta+","+endCeta);
         
-        //造obstacles((x1,y1)是外面一层，（x2，y2）是里面一层)
+        //ON aura deux couches des obstacles, (x1,y1) et (x2,y2), qui entournes la courbe
         if(startCeta < endCeta){
             for(double ceta=startCeta;ceta<=endCeta;ceta+=0.00001){
                 int x1 = (int)(radius*Math.cos(ceta)+centreX);
