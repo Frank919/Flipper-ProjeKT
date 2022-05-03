@@ -208,6 +208,36 @@ public class Ball extends ElementKinetic{
         }
         return false;
     }
+    
+
+    /**
+     * 
+     * @return le numero de la balle
+     */
+    public int getNum(){
+        int n = num;
+        return n;
+    }
+
+    @Override
+    /**
+     * 
+     * @return la position réel X de la balle
+     */
+    public int getPositionX(){
+        int x = positionX - GameTable.margin;
+        return x;
+    }
+
+    @Override
+    /**
+     * 
+     * @return la position réel Y de la balle
+     */
+    public int getPositionY(){
+        int y = positionY - GameTable.margin;
+        return y;
+    }
     /**
      * Mettre en place la balle manuellement
      * @param x
@@ -219,33 +249,6 @@ public class Ball extends ElementKinetic{
         this.positionX = x + GameTable.margin;
         this.positionY = y + GameTable.margin;
     }
-
-    /**
-     * 
-     * @return le numero de la balle
-     */
-    public int getNum(){
-        int n = num;
-        return n;
-    }
-    /**
-     * 
-     * @return la position réel X de la balle
-     */
-    public int getPositionX(){
-        int x = positionX - GameTable.margin;
-        return x;
-    }
-
-    /**
-     * 
-     * @return la position réel Y de la balle
-     */
-    public int getPositionY(){
-        int y = positionY - GameTable.margin;
-        return y;
-    }
-
     /**
      * Donner manuellement la vitesse de la balle
      * @param vx

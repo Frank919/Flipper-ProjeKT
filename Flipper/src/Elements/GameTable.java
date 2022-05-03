@@ -1,12 +1,13 @@
 package Elements;
 
+import java.awt.event.KeyEvent;
 
 /**
  * @author Chenglai FANG
  * @Description: Le conteneur de tous les éléments, obstacles, balles, manèttes...Tous les calcul s'y passent.
  * @date 01/05/2022
  */
-public class GameTable implements Runnable{
+public class GameTable {
     public Ball ball; 
     /**
      * Fois d'actualisation en 1 seconde
@@ -127,7 +128,7 @@ public class GameTable implements Runnable{
         
         ElementBasic[] elm5={new ElementBasic(154,776),new ElementBasic(225,647),new ElementBasic(219,828)};
         Polygone polygone5= new Polygone (elm5,smooth,elasticity);
-        ElementBasic[] elm6={new ElementBasic(32,876),new ElementBasic(54,772),new ElementBasic(114,876)};
+        ElementBasic[] elm6={new ElementBasic(32,856),new ElementBasic(54,752),new ElementBasic(114,856)};
         Polygone polygone6= new Polygone (elm6,smooth,elasticity);
         ElementBasic[] elm2={new ElementBasic(112,468),new ElementBasic(112,419),new ElementBasic(124,419),new ElementBasic(125,468)};
         Polygone polygone2= new Polygone (elm2,smooth,elasticity);
@@ -157,7 +158,7 @@ public class GameTable implements Runnable{
     }
 
     public boolean refresh() { 
-        
+    
         this.isRunning = true;
         //Supprimer la balle de pseudoTable 
         pseudoTable[ball.positionX][ball.positionY] = new Space(ball.positionX - GameTable.margin,ball.positionY - GameTable.margin);
@@ -171,7 +172,7 @@ public class GameTable implements Runnable{
             System.out.println("ccc2");
         }
         
-        outloop:
+        outterloop:
         for(int i = ball.positionX - detectionRange; i < ball.positionX + detectionRange - 1; i++){
             for(int j = ball.positionY - detectionRange; j < ball.positionY + detectionRange - 1; j++){
                 if (ball.isOnContectWith(pseudoTable[i][j])){
@@ -183,7 +184,7 @@ public class GameTable implements Runnable{
                     do{
                         ball.moves();
                     } while(ball.isOnContectWith(pseudoTable[i][j]));
-                    break outloop;
+                    break outterloop;
                 }
             }
         }
@@ -197,13 +198,39 @@ public class GameTable implements Runnable{
         return isRunning;
     }
 
+    public void keyPressed(KeyEvent e){
+		if(e.getKeyCode()==KeyEvent.VK_J){
+            flipperLeft.rotateUp();
+            System.out.println("JJJ");
+            flipperLeft = new Flipper(new ElementBasic(132, 919), flipperLeft.tip, 0.5,0.1, false);
+		}
+		if(e.getKeyCode()==KeyEvent.VK_L){
+            
+            flipperRight.rotateUp();
+            System.out.println("LLLL");
+            flipperRight = new Flipper(new ElementBasic(517, 919), flipperRight.tip, 0.5,0.1, true);
+			
+		}
+	}
+	public void keyReleased(KeyEvent e){
+		if(e.getKeyCode()==KeyEvent.VK_J){
+            System.out.println("JJJ");
+            flipperLeft.rotateDown();
+            flipperLeft = new Flipper(new ElementBasic(132, 919), flipperLeft.tip, 0.5,0.1, false);
+		}
+		if(e.getKeyCode()==KeyEvent.VK_L){
+			System.out.println("LLLL");
+            flipperRight.rotateDown();
+            flipperRight = new Flipper(new ElementBasic(517, 919), flipperRight.tip, 0.5,0.1, true);
+		}
+		
+	}
+
     public String toString(){
         return "Gmae is running : " + isRunning + "\n";
     }
     
-    public void run(){
-
-    }
+    
 
 
 }

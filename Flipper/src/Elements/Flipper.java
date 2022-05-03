@@ -1,7 +1,5 @@
 package Elements;
 
-import java.awt.event.KeyEvent;
-
 /**
  * @author Chenglai FANG
  * @Description: Les manàttes soit à gauche soit à droite dans ce jeu
@@ -12,9 +10,15 @@ public class Flipper extends ElementKinetic{
     public ElementBasic tip;
     public boolean isOnRight;
     /**
-     * Positif dans le sens horaire
+     * Angle initial positif dans le sens horaire
      */
     protected double angle;
+    /**
+     * Angle courrant
+     */
+    protected double curAngle;
+
+    protected double radius;
     /**
      * Positif dans le sens horaire
      */
@@ -45,16 +49,19 @@ public class Flipper extends ElementKinetic{
         int quadrant = 0;
         double deltaX = tip.positionX-centre.positionX;
         double deltaY = tip.positionY-centre.positionY;
+        this.radius= Math.sqrt(deltaX*deltaX + deltaY*deltaY);
         if((deltaX<=0)&&(deltaY<=0)){
             quadrant=3;
         }
         if((deltaX>=0)&&(deltaY<=0)){
             quadrant=4;
         } 
-        this.angle = Math.acos((deltaX)/Math.sqrt(deltaX*deltaX + deltaY*deltaY));
+        this.angle = Math.acos((deltaX)/radius);
         if(quadrant>2){
             this.angle = 2*Math.PI - angle;
         }
+        //Initializtion de l'angle courrant
+        curAngle = angle;
         /**
          * Calculer le vecteur normal
          */
@@ -86,62 +93,33 @@ public class Flipper extends ElementKinetic{
 
     public void rotateUp(){
         if(isOnRight){
-            if(angle <= Math.PI*5/4){
-                angle += GameTable.refreshTime*velocityAng;
+            if(curAngle <= Math.PI*5/4){
+                curAngle += GameTable.refreshTime*velocityAng;
             }
         }else{
-            if(angle >= -Math.PI/4){
-                angle -= GameTable.refreshTime*velocityAng;
+            if(curAngle >= -Math.PI/4){
+                curAngle -= GameTable.refreshTime*velocityAng;
             }
         }
-        tip.positionX = (int)Math.cos(angle);
-        tip.positionY = (int)Math.sin(angle);
+        tip.positionX = (int)(Math.cos(curAngle) * radius)+ centre.positionX;
+        tip.positionY = (int)(Math.sin(curAngle) * radius) + centre.positionY;
     }
 
     public void rotateDown(){
         if(! isOnRight){
-            if(angle <= Math.PI/4){
-                angle += GameTable.refreshTime*velocityAng;
+            while(curAngle <= angle){
+                curAngle += GameTable.refreshTime*velocityAng;
             }
         }else{
-            if(angle >= Math.PI*3/4){
-                angle -= GameTable.refreshTime*velocityAng;
+            while(curAngle >= angle){
+                curAngle -= GameTable.refreshTime*velocityAng;
             }
         }
-        tip.positionX = (int)Math.cos(angle);
-        tip.positionY = (int)Math.sin(angle);
+        tip.positionX = (int)(Math.cos(curAngle) * radius) + centre.positionX ;
+        tip.positionY = (int)(Math.sin(curAngle) * radius) + centre.positionY;
 
     }
     
-    public void keyPressed(KeyEvent e){
-		if(e.getKeyCode()==KeyEvent.VK_J){
-			if(isOnRight){
-                this.rotateUp();
-                System.out.println("JJJ");
-            }
-		}
-		if(e.getKeyCode()==KeyEvent.VK_L){
-            if(!isOnRight){
-                this.rotateUp();
-                System.out.println("LLLL");
-            }
-			
-		}
-	}
-	public void keyReleased(KeyEvent e){
-		if(e.getKeyCode()==KeyEvent.VK_J){
-			if(isOnRight){
-                this.rotateDown();
-                System.out.println("JJJ");
-            };
-		}
-		if(e.getKeyCode()==KeyEvent.VK_L){
-			if(!isOnRight){
-                this.rotateDown();
-                System.out.println("LLLL");
-            }
-		}
-		
-	}
+    
 	
 }

@@ -58,7 +58,9 @@ public class GamePanel extends JPanel implements Runnable{
         for (Picture pc : this.pcs) {
             g2d.drawImage(pc.getImage(),pc.getX(),pc.getY(),pc.getW(),pc.getH(),null);
         }
-
+        g2d.drawLine(GT.flipperLeft.centre.getPositionX(), GT.flipperLeft.centre.getPositionY(), GT.flipperLeft.tip.getPositionX(), GT.flipperLeft.tip.getPositionY());
+        g2d.drawLine(GT.flipperRight.centre.getPositionX(), GT.flipperRight.centre.getPositionY(), GT.flipperRight.tip.getPositionX(), GT.flipperRight.tip.getPositionY());
+        
         Toolkit.getDefaultToolkit().sync();
         //System.out.println("paint success");
     }
@@ -89,19 +91,17 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    //Passer les touches aux flippers
-    
+    //Passer les touches aux GameTable
 	private class TAdapter extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
-            GT.flipperLeft.keyReleased(e);
-			GT.flipperRight.keyReleased(e);
+            GT.keyReleased(e);
+
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-			GT.flipperLeft.keyPressed(e);
-			GT.flipperRight.keyPressed(e);
+			GT.keyPressed(e);
         }
     }
     

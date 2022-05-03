@@ -48,4 +48,17 @@ public class ElementBasic {
         this.smoothness=smoothness;
         this.elasticity=elasticity;
     }
+    public int getPositionX(){
+        return positionX;
+    }
+    public int getPositionY(){
+        return positionY;
+    }
+    public void setPositonX(int x){
+        this.positionX = x;
+    }
+    public void setPositonY(int y){
+        this.positionY = y;
+    }
+
 }
